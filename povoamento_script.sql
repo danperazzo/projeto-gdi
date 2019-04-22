@@ -51,5 +51,7 @@ INSERT INTO Dirige (Codigo_Titulo, Codigo_Diretor, Nome, Categoria_Premiacao, An
 
 INSERT INTO Dirige (Codigo_Titulo, Codigo_Diretor, Nome, Categoria_Premiacao, Ano) VALUES (3332, 4442, 'Oscar', 'Melhor Filme', to_date ('21/04/2019', 'dd/mm/yyyy'));
 
--- INSERT INTO Premio (Categoria,  Codigo_Titulo, Codigo_Diretor, Nome, Valor) VALUES ('Melhor Filme', 3331, 4442, …...);
-
+--
+INSERT INTO Premio (Categoria,  Codigo_Titulo, Codigo_Diretor, Nome, Valor) VALUES ('Melhor Filme', 3331, 4441, 'Prêmio Luana Amado', 30000);
+INSERT INTO Premio (Categoria,  Codigo_Titulo, Codigo_Diretor, Nome, Valor) VALUES ('Melhor Atriz', 3332, 4442, 'Prêmio Gabriela Leal', 20000);
+INSERT INTO Premio (Categoria,  Codigo_Titulo, Codigo_Diretor, Nome, Valor) VALUES ('Melhor Roteiro', 3331, 4441, 'Prêmio Robson Fidalgo', 190000);
