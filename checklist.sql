@@ -109,3 +109,21 @@ Having AVG(Duracao) >= 60
 
 -- 24.
 
+
+-- 30.
+Select U.Nome as NomeUsuario
+From Usuario U
+Where U.Data_Nascimento = Any
+(Select D.Data_Nascimento from Diretor D)
+
+-- 31.
+Select D.Nome as NomeDiretor
+From Diretor D
+Where D.Codigo_Diretor = All
+(Select T.Codigo_Diretor From TITULO T Where T.Avaliacao > 9)
+
+-- 32.
+Select T.Nome as NomeTitulo
+From TITULO T
+Where exists
+(Select * From Genero G Where T.Codigo_Genero == G.Codigo_Genero and G.Popularidade = "Baixa")
