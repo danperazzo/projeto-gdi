@@ -69,6 +69,43 @@ Alter Table Episodios
 Drop Column Lancamento
 
 -- 17.
+Select P.Valor, P.Valor/1000 as Divisao
+From Premio P
 
+-- 18.
+Select AVG(P.Valor)
+From Premio P
 
+-- 19.
+Select P.Categoria, AVG(P.Valor) 
+From Premio P
+Group By Categoria
+
+-- 20.
+Select Distinct D.Categoria_Premiacao
+From Dirige D
+
+-- 21.
+Select P.Categoria, AVG(P.Valor) 
+From Premio P
+Group By Categoria
+Having AVG(P.Valor) > 25000
+
+-- 22.
+Select P.Categoria, AVG(P.Valor) 
+From Premio P
+Group By Categoria
+Having AVG(P.Valor) > (
+    Select Min(P.Valor)
+    From Premio P
+)
+
+-- 23.
+Select EP.Nome, AVG(Duracao) as MediaDuracao
+From Episodios EP
+Where EP.Nome like '%ca%'
+Group by Nome
+Having AVG(Duracao) >= 60
+
+-- 24.
 
