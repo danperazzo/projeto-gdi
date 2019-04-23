@@ -140,3 +140,30 @@ Order By Nome
 Select Codigo_Titulo from Filme
 Intersect
 Select Codigo_Titulo from Assiste
+
+-- 48. 58.
+DECLARE
+    usersCount NUMBER;
+BEGIN
+    SELECT COUNT(Email) INTO usersCount
+    FROM Usuario;
+    DBMS_OUTPUT.PUT_LINE('Quantidade de suários cadastrados: ' ||usersCount);
+END;
+/
+
+-- 49. 56. 58.
+DECLARE 
+    nomeU Usuario.NOME%TYPE;
+    nascU Usuario.DATA_NASCIMENTO%Type;
+BEGIN
+    SELECT NOME, DATA_NASCIMENTO INTO nomeU, nascU
+    FROM Usuario
+    WHERE Email = 'user1@gmail.com';
+    DBMS_OUTPUT.PUT_LINE('Nome: ' ||nomeU);
+    DBMS_OUTPUT.PUT_LINE('Data de nascimento: ' ||nascU);
+EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+        DBMS_OUTPUT.PUT_LINE('Não existe usuário com este e-mail');
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('Error');
+END;
