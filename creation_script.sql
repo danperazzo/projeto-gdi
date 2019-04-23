@@ -16,14 +16,14 @@ DROP TABLE Genero;
 
 
 CREATE TABLE Genero (
-  Codigo_Genero NUMBER,
+  Codigo_Genero INT NOT NULL AUTO_INCREMENT,
   Nome VARCHAR2 (50),
   Popularidade VARCHAR (50),
   CONSTRAINT Genero_pk PRIMARY KEY (Codigo_Genero)
 );
 
 CREATE TABLE Diretor (
-  Codigo_Diretor NUMBER,
+  Codigo_Diretor INT NOT NULL AUTO_INCREMENT,
   Nome VARCHAR (50),
   Nacionalidade VARCHAR (50),
   Data_Nascimento DATE,
@@ -31,7 +31,7 @@ CREATE TABLE Diretor (
 );
 
 CREATE TABLE Titulo (
-  Codigo_Titulo NUMBER,
+  Codigo_Titulo INT NOT NULL AUTO_INCREMENT,
   Data DATE,
   Nome VARCHAR(50),
   Classificacao VARCHAR(50),
@@ -44,7 +44,7 @@ CREATE TABLE Titulo (
 );
 
 CREATE TABLE Estudio (
-  Codigo_Estudio NUMBER,
+  Codigo_Estudio INT NOT NULL AUTO_INCREMENT,
   Local VARCHAR(50),
   Nome VARCHAR(50),
   Data_Lancamento DATE,
@@ -54,7 +54,7 @@ CREATE TABLE Estudio (
 );
 
 CREATE TABLE Lista (
-  Codigo_Lista NUMBER,
+  Codigo_Lista INT NOT NULL AUTO_INCREMENT,
   Data_Atualizacao DATE,
   Nome VARCHAR(50),
   CONSTRAINT Lista_pk PRIMARY KEY (Codigo_Lista)
@@ -68,7 +68,7 @@ CREATE TABLE Cartao_Credito (
 );
 
 CREATE TABLE Usuario (
-  Email VARCHAR(40),
+  Email VARCHAR(40) NOT NULL,
   Data_Nascimento DATE,
   Nome VARCHAR(50),
   Email_Administrador VARCHAR(40),
@@ -79,21 +79,21 @@ CREATE TABLE Usuario (
 );
 
 CREATE TABLE Serie (
-  Codigo_Titulo NUMBER,
+  Codigo_Titulo INT NOT NULL,
   Qtd_Temporadas NUMBER,
   CONSTRAINT Serie_pk PRIMARY KEY (Codigo_Titulo),
   CONSTRAINT Serie_fk FOREIGN KEY (Codigo_Titulo) REFERENCES Titulo (Codigo_Titulo)
 );
 
 CREATE TABLE Filme (
-  Codigo_Titulo NUMBER,
+  Codigo_Titulo INT NOT NULL,
   Duracao NUMBER,
   CONSTRAINT Filme_pk PRIMARY KEY (Codigo_Titulo),
   CONSTRAINT Filme_fk FOREIGN KEY (Codigo_Titulo) REFERENCES Titulo (Codigo_Titulo)
 );
 
 CREATE TABLE Episodios (
-  Codigo_Titulo NUMBER,
+  Codigo_Titulo INT NOT NULL,
   Numero_Episodio NUMBER,
   Duracao NUMBER,
   Nome VARCHAR(50),
@@ -102,7 +102,7 @@ CREATE TABLE Episodios (
 );
 
 CREATE TABLE Adiciona (
-  Email VARCHAR(40),
+  Email VARCHAR(40) NOT NULL,
   Codigo_Lista NUMBER,
   Codigo_Titulo NUMBER,
   CONSTRAINT Adiciona_pk PRIMARY KEY (Email, Codigo_Lista, Codigo_Titulo),
@@ -111,7 +111,7 @@ CREATE TABLE Adiciona (
 );
 
 CREATE TABLE Assiste (
-  Email VARCHAR(40),
+  Email VARCHAR(40) NOT NULL,
   Codigo_Titulo NUMBER,
   Data DATE NOT NULL,
   CONSTRAINT Assiste_pk PRIMARY KEY (Email, Codigo_Titulo),
@@ -119,8 +119,8 @@ CREATE TABLE Assiste (
 );
 
 CREATE TABLE Dirige (
-  Codigo_Titulo NUMBER,
-  Codigo_Diretor NUMBER,
+  Codigo_Titulo INT NOT NULL,
+  Codigo_Diretor INT NOT NULL,
   Nome VARCHAR(50) ,
   Categoria_Premiacao VARCHAR(40),
   Ano DATE,
@@ -130,9 +130,9 @@ CREATE TABLE Dirige (
 );
 
 CREATE TABLE Premio (
-  Categoria VARCHAR(50),
-  Codigo_Titulo NUMBER,
-  Codigo_Diretor NUMBER,
+  Categoria VARCHAR(50) NOT NULL,
+  Codigo_Titulo NUMBER NOT NULL,
+  Codigo_Diretor NUMBER NOT NULL,
   Nome VARCHAR(50),
   Valor NUMBER,
   CONSTRAINT Premio_pk PRIMARY KEY (Categoria, Codigo_Titulo, Codigo_Diretor),
