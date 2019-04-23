@@ -127,3 +127,16 @@ Select T.Nome as NomeTitulo
 From TITULO T
 Where exists
 (Select * From Genero G Where T.Codigo_Genero == G.Codigo_Genero and G.Popularidade = "Baixa")
+
+-- 33. (já inserida em outras questões)
+
+-- 34.
+Select Nome from Diretor
+Union
+Select Nome from Usuario
+Order By Nome
+
+-- 35.
+Select Codigo_Titulo from Filme
+Intersect
+Select Codigo_Titulo from Assiste
