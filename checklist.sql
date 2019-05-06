@@ -141,6 +141,15 @@ Select Codigo_Titulo from Filme
 Intersect
 Select Codigo_Titulo from Assiste
 
+--36.
+SELECT Numero
+FROM Usuario
+WHERE Email_Administrador IS NOT NULL
+MINUS
+SELECT Numero
+FROM Cartao_Credito
+WHERE Numero = '6661';
+
 -- 48. 58.
 DECLARE
     usersCount NUMBER;
