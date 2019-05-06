@@ -162,6 +162,14 @@ DELETE
 FROM Usuario 
 WHERE Numero = (SELECT MAX(Numero) FROM Usuario); 
 
+--42.
+select Codigo_Diretor 
+from
+    (select Codigo_Diretor
+    from Diretor
+    group by Nacionalidade) as x
+inner join TITULO as y on x.Codigo_Diretor = y.Codigo_Diretor;
+
 -- 48. 58.
 DECLARE
     usersCount NUMBER;
