@@ -150,6 +150,14 @@ SELECT Numero
 FROM Cartao_Credito
 WHERE Numero = '6661';
 
+--38.
+UPDATE Cartao_Credito
+SET Codigo_Seguranca = ( 
+  SELECT MAX(Codigo_Seguranca) + 1
+  FROM Cartao_Credito
+) 
+WHERE Bandeira = 'Elo' OR Bandeira = 'MasterCard';
+
 -- 48. 58.
 DECLARE
     usersCount NUMBER;
