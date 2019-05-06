@@ -154,9 +154,13 @@ WHERE Numero = '6661';
 UPDATE Cartao_Credito
 SET Codigo_Seguranca = ( 
   SELECT MAX(Codigo_Seguranca) + 1
-  FROM Cartao_Credito
-) 
+  FROM Cartao_Credito) 
 WHERE Bandeira = 'Elo' OR Bandeira = 'MasterCard';
+
+--39.
+DELETE 
+FROM Usuario 
+WHERE Numero = (SELECT MAX(Numero) FROM Usuario); 
 
 -- 48. 58.
 DECLARE
