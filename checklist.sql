@@ -170,6 +170,11 @@ from
     group by Nacionalidade) as x
 inner join TITULO as y on x.Codigo_Diretor = y.Codigo_Diretor;
 
+--43.
+SELECT SUM(Avaliacao)
+FROM TITULO
+WHERE Codigo_Titulo = '01' OR Codigo_Titulo = '02' OR Codigo_Titulo = '03' ;
+
 -- 48. 58.
 DECLARE
     usersCount NUMBER;
