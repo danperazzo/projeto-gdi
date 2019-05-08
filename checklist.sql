@@ -122,7 +122,8 @@ FROM Titulo f LEFT JOIN Dirige d ON f.Codigo_Titulo = d.Codigo_Titulo
 WHERE d.Codigo_Titulo IS NULL
 
 -- 28.
-
+SELECT DISTINCT title.Nome FROM Adiciona ad RIGHT JOIN Titulo title ON title.Codigo_Titulo = ad.Codigo_Titulo
+WHERE ad.Codigo_Titulo IS NULL
 
 -- 29.
 
