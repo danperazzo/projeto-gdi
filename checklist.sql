@@ -112,6 +112,20 @@ SELECT *
 FROM Serie s JOIN Assiste a ON s.Codigo_Titulo = a.Codigo_Titulo
 WHERE a.Email = 'user1@gmail.com'
 
+-- 26.
+SELECT *
+FROM Serie s INNER JOIN Assiste a ON s.Codigo_Titulo = a.Codigo_Titulo
+
+-- 27.
+SELECT *
+FROM Filme f LEFT JOIN Dirige d ON f.Codigo_Titulo = d.Codigo_Titulo
+WHERE d.Codigo_Titulo IS NULL
+
+-- 28.
+SELECT *
+FROM Serie s RIGHT JOIN Assiste a ON s.Codigo_Titulo = a.Codigo_Titulo
+WHERE a.Codigo_Titulo IS NULL
+
 -- 30.
 Select U.Nome as NomeUsuario
 From Usuario U
