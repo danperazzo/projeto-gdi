@@ -214,7 +214,6 @@ BEGIN
     FROM Usuario;
     DBMS_OUTPUT.PUT_LINE('Quantidade de suários cadastrados: ' ||usersCount);
 END;
-/
 
 -- 49. 56. 58.
 DECLARE 
@@ -231,4 +230,40 @@ EXCEPTION
         DBMS_OUTPUT.PUT_LINE('Não existe usuário com este e-mail');
     WHEN OTHERS THEN
         DBMS_OUTPUT.PUT_LINE('Error');
+END;
+
+-- 50. 51. 53. 55. 63.
+CREATE OR REPLACE PROCEDURE Avaliados IS
+
+BEGIN
+    FOR linha IN (SELECT Nome, Avaliacao FROM Titulo) LOOP
+        IF (linha.Avaliacao = 10) THEN 
+            DBMS_OUTPUT.PUT_LINE(linha.Nome || ': Melhores do ano');
+        ELSEIF (linha.Avaliacao < 10 & linha.Avaliacao > 8) THEN
+            DBMS_OUTPUT.PUT_LINE(linha.Nome || ': Quase lá');
+        ELSE
+            DBMS_OUTPUT.PUT_LINE(linha.Nome || ': Irrelevante');
+        END IF
+    END LOOP;
+END;
+
+-- 73. 81. 82
+CREATE OR REPLACE TRIGGER teste
+BEFORE INSERT OR UPDATE ON Serie
+FOR EACH ROW
+BEGIN
+    IF (:new.Qtd_Temporadas < 1) THEN
+        RAISE_APPLICATION_ERROR(-20003, 'Serie deve haver pelo menos uma temporada');
+    END IF;
+
+END;
+
+-- 74. 80.
+CREATE OR REPLACE TRIGGER AtualizaGenero
+AFTER UPDATE OF Nome ON Genero
+FOR EACH ROW
+
+BEGIN
+    DBMS_OUTPUT.PUT_LINE('Nome do genero atualizado para: ' || :new.Nome);
+    DBMS_OUTPUT.PUT_LINE('Nome antigo: ' || :old.Nome);
 END;
