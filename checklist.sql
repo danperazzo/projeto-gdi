@@ -276,3 +276,29 @@ FOR EACH ROW
 BEGIN
     RAISE_APPLICATION_ERROR(-20005, 'Estudios nao devem ser deletados.');
 END;
+
+-- 84.
+CREATE OR REPLACE TRIGGER insertCartaoWhenInsertingUser
+AFTER INSERT ON Usuario
+FOR EACH ROW
+BEGIN
+    INSERT INTO Cartao_Credito (Numero, Codigo_Seguranca, Bandeira) VALUES (:new.Numero, 111, 'MasterCard');
+END;
+
+--85.
+CREATE OR REPLACE TRIGGER whenDeletingGenero 
+AFTER DELETE ON Genero
+FOR EACH ROW
+BEGIN
+    UPDATE Titulo
+    SET Codigo_Genero = NULL
+    WHERE Codigo_Genero = :old.Codigo_Genero;
+END;
+
+--86.
+CREATE OR REPLACE TRIGGER deleteAssisteWhenDeletingUser
+AFTER DELETE ON Usuario
+FOR EACH ROW
+BEGIN
+    DELETE FROM Assiste WHERE Email = :old.Email;
+END;
