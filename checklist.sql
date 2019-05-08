@@ -108,7 +108,9 @@ Group by Nome
 Having AVG(Duracao) >= 60
 
 -- 24.
-
+SELECT *
+FROM Serie s JOIN Assiste a ON s.Codigo_Titulo = a.Codigo_Titulo
+WHERE a.Email = 'user1@gmail.com'
 
 -- 30.
 Select U.Nome as NomeUsuario
