@@ -239,16 +239,16 @@ BEGIN
     FOR linha IN (SELECT Nome, Avaliacao FROM Titulo) LOOP
         IF (linha.Avaliacao = 10) THEN 
             DBMS_OUTPUT.PUT_LINE(linha.Nome || ': Melhores do ano');
-        ELSEIF (linha.Avaliacao < 10 & linha.Avaliacao > 8) THEN
+        ELSE IF (linha.Avaliacao < 10 AND linha.Avaliacao > 8) THEN
             DBMS_OUTPUT.PUT_LINE(linha.Nome || ': Quase lá');
         ELSE
             DBMS_OUTPUT.PUT_LINE(linha.Nome || ': Irrelevante');
-        END IF
+        END IF;
     END LOOP;
 END;
 
 -- 73. 81. 82
-CREATE OR REPLACE TRIGGER teste
+CREATE OR REPLACE TRIGGER numTempSerie
 BEFORE INSERT OR UPDATE ON Serie
 FOR EACH ROW
 BEGIN
@@ -266,4 +266,12 @@ FOR EACH ROW
 BEGIN
     DBMS_OUTPUT.PUT_LINE('Nome do genero atualizado para: ' || :new.Nome);
     DBMS_OUTPUT.PUT_LINE('Nome antigo: ' || :old.Nome);
+END;
+
+-- 83. 
+CREATE OR REPLACE TRIGGER deletarEstudio
+BEFORE DELETE ON Estudio
+FOR EACH ROW
+BEGIN
+    RAISE_APPLICATION_ERROR(-20005, 'Estudios nao devem ser deletados.');
 END;
