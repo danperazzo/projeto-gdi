@@ -14,16 +14,16 @@ DROP TABLE Titulo;
 DROP TABLE Diretor;
 DROP TABLE Genero;
 
-
+--
 CREATE TABLE Genero (
-  Codigo_Genero INT NOT NULL AUTO_INCREMENT,
+  Codigo_Genero INT GENERATED ALWAYS as IDENTITY(START with 1 INCREMENT by 1),
   Nome VARCHAR2 (50),
   Popularidade VARCHAR (50),
   CONSTRAINT Genero_pk PRIMARY KEY (Codigo_Genero)
 );
 
 CREATE TABLE Diretor (
-  Codigo_Diretor INT NOT NULL AUTO_INCREMENT,
+  Codigo_Diretor INT GENERATED ALWAYS as IDENTITY(START with 1 INCREMENT by 1),
   Nome VARCHAR (50),
   Nacionalidade VARCHAR (50),
   Data_Nascimento DATE,
@@ -31,7 +31,7 @@ CREATE TABLE Diretor (
 );
 
 CREATE TABLE Titulo (
-  Codigo_Titulo INT NOT NULL AUTO_INCREMENT,
+  Codigo_Titulo INT GENERATED ALWAYS as IDENTITY(START with 1 INCREMENT by 1),
   Data DATE,
   Nome VARCHAR(50),
   Classificacao VARCHAR(50),
@@ -44,7 +44,7 @@ CREATE TABLE Titulo (
 );
 
 CREATE TABLE Estudio (
-  Codigo_Estudio INT NOT NULL AUTO_INCREMENT,
+  Codigo_Estudio INT GENERATED ALWAYS as IDENTITY(START with 1 INCREMENT by 1),
   Local VARCHAR(50),
   Nome VARCHAR(50),
   Data_Lancamento DATE,
@@ -54,7 +54,7 @@ CREATE TABLE Estudio (
 );
 
 CREATE TABLE Lista (
-  Codigo_Lista INT NOT NULL AUTO_INCREMENT,
+  Codigo_Lista INT GENERATED ALWAYS as IDENTITY(START with 1 INCREMENT by 1),
   Data_Atualizacao DATE,
   Nome VARCHAR(50),
   CONSTRAINT Lista_pk PRIMARY KEY (Codigo_Lista)
