@@ -167,7 +167,6 @@ FROM Cartao_Credito
 WHERE Numero = '6661';
 
 -- 37.
-INSERT INTO Genero Genero (Nome, Popularidade) VALUES ('Terror', 'Alta')
 
 --38.
 UPDATE Cartao_Credito
