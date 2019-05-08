@@ -108,6 +108,15 @@ Group by Nome
 Having AVG(Duracao) >= 60
 
 -- 24.
+Select G.Nome, T.Nome
+From Genero G inner join TITULO T on G.Codigo_Genero = T.Codigo_Genero
+
+-- 25.
+Select G.Nome, T.Nome, A.Data
+From Genero G inner join TITULO T on G.Codigo_Genero = T.Codigo_Genero inner join Assiste A on T.Codigo_Titulo = A.Codigo_Titulo
+Where G.Nome like 'A%'
+
+-- 26.
 
 
 -- 30.
