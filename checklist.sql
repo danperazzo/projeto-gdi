@@ -117,11 +117,14 @@ SELECT *
 FROM Serie s INNER JOIN Assiste a ON s.Codigo_Titulo = a.Codigo_Titulo
 
 -- 27.
-SELECT *
-FROM Filme f LEFT JOIN Dirige d ON f.Codigo_Titulo = d.Codigo_Titulo
+SELECT f.Nome
+FROM Titulo f LEFT JOIN Dirige d ON f.Codigo_Titulo = d.Codigo_Titulo
 WHERE d.Codigo_Titulo IS NULL
 
 -- 28.
+
+
+-- 29.
 
 -- 30.
 Select U.Nome as NomeUsuario
@@ -163,6 +166,9 @@ SELECT Numero
 FROM Cartao_Credito
 WHERE Numero = '6661';
 
+-- 37.
+INSERT INTO Genero Genero (Nome, Popularidade) VALUES ('Terror', 'Alta')
+
 --38.
 UPDATE Cartao_Credito
 SET Codigo_Seguranca = ( 
@@ -174,6 +180,10 @@ WHERE Bandeira = 'Elo' OR Bandeira = 'MasterCard';
 DELETE 
 FROM Usuario 
 WHERE Numero = (SELECT MAX(Numero) FROM Usuario); 
+
+-- 40. grant
+
+-- 41. revoke
 
 --42.
 select Codigo_Diretor 
@@ -187,6 +197,11 @@ inner join TITULO as y on x.Codigo_Diretor = y.Codigo_Diretor;
 SELECT SUM(Avaliacao)
 FROM TITULO
 WHERE Codigo_Titulo = '01' OR Codigo_Titulo = '02' OR Codigo_Titulo = '03' ;
+
+-- 46.
+SELECT *
+FROM Episodios
+ORDER BY Duracao, Codigo_Titulo, Numero_Episodio;
 
 -- 48. 58.
 DECLARE
