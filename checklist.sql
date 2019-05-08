@@ -202,6 +202,10 @@ SELECT *
 FROM Episodios
 ORDER BY Duracao, Codigo_Titulo, Numero_Episodio;
 
+-- 47.
+SELECT * FROM Titulo
+WHERE EXISTS (SELECT * FROM Titulo t2, Assiste a WHERE a.Codigo_Titulo = t2.Codigo_Titulo);
+
 -- 48. 58.
 DECLARE
     usersCount NUMBER;
