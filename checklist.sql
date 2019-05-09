@@ -302,3 +302,15 @@ FOR EACH ROW
 BEGIN
     DELETE FROM Assiste WHERE Email = :old.Email;
 END;
+
+-- 66.
+CREATE OR REPLACE PROCEDURE toUpperCase(nome IN OUT VARCHAR) IS
+BEGIN
+    nome := UPPER(nome);
+END;
+
+-- 64. 65
+CREATE OR REPLACE PROCEDURE idadeUsuario(dataNasc IN DATE, idade OUT NUMBER) IS
+BEGIN
+    idade := EXTRACT(YEAR FROM SYSDATE) - EXTRACT(YEAR FROM dataNasc);
+END; 
