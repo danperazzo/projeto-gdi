@@ -324,3 +324,21 @@ BEGIN
     idadeUsuario(dataNasc, idade);
     DBMS_OUTPUT.PUT_LINE('Idade do usuário user1@gmail.com = ' || idade);
 END;
+
+--68.
+CREATE OR REPLACE FUNCTION nomeDoMaisVelho
+RETURN VARCHAR IS
+nome VARCHAR;
+BEGIN
+    SELECT Nome INTO nome FORM Usuario WHERE Data_Nascimento = MAX(SELECT Data_Nascimento FROM Usuario);
+END;
+
+--68.
+TYPE bandeiraType IS TABLE OF Cartao_Credito.Bandeira%TYPE INDEX BY PLS_INTEGER;
+CREATE OR REPLACE FUNCTION bandeirasCartoes 
+RETURN bandeiraType IS
+listBandeiras bandeiraType;
+BEGIN
+    SELECT DISTINCT Bandeira BULK COLLECT INTO listBandeiras FROM Cartao_Credito;
+    RETURN listBandeiras;
+END;
