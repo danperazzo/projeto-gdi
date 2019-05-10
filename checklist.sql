@@ -314,3 +314,13 @@ CREATE OR REPLACE PROCEDURE idadeUsuario(dataNasc IN DATE, idade OUT NUMBER) IS
 BEGIN
     idade := EXTRACT(YEAR FROM SYSDATE) - EXTRACT(YEAR FROM dataNasc);
 END; 
+
+-- 67.
+DECLARE
+    dataNasc DATE;
+    idade NUMBER;
+BEGIN
+    SELECT Data_Nascimento INTO dataNasc FROM Usuario WHERE Email = 'user1@gmail.com';
+    idadeUsuario(dataNasc, idade);
+    DBMS_OUTPUT.PUT_LINE('Idade do usuário user1@gmail.com = ' || idade);
+END;
