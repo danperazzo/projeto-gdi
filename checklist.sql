@@ -117,7 +117,24 @@ From Genero G inner join TITULO T on G.Codigo_Genero = T.Codigo_Genero inner joi
 Where G.Nome like 'A%'
 
 -- 26.
+SELECT *
+FROM Serie s JOIN Assiste a ON s.Codigo_Titulo = a.Codigo_Titulo
+WHERE a.Email = 'user1@gmail.com'
 
+-- 26.
+SELECT *
+FROM Serie s INNER JOIN Assiste a ON s.Codigo_Titulo = a.Codigo_Titulo
+
+-- 27.
+SELECT f.Nome
+FROM Titulo f LEFT JOIN Dirige d ON f.Codigo_Titulo = d.Codigo_Titulo
+WHERE d.Codigo_Titulo IS NULL
+
+-- 28.
+SELECT DISTINCT title.Nome FROM Adiciona ad RIGHT JOIN Titulo title ON title.Codigo_Titulo = ad.Codigo_Titulo
+WHERE ad.Codigo_Titulo IS NULL
+
+-- 29.
 
 -- 30.
 Select U.Nome as NomeUsuario
@@ -150,6 +167,55 @@ Select Codigo_Titulo from Filme
 Intersect
 Select Codigo_Titulo from Assiste
 
+--36.
+SELECT Numero
+FROM Usuario
+WHERE Email_Administrador IS NOT NULL
+MINUS
+SELECT Numero
+FROM Cartao_Credito
+WHERE Numero = '6661';
+
+-- 37.
+
+--38.
+UPDATE Cartao_Credito
+SET Codigo_Seguranca = ( 
+  SELECT MAX(Codigo_Seguranca) + 1
+  FROM Cartao_Credito) 
+WHERE Bandeira = 'Elo' OR Bandeira = 'MasterCard';
+
+--39.
+DELETE 
+FROM Usuario 
+WHERE Numero = (SELECT MAX(Numero) FROM Usuario); 
+
+-- 40. grant
+
+-- 41. revoke
+
+--42.
+select Codigo_Diretor 
+from
+    (select Codigo_Diretor
+    from Diretor
+    group by Nacionalidade) as x
+inner join TITULO as y on x.Codigo_Diretor = y.Codigo_Diretor;
+
+--43.
+SELECT SUM(Avaliacao)
+FROM TITULO
+WHERE Codigo_Titulo = '01' OR Codigo_Titulo = '02' OR Codigo_Titulo = '03' ;
+
+-- 46.
+SELECT *
+FROM Episodios
+ORDER BY Duracao, Codigo_Titulo, Numero_Episodio;
+
+-- 47.
+SELECT * FROM Titulo
+WHERE EXISTS (SELECT * FROM Titulo t2, Assiste a WHERE a.Codigo_Titulo = t2.Codigo_Titulo);
+
 -- 48. 58.
 DECLARE
     usersCount NUMBER;
@@ -158,7 +224,6 @@ BEGIN
     FROM Usuario;
     DBMS_OUTPUT.PUT_LINE('Quantidade de suários cadastrados: ' ||usersCount);
 END;
-/
 
 -- 49. 56. 58.
 DECLARE 
@@ -175,4 +240,48 @@ EXCEPTION
         DBMS_OUTPUT.PUT_LINE('Não existe usuário com este e-mail');
     WHEN OTHERS THEN
         DBMS_OUTPUT.PUT_LINE('Error');
+END;
+
+-- 50. 51. 53. 55. 63.
+CREATE OR REPLACE PROCEDURE Avaliados IS
+
+BEGIN
+    FOR linha IN (SELECT Nome, Avaliacao FROM Titulo) LOOP
+        IF (linha.Avaliacao = 10) THEN 
+            DBMS_OUTPUT.PUT_LINE(linha.Nome || ': Melhores do ano');
+        ELSE IF (linha.Avaliacao < 10 AND linha.Avaliacao > 8) THEN
+            DBMS_OUTPUT.PUT_LINE(linha.Nome || ': Quase lá');
+        ELSE
+            DBMS_OUTPUT.PUT_LINE(linha.Nome || ': Irrelevante');
+        END IF;
+    END LOOP;
+END;
+
+-- 73. 81. 82
+CREATE OR REPLACE TRIGGER numTempSerie
+BEFORE INSERT OR UPDATE ON Serie
+FOR EACH ROW
+BEGIN
+    IF (:new.Qtd_Temporadas < 1) THEN
+        RAISE_APPLICATION_ERROR(-20003, 'Serie deve haver pelo menos uma temporada');
+    END IF;
+
+END;
+
+-- 74. 80.
+CREATE OR REPLACE TRIGGER AtualizaGenero
+AFTER UPDATE OF Nome ON Genero
+FOR EACH ROW
+
+BEGIN
+    DBMS_OUTPUT.PUT_LINE('Nome do genero atualizado para: ' || :new.Nome);
+    DBMS_OUTPUT.PUT_LINE('Nome antigo: ' || :old.Nome);
+END;
+
+-- 83. 
+CREATE OR REPLACE TRIGGER deletarEstudio
+BEFORE DELETE ON Estudio
+FOR EACH ROW
+BEGIN
+    RAISE_APPLICATION_ERROR(-20005, 'Estudios nao devem ser deletados.');
 END;
