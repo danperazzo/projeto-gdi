@@ -285,3 +285,69 @@ FOR EACH ROW
 BEGIN
     RAISE_APPLICATION_ERROR(-20005, 'Estudios nao devem ser deletados.');
 END;
+
+-- 84.
+CREATE OR REPLACE TRIGGER insertCartaoWhenInsertingUser
+AFTER INSERT ON Usuario
+FOR EACH ROW
+BEGIN
+    INSERT INTO Cartao_Credito (Numero, Codigo_Seguranca, Bandeira) VALUES (:new.Numero, 111, 'MasterCard');
+END;
+
+--85.
+CREATE OR REPLACE TRIGGER whenDeletingGenero 
+AFTER DELETE ON Genero
+FOR EACH ROW
+BEGIN
+    UPDATE Titulo
+    SET Codigo_Genero = NULL
+    WHERE Codigo_Genero = :old.Codigo_Genero;
+END;
+
+--86.
+CREATE OR REPLACE TRIGGER deleteAssisteWhenDeletingUser
+AFTER DELETE ON Usuario
+FOR EACH ROW
+BEGIN
+    DELETE FROM Assiste WHERE Email = :old.Email;
+END;
+
+-- 66.
+CREATE OR REPLACE PROCEDURE toUpperCase(nome IN OUT VARCHAR) IS
+BEGIN
+    nome := UPPER(nome);
+END;
+
+-- 64. 65
+CREATE OR REPLACE PROCEDURE idadeUsuario(dataNasc IN DATE, idade OUT NUMBER) IS
+BEGIN
+    idade := EXTRACT(YEAR FROM SYSDATE) - EXTRACT(YEAR FROM dataNasc);
+END; 
+
+-- 67.
+DECLARE
+    dataNasc DATE;
+    idade NUMBER;
+BEGIN
+    SELECT Data_Nascimento INTO dataNasc FROM Usuario WHERE Email = 'user1@gmail.com';
+    idadeUsuario(dataNasc, idade);
+    DBMS_OUTPUT.PUT_LINE('Idade do usuário user1@gmail.com = ' || idade);
+END;
+
+--68.
+CREATE OR REPLACE FUNCTION nomeDoMaisVelho
+RETURN VARCHAR IS
+nome VARCHAR;
+BEGIN
+    SELECT Nome INTO nome FORM Usuario WHERE Data_Nascimento = MAX(SELECT Data_Nascimento FROM Usuario);
+END;
+
+--68.
+TYPE bandeiraType IS TABLE OF Cartao_Credito.Bandeira%TYPE INDEX BY PLS_INTEGER;
+CREATE OR REPLACE FUNCTION bandeirasCartoes 
+RETURN bandeiraType IS
+listBandeiras bandeiraType;
+BEGIN
+    SELECT DISTINCT Bandeira BULK COLLECT INTO listBandeiras FROM Cartao_Credito;
+    RETURN listBandeiras;
+END;
