@@ -336,18 +336,52 @@ END;
 
 --68.
 CREATE OR REPLACE FUNCTION nomeDoMaisVelho
-RETURN VARCHAR IS
-nome VARCHAR;
+RETURN VARCHAR
+IS
+nome VARCHAR(50);
 BEGIN
-    SELECT Nome INTO nome FORM Usuario WHERE Data_Nascimento = MAX(SELECT Data_Nascimento FROM Usuario);
+    SELECT Nome INTO nome FROM Usuario WHERE Data_Nascimento = (SELECT MIN(Data_Nascimento) FROM Usuario);
+    DBMS_OUTPUT.PUT_LINE('Nome do usuário mais velho = ' || nome);
+    RETURN nome;
 END;
 
---68.
-TYPE bandeiraType IS TABLE OF Cartao_Credito.Bandeira%TYPE INDEX BY PLS_INTEGER;
-CREATE OR REPLACE FUNCTION bandeirasCartoes 
-RETURN bandeiraType IS
-listBandeiras bandeiraType;
+--69.
+CREATE OR REPLACE FUNCTION nomeDoFilmeComDuracao(duracao IN NUMBER)
+RETURN VARCHAR
+IS
+    nome VARCHAR(50);
 BEGIN
-    SELECT DISTINCT Bandeira BULK COLLECT INTO listBandeiras FROM Cartao_Credito;
-    RETURN listBandeiras;
+    SELECT Nome INTO nome FROM Titulo WHERE Codigo_Titulo = (SELECT Codigo_Titulo FROM Filme WHERE Duracao = 123);
+    RETURN nome;
 END;
+
+--70.
+CREATE OR REPLACE FUNCTION oMaisBemAvaliado(nomeTitulo OUT VARCHAR)
+RETURN VARCHAR
+IS
+BEGIN
+    SELECT Nome INTO nomeTitulo FROM Titulo WHERE ROWNUM = 1 ORDER BY Avaliacao DESC;
+    DBMS_OUTPUT.PUT_LINE('Nome do título mais bem avaliado: ' || nomeTitulo);
+    RETURN nomeTitulo;
+END;
+
+--69. 72.
+CREATE OR REPLACE PACKAGE my_pkg as
+
+  TYPE textGroupArray IS TABLE OF VARCHAR2(50) INDEX BY BINARY_INTEGER;
+
+  FUNCTION xMaisBemAvaliados(checksumNumber VARCHAR2) RETURN textGroupArray;
+  FUNCTION oMaisBemAvaliado(nomeTitulo OUT VARCHAR) RETURN VARCHAR;
+
+END my_pkg;
+
+CREATE OR REPLACE PACKAGE BODY my_pkg AS
+
+    CREATE OR REPLACE FUNCTION xMaisBemAvaliados(xPrimeiros IN NUMBER) 
+    RETURN textGroupArray
+    IS
+        nome VARCHAR(50);
+    BEGIN
+        SELECT Nome INTO textGroupArray FROM TITULO WHERE ROWNUM <= xPrimeiros ORDER BY Avaliacao DESC;
+    END;
+END my_pkg;
