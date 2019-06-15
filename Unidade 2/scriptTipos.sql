@@ -22,6 +22,7 @@ CREATE OR REPLACE TYPE tp_Genero AS OBJECT (
 CREATE OR REPLACE TYPE tp_Diretor AS OBJECT (
 	Codigo_Diretor INT GENERATED ALWAYS as IDENTITY(START with 1 INCREMENT by 1),
 	Nome VARCHAR2(50),
+    Nacionalidade VARCHAR (50),
 	Data_Nascimento DATE
 ) FINAL;
 
@@ -90,6 +91,7 @@ CREATE OR REPLACE TYPE tp_Adiciona AS OBJECT(
 CREATE OR REPLACE TYPE tp_Assiste AS OBJECT(
 	Email VARCHAR(40),
     Codigo_Titulo NUMBER,
+    Data DATE,
 	ref_Titulo REF tp_Titulo
 ) FINAL;
 

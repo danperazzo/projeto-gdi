@@ -23,8 +23,8 @@ CREATE TABLE tb_Diretor OF tp_Diretor (
 
 CREATE TABLE tb_Titulo OF tp_Titulo (
 	PRIMARY KEY (Codigo_Titulo),
-    FOREIGN KEY (Codigo_Genero) REFERENCES tb_Genero,
-    FOREIGN KEY (Codigo_Diretor) REFERENCES tb_Diretor
+    FOREIGN KEY (ref_Genero) REFERENCES tb_Genero,
+    FOREIGN KEY (ref_Diretor) REFERENCES tb_Diretor
 );
 
 CREATE TABLE tb_Estudio OF tp_Estudio (
@@ -42,7 +42,7 @@ CREATE TABLE tb_Cartao_Credito OF tp_Cartao_Credito (
 
 CREATE TABLE tb_Usuario OF tp_Usuario (
     PRIMARY KEY (Email),
-    FOREIGN KEY (Numero) REFERENCES tb_Cartao_Credito,
+    FOREIGN KEY (ref_Cartao) REFERENCES tb_Cartao_Credito,
     FOREIGN KEY (ref_Administrador) REFERENCES tb_Usuario,
 );
 
