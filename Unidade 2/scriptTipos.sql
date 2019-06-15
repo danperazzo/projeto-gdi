@@ -102,3 +102,13 @@ CREATE OR REPLACE TYPE tp_Dirige AS OBJECT(
     ref_Titulo REF tp_Titulo,
     ref_Diretor REF tp_Diretor
 ) FINAL;
+
+CREATE OR REPLACE TYPE tp_Premio AS OBJECT (
+    Categoria VARCHAR(50),
+    Codigo_Titulo NUMBER,
+    Codigo_Diretor NUMBER,
+    Nome VARCHAR(50),
+    Valor NUMBER,
+    ref_Titulo REF tp_Titulo,
+    ref_Diretor REF tp_Diretor
+) FINAL;
