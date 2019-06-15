@@ -1,17 +1,17 @@
-DROP TYPE tp_Premio;
-DROP TYPE tp_Dirige;
-DROP TYPE tp_Assiste;
-DROP TYPE tp_Adiciona;
-DROP TYPE tp_Episodios_Serie;
-DROP TYPE tp_Filme;
-DROP TYPE tp_Serie;
-DROP TYPE tp_Usuario;
-DROP TYPE tp_Cartao_Credito;
-DROP TYPE tp_Lista;
-DROP TYPE tp_Estudio;
-DROP TYPE tp_Titulo;
-DROP TYPE tp_Diretor;
-DROP TYPE tp_Genero;
+DROP TYPE tp_Premio force;
+DROP TYPE tp_Dirige force;
+DROP TYPE tp_Assiste force;
+DROP TYPE tp_Adiciona force;
+DROP TYPE tp_Episodios_Serie force;
+DROP TYPE tp_Filme force;
+DROP TYPE tp_Serie force;
+DROP TYPE tp_Usuario force;
+DROP TYPE tp_Cartao_Credito force;
+DROP TYPE tp_Lista force;
+DROP TYPE tp_Estudio force;
+DROP TYPE tp_Titulo force;
+DROP TYPE tp_Diretor force;
+DROP TYPE tp_Genero force;
 
 CREATE OR REPLACE TYPE tp_Genero AS OBJECT (
 	Codigo_Genero INT GENERATED ALWAYS as IDENTITY(START with 1 INCREMENT by 1),
