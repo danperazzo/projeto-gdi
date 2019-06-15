@@ -2,7 +2,7 @@ DROP TYPE tp_Premio;
 DROP TYPE tp_Dirige;
 DROP TYPE tp_Assiste;
 DROP TYPE tp_Adiciona;
-DROP TYPE tp_Episodios;
+DROP TYPE tp_Episodios_Serie;
 DROP TYPE tp_Filme;
 DROP TYPE tp_Serie;
 DROP TYPE tp_Usuario;
@@ -71,10 +71,12 @@ CREATE OR REPLACE TYPE tp_Filme under tp_Titulo ( -- herança
     Duracao NUMBER
 ) FINAL;
 
-CREATE OR REPLACE TYPE tp_Episodios AS OBJECT (
+CREATE OR REPLACE TYPE tp_Episodios_Serie AS OBJECT ( -- conferir
+    Codigo_Titulo INT,
     Nome VARCHAR(50),
     Numero_Episodio NUMBER,
-    Duracao NUMBER
+    Duracao NUMBER,
+    ref_Serie REF tp_Serie
 ) FINAL;
 
 CREATE OR REPLACE TYPE tp_Adiciona AS OBJECT(
