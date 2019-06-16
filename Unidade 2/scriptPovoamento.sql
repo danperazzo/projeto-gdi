@@ -211,16 +211,57 @@ INSERT INTO tb_Adiciona VALUES (
 
 -- TA ERRADO AQUI, VOU AJEITAR AINDA
 -- inserindo títulos assistidos (assiste)
-INSERT INTO tb_Assiste VALUES ('user1@gmail.com', 1, to_date ('20/04/2019', 'dd/mm/yyyy'));
-INSERT INTO tb_Assiste VALUES ('user1@gmail.com', 3, to_date ('22/04/2019', 'dd/mm/yyyy'));
-INSERT INTO tb_Assiste VALUES ('user2@gmail.com', 2, to_date ('21/04/2019', 'dd/mm/yyyy'));
-INSERT INTO tb_Assiste VALUES ('user2@gmail.com', 5, to_date ('06/05/2019', 'dd/mm/yyyy'));
-INSERT INTO tb_Assiste VALUES ('user3@gmail.com', 3, to_date ('24/04/2019', 'dd/mm/yyyy'));
-INSERT INTO tb_Assiste VALUES ('user3@gmail.com', 4, to_date ('07/05/2019', 'dd/mm/yyyy'));
+INSERT INTO tb_Assiste VALUES (
+    (SELECT REF(U) FROM tb_Usuario U WHERE U.Email = 'user1@gmail.com'),
+    (SELECT REF(T) FROM tb_Titulo T WHERE T.Codigo_Titulo = 1),
+    to_date ('20/04/2019', 'dd/mm/yyyy')
+);
+INSERT INTO tb_Assiste VALUES (
+    (SELECT REF(U) FROM tb_Usuario U WHERE U.Email = 'user1@gmail.com'),
+    (SELECT REF(T) FROM tb_Titulo T WHERE T.Codigo_Titulo = 3),
+    to_date ('22/04/2019', 'dd/mm/yyyy')
+);
+INSERT INTO tb_Assiste VALUES (
+    (SELECT REF(U) FROM tb_Usuario U WHERE U.Email = 'user2@gmail.com'),
+    (SELECT REF(T) FROM tb_Titulo T WHERE T.Codigo_Titulo = 2),
+    to_date ('21/04/2019', 'dd/mm/yyyy')
+);
+INSERT INTO tb_Assiste VALUES (
+    (SELECT REF(U) FROM tb_Usuario U WHERE U.Email = 'user2@gmail.com'),
+    (SELECT REF(T) FROM tb_Titulo T WHERE T.Codigo_Titulo = 5),
+    to_date ('06/05/2019', 'dd/mm/yyyy')
+);
+INSERT INTO tb_Assiste VALUES (
+    (SELECT REF(U) FROM tb_Usuario U WHERE U.Email = 'user3@gmail.com'),
+    (SELECT REF(T) FROM tb_Titulo T WHERE T.Codigo_Titulo = 3),
+    to_date ('24/04/2019', 'dd/mm/yyyy')
+);
+INSERT INTO tb_Assiste VALUES (
+    (SELECT REF(U) FROM tb_Usuario U WHERE U.Email = 'user3@gmail.com'),
+    (SELECT REF(T) FROM tb_Titulo T WHERE T.Codigo_Titulo = 4),
+    to_date ('07/05/2019', 'dd/mm/yyyy')
+);
 
 -- inserindo relação entre títulos e diretores (dirige)
-INSERT INTO tb_Dirige VALUES (1, 1, 'Cannes', 'Melhor Filme', to_date ('16/04/2019', 'dd/mm/yyyy'));
-INSERT INTO tb_Dirige VALUES (3, 3, 'Oscar', 'Melhor Filme', to_date ('21/04/2019', 'dd/mm/yyyy'));
+INSERT INTO tb_Dirige VALUES (
+    (SELECT REF(T) FROM tb_Titulo T WHERE T.Codigo_Titulo = 1),
+    (SELECT REF(D) FROM tb_Diretor D WHERE D.Codigo_Diretor = 1),
+    'Cannes',
+    'Melhor Filme',
+    to_date ('16/04/2019', 'dd/mm/yyyy')
+);
+INSERT INTO tb_Dirige VALUES (
+    (SELECT REF(T) FROM tb_Titulo T WHERE T.Codigo_Titulo = 3),
+    (SELECT REF(D) FROM tb_Diretor D WHERE D.Codigo_Diretor = 3),
+    'Oscar',
+    'Melhor Filme',
+    to_date ('21/04/2019', 'dd/mm/yyyy')
+);
 
 -- inserindo prêmios
-INSERT INTO tb_Premio VALUES ('Melhor Filme', 1, 1, 'Prêmio Luana Amado', 30000);
+INSERT INTO tb_Premio VALUES (
+    'Melhor Filme',
+    (SELECT REF(T) FROM tb_Titulo T WHERE T.Codigo_Titulo = 1),
+    (SELECT REF(D) FROM tb_Diretor D WHERE D.Codigo_Diretor = 1),
+    'Prêmio Luana Amado',
+    30000);
