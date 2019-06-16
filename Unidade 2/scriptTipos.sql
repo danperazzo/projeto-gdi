@@ -38,7 +38,7 @@ CREATE OR REPLACE TYPE tp_Titulo AS OBJECT (
     Avaliacao NUMBER,
     ref_Genero REF tp_Genero,
     ref_Diretor REF tp_Diretor
-) NOT FINAL;
+) NOT FINAL NOT INSTANTIABLE;
 /
 -- T
 
@@ -91,7 +91,7 @@ CREATE OR REPLACE TYPE tp_Filme under tp_Titulo (
 -- T
 
 CREATE OR REPLACE TYPE tp_Episodios_Serie AS OBJECT (
-    Codigo_Titulo INT,
+    Codigo_Titulo NUMBER,
     Numero_Episodio NUMBER,
     Duracao NUMBER,
     Nome VARCHAR(50),
@@ -120,8 +120,8 @@ CREATE OR REPLACE TYPE tp_Assiste AS OBJECT(
 -- T
 
 CREATE OR REPLACE TYPE tp_Dirige AS OBJECT(
-	Codigo_Titulo INT,
-    Codigo_Diretor INT,
+	Codigo_Titulo NUMBER,
+    Codigo_Diretor NUMBER,
     Nome VARCHAR(50) ,
     Categoria_Premiacao VARCHAR(40),
     Ano DATE,
