@@ -71,27 +71,23 @@ CREATE TABLE tb_Episodios_Serie OF tp_Episodios_Serie (
 
 CREATE TABLE tb_Adiciona OF tp_Adiciona (
     PRIMARY KEY (Email, Codigo_Lista, Codigo_Titulo),
-    FOREIGN KEY (ref_Lista) REFERENCES tb_Lista,
-    FOREIGN KEY (ref_Titulo) REFERENCES tb_Titulo
+    FOREIGN KEY (ref_Lista) REFERENCES tb_Lista
 );
 -- T
 
 CREATE TABLE tb_Assiste OF tp_Assiste (
-    PRIMARY KEY (Email, Codigo_Titulo),
-    FOREIGN KEY (ref_Titulo) REFERENCES tb_Titulo
+    PRIMARY KEY (Email, Codigo_Titulo)
 );
 -- T
 
 CREATE TABLE tb_Dirige OF tp_Dirige (
     PRIMARY KEY (Codigo_Titulo, Codigo_Diretor),
-    FOREIGN KEY (ref_Titulo) REFERENCES tb_Titulo,
     FOREIGN KEY (ref_Diretor) REFERENCES tb_Diretor
 );
 -- T
 
 CREATE TABLE tb_Premio OF tp_Premio (
     PRIMARY KEY (Categoria, Codigo_Titulo, Codigo_Diretor),
-    FOREIGN KEY (ref_Titulo) REFERENCES tb_Titulo,
     FOREIGN KEY (ref_Diretor) REFERENCES tb_Diretor
 );
 -- T

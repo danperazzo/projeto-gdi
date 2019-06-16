@@ -35,7 +35,6 @@ INSERT INTO tb_Serie VALUES (
 
 -- inserindo filmes
 INSERT INTO tb_Filme VALUES (
-    -- (SELECT REF(T) FROM tb_Titulo T WHERE T.Codigo_Titulo = 1),
     1,
     to_date ('28/11/2000', 'dd/mm/yyyy'),
     'E.T.: O Extraterrestre',
@@ -46,7 +45,6 @@ INSERT INTO tb_Filme VALUES (
     123
 );
 INSERT INTO tb_Filme VALUES (
-    -- (SELECT REF(T) FROM tb_Titulo T WHERE T.Codigo_Titulo = 3),
     3,
     to_date ('16/04/1997', 'dd/mm/yyyy'),
     'Kill Bill',
@@ -57,7 +55,6 @@ INSERT INTO tb_Filme VALUES (
     123
 );
 INSERT INTO tb_Filme VALUES (
-    -- (SELECT REF(T) FROM tb_Titulo T WHERE T.Codigo_Titulo = 4),
     4,
     to_date ('10/11/2014', 'dd/mm/yyyy'),
     'Jogos Vorazes',
@@ -196,8 +193,6 @@ INSERT INTO tb_Usuario VALUES (
     (SELECT REF(C) FROM tb_Cartao_Credito C WHERE C.Numero = 6663)
 );
 
-
--- BUGADO DAQUI PRA BAIXO AINDA
 -- inserindo títulos às listas (adiciona)
 INSERT INTO tb_Adiciona VALUES (
     'user1@gmail.com',
