@@ -38,7 +38,7 @@ CREATE OR REPLACE TYPE tp_Titulo AS OBJECT (
     Avaliacao NUMBER,
     ref_Genero REF tp_Genero,
     ref_Diretor REF tp_Diretor
-) NOT FINAL NOT INSTANTIABLE;
+) NOT FINAL;
 /
 -- T
 

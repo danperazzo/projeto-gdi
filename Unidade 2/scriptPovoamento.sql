@@ -58,29 +58,29 @@ INSERT INTO tb_Titulo VALUES (
     (SELECT REF(D) FROM tb_Diretor D WHERE D.Codigo_Diretor = 5)
 );
 
--- inserindo séries
-INSERT INTO tb_Serie VALUES (
-    (SELECT REF(T) FROM tb_Titulo T WHERE T.Codigo_Titulo = 2),
-    8
-);
-INSERT INTO tb_Serie VALUES (
-    (SELECT REF(T) FROM tb_Titulo T WHERE T.Codigo_Titulo = 5),
-    2
-);
+-- -- inserindo séries
+-- INSERT INTO tb_Serie VALUES (
+--     (SELECT REF(T) FROM tb_Titulo T WHERE T.Codigo_Titulo = 2),
+--     8
+-- );
+-- INSERT INTO tb_Serie VALUES (
+--     (SELECT REF(T) FROM tb_Titulo T WHERE T.Codigo_Titulo = 5),
+--     2
+-- );
 
--- inserindo filmes
-INSERT INTO tb_Filme VALUES (
-    (SELECT REF(T) FROM tb_Titulo T WHERE T.Codigo_Titulo = 1),
-    123
-);
-INSERT INTO tb_Filme VALUES (
-    (SELECT REF(T) FROM tb_Titulo T WHERE T.Codigo_Titulo = 3),
-    123
-);
-INSERT INTO tb_Filme VALUES (
-    (SELECT REF(T) FROM tb_Titulo T WHERE T.Codigo_Titulo = 4),
-    90
-);
+-- -- inserindo filmes
+-- INSERT INTO tb_Filme VALUES (
+--     (SELECT REF(T) FROM tb_Titulo T WHERE T.Codigo_Titulo = 1),
+--     123
+-- );
+-- INSERT INTO tb_Filme VALUES (
+--     (SELECT REF(T) FROM tb_Titulo T WHERE T.Codigo_Titulo = 3),
+--     123
+-- );
+-- INSERT INTO tb_Filme VALUES (
+--     (SELECT REF(T) FROM tb_Titulo T WHERE T.Codigo_Titulo = 4),
+--     90
+-- );
 
 -- inserindo episódios de série
 INSERT INTO tb_Episodios_Serie VALUES (
