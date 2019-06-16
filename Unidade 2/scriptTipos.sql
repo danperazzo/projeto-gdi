@@ -60,8 +60,8 @@ CREATE OR REPLACE TYPE tp_Usuario AS OBJECT (
     Email VARCHAR(40) NOT NULL,
     Data_Nascimento DATE,
     Nome VARCHAR(50),
-    ref_Cartao REF tp_Cartao_Credito,
     ref_Administrador REF tp_Usuario -- auto-relacionamento
+    ref_Cartao REF tp_Cartao_Credito,
 ) FINAL;
 
 CREATE OR REPLACE TYPE tp_Serie under tp_Titulo ( -- herança
@@ -74,9 +74,9 @@ CREATE OR REPLACE TYPE tp_Filme under tp_Titulo ( -- herança
 
 CREATE OR REPLACE TYPE tp_Episodios_Serie AS OBJECT ( -- conferir
     Codigo_Titulo INT,
-    Nome VARCHAR(50),
     Numero_Episodio NUMBER,
     Duracao NUMBER,
+    Nome VARCHAR(50),
     ref_Serie REF tp_Serie
 ) FINAL;
 
@@ -96,11 +96,11 @@ CREATE OR REPLACE TYPE tp_Assiste AS OBJECT(
 ) FINAL;
 
 CREATE OR REPLACE TYPE tp_Dirige AS OBJECT(
+	Codigo_Titulo INT,
+    Codigo_Diretor INT,
     Nome VARCHAR(50) ,
     Categoria_Premiacao VARCHAR(40),
     Ano DATE,
-	Codigo_Titulo INT,
-    Codigo_Diretor INT,
     ref_Titulo REF tp_Titulo,
     ref_Diretor REF tp_Diretor
 ) FINAL;

@@ -1,17 +1,17 @@
-DROP TABLE tp_Premio;
-DROP TABLE tp_Dirige;
-DROP TABLE tp_Assiste;
-DROP TABLE tp_Adiciona;
-DROP TABLE tp_Episodios;
-DROP TABLE tp_Filme;
-DROP TABLE tp_Serie;
-DROP TABLE tp_Usuario;
-DROP TABLE tp_Cartao_Credito;
-DROP TABLE tp_Lista;
-DROP TABLE tp_Estudio;
-DROP TABLE tp_Titulo;
-DROP TABLE tp_Diretor;
-DROP TABLE tp_Genero;
+DROP TABLE tb_Premio;
+DROP TABLE tb_Dirige;
+DROP TABLE tb_Assiste;
+DROP TABLE tb_Adiciona;
+DROP TABLE tb_Episodios_Serie;
+DROP TABLE tb_Filme;
+DROP TABLE tb_Serie;
+DROP TABLE tb_Usuario;
+DROP TABLE tb_Cartao_Credito;
+DROP TABLE tb_Lista;
+DROP TABLE tb_Estudio;
+DROP TABLE tb_Titulo;
+DROP TABLE tb_Diretor;
+DROP TABLE tb_Genero;
 
 CREATE TABLE tb_Genero OF tp_Genero (
 	PRIMARY KEY (Codigo_Genero)
