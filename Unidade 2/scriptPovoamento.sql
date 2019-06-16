@@ -1,18 +1,19 @@
 -- inserindo gêneros
-INSERT INTO tb_Genero VALUES ('Ação', 'Alta');
-INSERT INTO tb_Genero VALUES ('Comédia', 'Alta');
-INSERT INTO tb_Genero VALUES ('Romance', 'Média');
-INSERT INTO tb_Genero VALUES ('Drama', 'Alta');
+INSERT INTO tb_Genero VALUES (1, 'Ação', 'Alta');
+INSERT INTO tb_Genero VALUES (2, 'Comédia', 'Alta');
+INSERT INTO tb_Genero VALUES (3, 'Romance', 'Média');
+INSERT INTO tb_Genero VALUES (4, 'Drama', 'Alta');
 
 -- inserindo diretores
-INSERT INTO tb_Diretor VALUES ('Steven Spielberg', 'Americana', to_date ('29/08/1968', 'dd/mm/yyyy'));
-INSERT INTO tb_Diretor VALUES ('Alan Taylor', 'Americana', to_date ('29/10/1965', 'dd/mm/yyyy'));
-INSERT INTO tb_Diretor VALUES ('Tarantino', 'Americana', to_date ('12/09/1972', 'dd/mm/yyyy'));
-INSERT INTO tb_Diretor VALUES ('Gary Ross', 'Americana', to_date ('03/11/1956', 'dd/mm/yyyy'));
-INSERT INTO tb_Diretor VALUES ('Lisa Joy', 'Americana', to_date ('18/05/1982', 'dd/mm/yyyy'));
+INSERT INTO tb_Diretor VALUES (1, 'Steven Spielberg', 'Americana', to_date ('29/08/1968', 'dd/mm/yyyy'));
+INSERT INTO tb_Diretor VALUES (2, 'Alan Taylor', 'Americana', to_date ('29/10/1965', 'dd/mm/yyyy'));
+INSERT INTO tb_Diretor VALUES (3, 'Tarantino', 'Americana', to_date ('12/09/1972', 'dd/mm/yyyy'));
+INSERT INTO tb_Diretor VALUES (4, 'Gary Ross', 'Americana', to_date ('03/11/1956', 'dd/mm/yyyy'));
+INSERT INTO tb_Diretor VALUES (5, 'Lisa Joy', 'Americana', to_date ('18/05/1982', 'dd/mm/yyyy'));
 
 -- inserindo títulos
 INSERT INTO tb_Titulo VALUES (
+    1,
     to_date ('28/11/2000', 'dd/mm/yyyy'),
     'E.T.: O Extraterrestre',
     'Para maiores de 10 anos',
@@ -21,6 +22,7 @@ INSERT INTO tb_Titulo VALUES (
     (SELECT REF(D) FROM tb_Diretor D WHERE D.Codigo_Diretor = 1)
 );
 INSERT INTO tb_Titulo VALUES (
+    2,
     to_date ('07/05/2016', 'dd/mm/yyyy'),
     'Game Of Thrones',
     'Para maiores de 16 anos',
@@ -29,6 +31,7 @@ INSERT INTO tb_Titulo VALUES (
     (SELECT REF(D) FROM tb_Diretor D WHERE D.Codigo_Diretor = 2)
 );
 INSERT INTO tb_Titulo VALUES (
+    3,
     to_date ('16/04/1997', 'dd/mm/yyyy'),
     'Kill Bill',
     'Para maiores de 16 anos',
@@ -37,6 +40,7 @@ INSERT INTO tb_Titulo VALUES (
     (SELECT REF(D) FROM tb_Diretor D WHERE D.Codigo_Diretor = 3)
 );
 INSERT INTO tb_Titulo VALUES (
+    4,
     to_date ('10/11/2014', 'dd/mm/yyyy'),
     'Jogos Vorazes',
     'Para maiores de 10 anos',
@@ -45,6 +49,7 @@ INSERT INTO tb_Titulo VALUES (
     (SELECT REF(D) FROM tb_Diretor D WHERE D.Codigo_Diretor = 4)
 );
 INSERT INTO tb_Titulo VALUES (
+    5,
     to_date ('10/11/2014', 'dd/mm/yyyy'),
     'Westworld',
     'Para maiores de 14 anos',
@@ -129,30 +134,35 @@ INSERT INTO tb_Episodios_Serie VALUES (
 
 -- inserindo estúdios
 INSERT INTO tb_Estudio VALUES (
+    1,
     '5th Avenue, 15',
     'Miramax',
     to_date ('16/04/1997', 'dd/mm/yyyy'),
     (SELECT REF(T) FROM tb_Titulo T WHERE T.Codigo_Titulo = 1)
 );
 INSERT INTO tb_Estudio VALUES (
+    2,
     '7th Avenue, 30',
     'HBO Sudios',
     to_date ('05/12/1995', 'dd/mm/yyyy'),
     (SELECT REF(T) FROM tb_Titulo T WHERE T.Codigo_Titulo = 2)
 );
 INSERT INTO tb_Estudio VALUES (
+    3,
     'Universal, Orlando',
     'Universal Studios',
     to_date ('20/10/2004', 'dd/mm/yyyy'),
     (SELECT REF(T) FROM tb_Titulo T WHERE T.Codigo_Titulo = 3)
 );
 INSERT INTO tb_Estudio VALUES (
+    4,
     'Rodeo Drive, 140',
     'Liongate',
     to_date ('20/10/2004', 'dd/mm/yyyy'),
     (SELECT REF(T) FROM tb_Titulo T WHERE T.Codigo_Titulo = 4)
 );
 INSERT INTO tb_Estudio VALUES (
+    5,
     '7th Avenue, 30',
     'HBO',
     to_date ('20/10/2004', 'dd/mm/yyyy'),
@@ -160,9 +170,9 @@ INSERT INTO tb_Estudio VALUES (
 ); 
 
 -- inserindo listas
-INSERT INTO tb_Lista VALUES (to_date ('20/04/2019', 'dd/mm/yyyy'), 'Ver mais tarde');
-INSERT INTO tb_Lista VALUES (to_date ('19/04/2019', 'dd/mm/yyyy'), 'Ver mais depois');
-INSERT INTO tb_Lista VALUES (to_date ('20/04/2019', 'dd/mm/yyyy'), 'Gostei');
+INSERT INTO tb_Lista VALUES (1, to_date ('20/04/2019', 'dd/mm/yyyy'), 'Ver mais tarde');
+INSERT INTO tb_Lista VALUES (2, to_date ('19/04/2019', 'dd/mm/yyyy'), 'Ver mais depois');
+INSERT INTO tb_Lista VALUES (3, to_date ('20/04/2019', 'dd/mm/yyyy'), 'Gostei');
 
 -- inserindo cartões de crédito
 INSERT INTO tb_Cartao_Credito VALUES (6661, 111, 'MasterCard');
