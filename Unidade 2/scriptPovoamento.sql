@@ -11,125 +11,119 @@ INSERT INTO tb_Diretor VALUES (3, 'Tarantino', 'Americana', to_date ('12/09/1972
 INSERT INTO tb_Diretor VALUES (4, 'Gary Ross', 'Americana', to_date ('03/11/1956', 'dd/mm/yyyy'));
 INSERT INTO tb_Diretor VALUES (5, 'Lisa Joy', 'Americana', to_date ('18/05/1982', 'dd/mm/yyyy'));
 
--- inserindo títulos
-INSERT INTO tb_Titulo VALUES (
-    1,
-    to_date ('28/11/2000', 'dd/mm/yyyy'),
-    'E.T.: O Extraterrestre',
-    'Para maiores de 10 anos',
-    8,
-    (SELECT REF(G) FROM tb_Genero G WHERE G.Codigo_Genero = 4),
-    (SELECT REF(D) FROM tb_Diretor D WHERE D.Codigo_Diretor = 1)
-);
-INSERT INTO tb_Titulo VALUES (
+-- inserindo séries
+INSERT INTO tb_Serie VALUES (
     2,
     to_date ('07/05/2016', 'dd/mm/yyyy'),
     'Game Of Thrones',
     'Para maiores de 16 anos',
     10,
     (SELECT REF(G) FROM tb_Genero G WHERE G.Codigo_Genero = 1),
-    (SELECT REF(D) FROM tb_Diretor D WHERE D.Codigo_Diretor = 2)
+    (SELECT REF(D) FROM tb_Diretor D WHERE D.Codigo_Diretor = 2),
+    8
 );
-INSERT INTO tb_Titulo VALUES (
-    3,
-    to_date ('16/04/1997', 'dd/mm/yyyy'),
-    'Kill Bill',
-    'Para maiores de 16 anos',
-    9,
-    (SELECT REF(G) FROM tb_Genero G WHERE G.Codigo_Genero = 1),
-    (SELECT REF(D) FROM tb_Diretor D WHERE D.Codigo_Diretor = 3)
-);
-INSERT INTO tb_Titulo VALUES (
-    4,
-    to_date ('10/11/2014', 'dd/mm/yyyy'),
-    'Jogos Vorazes',
-    'Para maiores de 10 anos',
-    8,
-    (SELECT REF(G) FROM tb_Genero G WHERE G.Codigo_Genero = 3),
-    (SELECT REF(D) FROM tb_Diretor D WHERE D.Codigo_Diretor = 4)
-);
-INSERT INTO tb_Titulo VALUES (
+INSERT INTO tb_Serie VALUES (
     5,
     to_date ('10/11/2014', 'dd/mm/yyyy'),
     'Westworld',
     'Para maiores de 14 anos',
     8,
     (SELECT REF(G) FROM tb_Genero G WHERE G.Codigo_Genero = 1),
-    (SELECT REF(D) FROM tb_Diretor D WHERE D.Codigo_Diretor = 5)
+    (SELECT REF(D) FROM tb_Diretor D WHERE D.Codigo_Diretor = 5),
+    2
 );
 
--- -- inserindo séries
--- INSERT INTO tb_Serie VALUES (
---     (SELECT REF(T) FROM tb_Titulo T WHERE T.Codigo_Titulo = 2),
---     8
--- );
--- INSERT INTO tb_Serie VALUES (
---     (SELECT REF(T) FROM tb_Titulo T WHERE T.Codigo_Titulo = 5),
---     2
--- );
-
--- -- inserindo filmes
--- INSERT INTO tb_Filme VALUES (
---     (SELECT REF(T) FROM tb_Titulo T WHERE T.Codigo_Titulo = 1),
---     123
--- );
--- INSERT INTO tb_Filme VALUES (
---     (SELECT REF(T) FROM tb_Titulo T WHERE T.Codigo_Titulo = 3),
---     123
--- );
--- INSERT INTO tb_Filme VALUES (
---     (SELECT REF(T) FROM tb_Titulo T WHERE T.Codigo_Titulo = 4),
---     90
--- );
+-- inserindo filmes
+INSERT INTO tb_Filme VALUES (
+    -- (SELECT REF(T) FROM tb_Titulo T WHERE T.Codigo_Titulo = 1),
+    1,
+    to_date ('28/11/2000', 'dd/mm/yyyy'),
+    'E.T.: O Extraterrestre',
+    'Para maiores de 10 anos',
+    8,
+    (SELECT REF(G) FROM tb_Genero G WHERE G.Codigo_Genero = 4),
+    (SELECT REF(D) FROM tb_Diretor D WHERE D.Codigo_Diretor = 1),
+    123
+);
+INSERT INTO tb_Filme VALUES (
+    -- (SELECT REF(T) FROM tb_Titulo T WHERE T.Codigo_Titulo = 3),
+    3,
+    to_date ('16/04/1997', 'dd/mm/yyyy'),
+    'Kill Bill',
+    'Para maiores de 16 anos',
+    9,
+    (SELECT REF(G) FROM tb_Genero G WHERE G.Codigo_Genero = 1),
+    (SELECT REF(D) FROM tb_Diretor D WHERE D.Codigo_Diretor = 3),
+    123
+);
+INSERT INTO tb_Filme VALUES (
+    -- (SELECT REF(T) FROM tb_Titulo T WHERE T.Codigo_Titulo = 4),
+    4,
+    to_date ('10/11/2014', 'dd/mm/yyyy'),
+    'Jogos Vorazes',
+    'Para maiores de 10 anos',
+    8,
+    (SELECT REF(G) FROM tb_Genero G WHERE G.Codigo_Genero = 3),
+    (SELECT REF(D) FROM tb_Diretor D WHERE D.Codigo_Diretor = 4),
+    90
+);
 
 -- inserindo episódios de série
 INSERT INTO tb_Episodios_Serie VALUES (
-    (SELECT REF(T) FROM tb_Titulo T WHERE T.Codigo_Titulo = 2),
+    (SELECT T.Codigo_Titulo FROM tb_Serie T WHERE T.Codigo_Titulo = 2),
     1,
     45,
-    'Winter Is Coming'
+    'Winter Is Coming',
+    (SELECT REF(T) FROM tb_Serie T WHERE T.Codigo_Titulo = 2)
 );
 INSERT INTO tb_Episodios_Serie VALUES (
-    (SELECT REF(T) FROM tb_Titulo T WHERE T.Codigo_Titulo = 2),
+    (SELECT T.Codigo_Titulo FROM tb_Serie T WHERE T.Codigo_Titulo = 2),
     2,
     47,
-    'The Kings Road'
+    'The Kings Road',
+    (SELECT REF(T) FROM tb_Serie T WHERE T.Codigo_Titulo = 2)
 );
 INSERT INTO tb_Episodios_Serie VALUES (
-    (SELECT REF(T) FROM tb_Titulo T WHERE T.Codigo_Titulo = 2),
+    (SELECT T.Codigo_Titulo FROM tb_Serie T WHERE T.Codigo_Titulo = 2),
     3,
     50,
-    'Lord Snow'
+    'Lord Snow',
+    (SELECT REF(T) FROM tb_Serie T WHERE T.Codigo_Titulo = 2)
 );
 INSERT INTO tb_Episodios_Serie VALUES (
-    (SELECT REF(T) FROM tb_Titulo T WHERE T.Codigo_Titulo = 2),
+    (SELECT T.Codigo_Titulo FROM tb_Serie T WHERE T.Codigo_Titulo = 2),
     4,
     48,
-    'Cripples, Bastards, and Broken Things'
+    'Cripples, Bastards, and Broken Things',
+    (SELECT REF(T) FROM tb_Serie T WHERE T.Codigo_Titulo = 2)
 );
 INSERT INTO tb_Episodios_Serie VALUES (
-    (SELECT REF(T) FROM tb_Titulo T WHERE T.Codigo_Titulo = 5),
+    (SELECT T.Codigo_Titulo FROM tb_Serie T WHERE T.Codigo_Titulo = 5),
     1,
     55,
-    'The Original'
+    'The Original',
+    (SELECT REF(T) FROM tb_Serie T WHERE T.Codigo_Titulo = 5)
 );
 INSERT INTO tb_Episodios_Serie VALUES (
-    (SELECT REF(T) FROM tb_Titulo T WHERE T.Codigo_Titulo = 5),
+    (SELECT T.Codigo_Titulo FROM tb_Serie T WHERE T.Codigo_Titulo = 5),
     2,
     55,
-    'Chestnut'
+    'Chestnut',
+    (SELECT REF(T) FROM tb_Serie T WHERE T.Codigo_Titulo = 5)
 );
 INSERT INTO tb_Episodios_Serie VALUES (
-    (SELECT REF(T) FROM tb_Titulo T WHERE T.Codigo_Titulo = 5),
+    (SELECT T.Codigo_Titulo FROM tb_Serie T WHERE T.Codigo_Titulo = 5),
     3,
     55,
-    'The Stray'
+    'The Stray',
+    (SELECT REF(T) FROM tb_Serie T WHERE T.Codigo_Titulo = 5)
 );
 INSERT INTO tb_Episodios_Serie VALUES (
-    (SELECT REF(T) FROM tb_Titulo T WHERE T.Codigo_Titulo = 5),
+    (SELECT T.Codigo_Titulo FROM tb_Serie T WHERE T.Codigo_Titulo = 5),
     4,
     55,
-    'Dissonance Theory'
+    'Dissonance Theory',
+    (SELECT REF(T) FROM tb_Serie T WHERE T.Codigo_Titulo = 5)
 );
 
 -- inserindo estúdios
@@ -202,11 +196,15 @@ INSERT INTO tb_Usuario VALUES (
     (SELECT REF(C) FROM tb_Cartao_Credito C WHERE C.Numero = 6663)
 );
 
+
+-- BUGADO DAQUI PRA BAIXO AINDA
 -- inserindo títulos às listas (adiciona)
 INSERT INTO tb_Adiciona VALUES (
-    (SELECT REF(U) FROM tb_Usuario U WHERE U.Email = 'user1@gmail.com'),
+    'user1@gmail.com',
+    (SELECT L.Codigo_Lista FROM tb_Lista WHERE L.Codigo_Lista = 1),
+    (SELECT T.Codigo_Titulo FROM tb_Filme WHERE T.Codigo_Titulo = 1),
     (SELECT REF(L) FROM tb_Lista L WHERE L.Codigo_Lista = 1),
-    (SELECT REF(T) FROM tb_Titulo T WHERE T.Codigo_Titulo = 1)
+    (SELECT REF(T) FROM tb_Filme T WHERE T.Codigo_Titulo = 1)
 );
 INSERT INTO tb_Adiciona VALUES (
     (SELECT REF(U) FROM tb_Usuario U WHERE U.Email = 'user2@gmail.com'),
@@ -219,7 +217,6 @@ INSERT INTO tb_Adiciona VALUES (
     (SELECT REF(T) FROM tb_Titulo T WHERE T.Codigo_Titulo = 1)
 );
 
--- TA ERRADO AQUI, VOU AJEITAR AINDA
 -- inserindo títulos assistidos (assiste)
 INSERT INTO tb_Assiste VALUES (
     (SELECT REF(U) FROM tb_Usuario U WHERE U.Email = 'user1@gmail.com'),
