@@ -22,7 +22,7 @@ db.episodios.insertMany([{_id: 1, id_titulo: 2, numero_episodio: 1, duracao: 45,
 {_id: 5, id_titulo: 5, numero_episodio: 1, duracao: 55, nome: 'The Original'},
 {_id: 6, id_titulo: 5, numero_episodio: 2, duracao: 55, nome: 'Chestnut'},
 {_id: 7, id_titulo: 5, numero_episodio: 3, duracao: 55, nome: 'The Stray'},
-{_id: 8, id_titulo: 5, numero_episodio: 4, duracao: 55, nome: 'Dissonance Theory'},])
+{_id: 8, titulo_id: 5, numero_episodio: 4, duracao: 55, nome: 'Dissonance Theory'},])
 
 db.cartao.insertMany([{_id: 1, numero: 6661, codigo_seguranca: 111, bandeira: 'MasterCard'},
 {_id: 2, numero: 6662, codigo_seguranca: 112, bandeira: 'MasterCard'},
@@ -33,3 +33,64 @@ db.usuario.insertMany([{_id: 1, email: 'user1@gmail.com', data_nascimento: '20/0
 {_id: 3, email: 'user3@gmail.com', data_nascimento: '15/09/1999', nome: 'Sabrina Spellman', id_cartao: 6663},])
 
 -- CONSULTAS:
+1. Uma consulta de atualização utilizando o valor prévio do campo
+
+
+2. Uma consulta de atualização utilizando ReplaceOne
+db.genero.replaceOne(
+      { nome: "Romance" },
+      { nome: "Romance", popularidade: "Baixa" }
+)
+
+3. Uma consulta para remover ou renomear um campo do documento
+db.episodios.update(
+    { _id: 8 },
+    {
+        $rename: {
+            'titulo_id': 'id_titulo'
+        }
+    }
+)
+
+4. Uma consulta utilizando busca em string / 6. Uma consulta com projeção
+db.episodios.find({nome: {$regex: /^the/, $options: 'i'}}, {_id: 0, nome: 1})
+
+5. Uma consulta utilizando operadores de comparação
+8. Uma consulta utilizando ordenação
+13.Uma consulta de agregação
+14.Uma junção de tabela com unwind
+db.episodios.aggregate([
+    {
+        $lookup: {
+            from: "titulo",
+            localField: "id_titulo",
+            foreignField: "_id",
+            as: "titulo"
+        },
+    },
+    {
+        $unwind: {
+            path: "$titulo"
+        }
+    },
+    {
+        $match: {
+            "titulo.nome": {$eq: "Westworld"}
+        }
+    },
+    {
+        $sort: {
+            nome: 1
+        }
+    },
+    {
+        $project: {
+            _id: 0,
+            "titulo.nome": 1,
+            nome: 1
+        }
+    }
+])
+
+7. Uma consulta limitando a quantidade de documentos retornados
+db.diretor.find().limit(3)
