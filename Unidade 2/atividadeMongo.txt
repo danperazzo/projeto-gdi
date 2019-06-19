@@ -42,6 +42,7 @@ db.genero.replaceOne(
       { nome: "Romance", popularidade: "Baixa" }
 )
 
+
 3. Uma consulta para remover ou renomear um campo do documento
 db.episodios.update(
     { _id: 8 },
@@ -52,8 +53,11 @@ db.episodios.update(
     }
 )
 
-4. Uma consulta utilizando busca em string / 6. Uma consulta com projeção
+
+4. Uma consulta utilizando busca em string
+6. Uma consulta com projeção
 db.episodios.find({nome: {$regex: /^the/, $options: 'i'}}, {_id: 0, nome: 1})
+
 
 5. Uma consulta utilizando operadores de comparação
 8. Uma consulta utilizando ordenação
@@ -91,6 +95,7 @@ db.episodios.aggregate([
         }
     }
 ])
+
 
 7. Uma consulta limitando a quantidade de documentos retornados
 db.diretor.find().limit(3)
