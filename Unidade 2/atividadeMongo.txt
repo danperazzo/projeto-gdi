@@ -1,21 +1,23 @@
 -- ADICIONANDO DADOS:
-db.genero.insertMany([{_id: 1, nome: 'Ação', popularidade: 'Alta'}, {_id: 2, nome: 'Comédia', popularidade: 'Alta'},
-{_id: 3, nome: 'Romance', popularidade: 'Média'}, {_id: 4, nome: 'Drama', popularidade: 'Alta'},])
+db.genero.insertMany([{_id: 1, nome: 'Ação', popularidade: 'Alta'},
+{_id: 2, nome: 'Comédia', popularidade: 'Alta'},
+{_id: 3, nome: 'Romance', popularidade: 'Média'},
+{_id: 4, nome: 'Drama', popularidade: 'Alta'},])
 
 db.diretor.insertMany([{_id: 1, nome: 'Steven Spielberg', nacionalidade: 'Americana', data_nascimento: '29/08/1968'},
 {_id: 2, nome: 'Alan Taylor', nacionalidade: 'Americana', data_nascimento: '29/10/1965'},
 {_id: 3, nome: 'Tarantino', nacionalidade: 'Americana', data_nascimento: '12/09/1972'},
 {_id: 4, nome: 'Gary Ross', nacionalidade: 'Americana', data_nascimento: '03/11/1956'},
-{_id: 5, nome: 'Lisa Joy', nacionalidade: 'Americana', data_nascimento: '18/05/1982'},])
+{_id: 5, nome: 'Lisa Joy', nacionalidade: 'Americana', data_nascimento: '18/05/1982'},
+{_id: 6, nome: 'Walcyr Carrasco', nacionalidade: 'Brasileira', data_nascimento: '02/12/1951'},
+{_id: 7, nome: 'Glória Perez', nacionalidade: 'Brasileira', data_nascimento: '25/09/1948'},])
 
 -- ignorando herança já que é não relacional
 db.titulo.insertMany([{_id: 1, data: '28/11/2000', nome: 'E.T.: O Extraterrestre', classificacao: 'Para maiores de 10 anos', avaliacao: 10, id_genero: 4, id_diretor: 1, duracao: 123},
 {_id: 2, data: '07/05/2012', nome: 'Game Of Thrones', classificacao: 'Para maiores de 16 anos', avaliacao: 10, id_genero: 1, id_diretor: 2, qtd_temporadas: 8},
 {_id: 3, data: '16/04/1997', nome: 'Kill Bill', classificacao: 'Para maiores de 16 anos', avaliacao: 9, id_genero: 1, id_diretor: 3, duracao: 123},
 {_id: 4, data: '10/11/2014', nome: 'Jogos Vorazes', classificacao: 'Para maiores de 10 anos', avaliacao: 8, id_genero: 3, id_diretor: 4, duracao: 90},
-{_id: 5, data: '10/11/2014', nome: 'Westworld', classificacao: 'Para maiores de 14 anos', avaliacao: 9, id_genero: 1, id_diretor: 5, qtd_temporadas: 2}
-{_id: 6, nome: 'Walcyr Carrasco', nacionalidade: 'Brasileira', data_nascimento: '02/12/1951'},
-{_id: 7, nome: 'Glória Perez', nacionalidade: 'Brasileira', data_nascimento: '25/09/1948'},])
+{_id: 5, data: '10/11/2014', nome: 'Westworld', classificacao: 'Para maiores de 14 anos', avaliacao: 9, id_genero: 1, id_diretor: 5, qtd_temporadas: 2},])
 
 db.episodios.insertMany([{_id: 1, id_titulo: 2, numero_episodio: 1, duracao: 45, nome: 'Winter Is Coming'},
 {_id: 2, id_titulo: 2, numero_episodio: 2, duracao: 47, nome: 'The Kings Road'},
@@ -36,6 +38,10 @@ db.usuario.insertMany([{_id: 1, email: 'user1@gmail.com', data_nascimento: '20/0
 
 -- CONSULTAS:
 1. Uma consulta de atualização utilizando o valor prévio do campo
+db.episodios.update(
+    {nome: {$eq: 'The Kings Road'}},
+    {  $inc: {duracao: 5} }
+)
 
 
 2. Uma consulta de atualização utilizando ReplaceOne
@@ -115,12 +121,14 @@ db.titulo.find({qtd_temporadas: {$exists: true}}, {_id: 0, nome: 1})
 db.usuario.find({ nome: { $type: "string" } }, {_id: 0, email: 1})
 
 
-12. Uma consulta utilizando MapReduce
+12. Uma consulta utilizando mapReduce
 db.diretor.mapReduce(
-    function() { emit(this.nome, this.nacionalidade);},
-    function(key,value) {return Array.value},
+    function() { emit(this.nacionalidade, this.nome);},
+    function(key, value) {return value.length},
     {
-        query: { nacionalidade: {$eq: 'Brasileira'} },
         out: 'diretores_brasileiros'
     }
 )
+
+
+15. 
