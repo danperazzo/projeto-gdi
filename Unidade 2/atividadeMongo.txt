@@ -13,7 +13,9 @@ db.titulo.insertMany([{_id: 1, data: '28/11/2000', nome: 'E.T.: O Extraterrestre
 {_id: 2, data: '07/05/2012', nome: 'Game Of Thrones', classificacao: 'Para maiores de 16 anos', avaliacao: 10, id_genero: 1, id_diretor: 2, qtd_temporadas: 8},
 {_id: 3, data: '16/04/1997', nome: 'Kill Bill', classificacao: 'Para maiores de 16 anos', avaliacao: 9, id_genero: 1, id_diretor: 3, duracao: 123},
 {_id: 4, data: '10/11/2014', nome: 'Jogos Vorazes', classificacao: 'Para maiores de 10 anos', avaliacao: 8, id_genero: 3, id_diretor: 4, duracao: 90},
-{_id: 5, data: '10/11/2014', nome: 'Westworld', classificacao: 'Para maiores de 14 anos', avaliacao: 9, id_genero: 1, id_diretor: 5, qtd_temporadas: 2},])
+{_id: 5, data: '10/11/2014', nome: 'Westworld', classificacao: 'Para maiores de 14 anos', avaliacao: 9, id_genero: 1, id_diretor: 5, qtd_temporadas: 2}
+{_id: 6, nome: 'Walcyr Carrasco', nacionalidade: 'Brasileira', data_nascimento: '02/12/1951'},
+{_id: 7, nome: 'Glória Perez', nacionalidade: 'Brasileira', data_nascimento: '25/09/1948'},])
 
 db.episodios.insertMany([{_id: 1, id_titulo: 2, numero_episodio: 1, duracao: 45, nome: 'Winter Is Coming'},
 {_id: 2, id_titulo: 2, numero_episodio: 2, duracao: 47, nome: 'The Kings Road'},
@@ -111,3 +113,14 @@ db.titulo.find({qtd_temporadas: {$exists: true}}, {_id: 0, nome: 1})
 
 11. Uma consulta com o operador $type
 db.usuario.find({ nome: { $type: "string" } }, {_id: 0, email: 1})
+
+
+12. Uma consulta utilizando MapReduce
+db.diretor.mapReduce(
+    function() { emit(this.nome, this.nacionalidade);},
+    function(key,value) {return Array.value},
+    {
+        query: { nacionalidade: {$eq: 'Brasileira'} },
+        out: 'diretores_brasileiros'
+    }
+)
