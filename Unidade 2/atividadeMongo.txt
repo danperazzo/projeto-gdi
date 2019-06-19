@@ -1,4 +1,4 @@
--- ADICIONANDO DADOS
+-- ADICIONANDO DADOS:
 db.genero.insertMany([{_id: 1, nome: 'Ação', popularidade: 'Alta'}, {_id: 2, nome: 'Comédia', popularidade: 'Alta'},
 {_id: 3, nome: 'Romance', popularidade: 'Média'}, {_id: 4, nome: 'Drama', popularidade: 'Alta'},])
 
@@ -99,3 +99,15 @@ db.episodios.aggregate([
 
 7. Uma consulta limitando a quantidade de documentos retornados
 db.diretor.find().limit(3)
+
+
+9. Uma consulta utilizando operadores lógicos
+db.titulo.find({$and:[{duracao: {$exists: true}}, {duracao: {$gte: 100}}]}, {_id: 0, nome: 1})
+
+
+10. Uma consulta com o operador $exists
+db.titulo.find({qtd_temporadas: {$exists: true}}, {_id: 0, nome: 1})
+
+
+11. Uma consulta com o operador $type
+db.usuario.find({ nome: { $type: "string" } }, {_id: 0, email: 1})
