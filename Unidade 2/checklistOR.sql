@@ -135,7 +135,7 @@ ALTER TYPE tp_Titulo
     
 ALTER TYPE tp_Serie
     ADD OVERRIDING MAP MEMBER FUNCTION tituloToInt RETURN NUMBER CASCADE;
-CREATE OR REPLACE TYPE BODY AS
+CREATE OR REPLACE TYPE BODY tp_Serie AS
     OVERRIDING MAP MEMBER FUNCTION tituloToInt RETURN NUMBER IS
     BEGIN
         RETURN Qtd_Temporadas;
@@ -152,24 +152,31 @@ END;
 ALTER TYPE tp_Usuario
     ADD ORDER MEMBER FUNCTION isOlderThan (otherUser tp_Usuario) RETURN NUMBER CASCADE;
 
-CREATE OR REPLACE TYPE BODY AS
+CREATE OR REPLACE TYPE BODY tp_Usuario AS
     ORDER MEMBER FUNCTION comp (otherUser tp_Usuario) RETURN NUMBER IS
     BEGIN
         RETURN otherUser.Data_Nascimento - SELF.Data_Nascimento;
     END;
 END;
-
+/
 DECLARE
-    userTest := tp_Usuario('usertest@gmail.com', to_date ('23/08/1971', 'dd/mm/yyyy'), 'Eduardo Fraco', (SELECT REF(U) FROM tb_Usuario U WHERE U.Email = 'user1@gmail.com'), (SELECT REF(C) FROM tb_Cartao_Credito C WHERE C.Numero = 6662));
-    userTest2 := tp_Usuario('usertest2@gmail.com', to_date ('23/08/1973', 'dd/mm/yyyy'), 'Eduardo Corno', (SELECT REF(U) FROM tb_Usuario U WHERE U.Email = 'user1@gmail.com'), (SELECT REF(C) FROM tb_Cartao_Credito C WHERE C.Numero = 6662));
+    userTest tp_Usuario;
+    userTest2 tp_Usuario;
+    us1 tp_Usuario;
+    ct1 tp_Cartao_Credito;
 BEGIN
-    IF userTest.isOlderThan(userTest2) > 0 THEN
+    SELECT REF(U) INTO us1 FROM tb_Usuario U WHERE U.Email = 'user1@gmail.com';
+    SELECT REF(C) FROM tb_Cartao_Credito C WHERE C.Numero = 6662;
+    userTest := new tp_Usuario('usertest@gmail.com', to_date ('23/08/1971', 'dd/mm/yyyy'), 'Eduardo Fraco', us1, ct1);
+    userTest2 := new tp_Usuario('usertest2@gmail.com', to_date ('23/08/1973', 'dd/mm/yyyy'), 'Eduardo Corno', us1, ct1);
+
+    IF (userTest.isOlderThan(userTest2) > 0) THEN
         DBMS_OUTPUT.PUT_LINE('É mais velho');
-    ELSEIF userTest.isOlderThan(userTest2) < 0 THEN
+    ELSE IF (userTest.isOlderThan(userTest2) < 0) THEN
         DBMS_OUTPUT.PUT_LINE('É mais novo');
     ELSE
         DBMS_OUTPUT.PUT_LINE('Os dois têm a mesma idade');
-    END IF
+    END IF;
 
 END;
 
@@ -178,14 +185,14 @@ SELECT S.Nome
 FROM tb_Serie S
 ORDER BY S.Qtd_Temporadas;
 
-SELECT S.Nome
+SELECT S.Nome, S.Classificacao
 FROM tb_Serie S
-GROUP BY S.Classificacao;
+GROUP BY S.Nome, S.Classificacao;
 
 -- Série com mais de 5 episódios
 SELECT S.ref_Serie.Nome
-FROM tb_Episodios_Serie
-GROUP BY S.ref_Serie
+FROM tb_Episodios_Serie S
+GROUP BY S.ref_Serie.Nome
 HAVING COUNT (S.ref_Serie) > 5;
 
 SELECT U.Nome
@@ -198,15 +205,15 @@ WHERE U.Data_Nascimento BETWEEN to_date ('23/08/1990', 'dd/mm/yyyy') AND to_date
 
 --24.
 SELECT S.Nome
-FROM tb_Serie
+FROM tb_Serie S
 WHERE S.Qtd_Temporadas IN (1, 2, 3, 4, 5);
 
 SELECT S.Nome
-FROM tb_Serie
+FROM tb_Serie S
 WHERE S.Qtd_Temporadas = ALL (6, 8, 10, 20);
 
 SELECT S.Nome
-FROM tb_Serie
+FROM tb_Serie S
 WHERE S.Qtd_Temporadas = ANY (6, 8, 10, 20);
 
 --27.
@@ -215,5 +222,5 @@ FROM tb_Diretor D
 WHERE EXISTS (
     SELECT *
     FROM tb_Premio P
-    WHERE P.ref_Diretor = D.Codigo_Diretor;
+    WHERE DEREF(P.ref_Diretor).Codigo_Diretor = D.Codigo_Diretor
 );
