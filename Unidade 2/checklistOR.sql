@@ -1,33 +1,19 @@
--- --1., 2., 3., 4.
--- CREATE OR REPLACE TYPE tp_endereco AS VARRAY(2) OF VARCHAR2(30);
+--1.
+CREATE OR REPLACE TYPE tp_Estudio AS OBJECT (
+	Codigo_Estudio NUMBER,
+    Local VARCHAR(50),
+    Nome VARCHAR(50),
+    Data_Lancamento DATE,
+    ref_Titulo REF tp_Titulo
+) FINAL;
 
--- CREATE OR REPLACE TYPE tp_pessoa AS OBJECT (
---     nome VARCHAR2(30),
---     CPF VARCHAR2(11),
---     endr tp_endereco,
---     sexo CHAR(1)
--- ) NOT FINAL;
+CREATE OR REPLACE TYPE tp_Serie under tp_Titulo (
+    Qtd_Temporadas NUMBER
+) FINAL;
 
--- CREATE OR REPLACE TYPE tp_faculdade AS OBJECT(
---     nome VARCHAR2(50),
---     num_cursos NUMBER,
---     idade NUMBER,
---     cidade VARCHAR2(30),
--- );
-
--- CREATE OR REPLACE TYPE tp_ref_faculdade AS TABLE OF REF tp_faculdade;
-
--- CREATE OR REPLACE TYPE tp_aluno UNDER tp_pessoa(
---     curso VARCHAR2(30),
---     univ tp_ref_faculdade,
---     ano_entrada NUMBER,
---     periodo_atual NUMBER
--- );
-
--- -- 3.
- 
--- A CHECKLIST É A PARTIR DOS NOSSOS SCRIPTS
-
+CREATE OR REPLACE TYPE tp_Filme under tp_Titulo (
+    Duracao NUMBER
+) FINAL;
 
 --3.
 CREATE OR REPLACE TYPE tp_va_email AS VARRAY(3) OF VARCHAR2(40);
@@ -224,3 +210,39 @@ WHERE EXISTS (
     FROM tb_Premio P
     WHERE DEREF(P.ref_Diretor).Codigo_Diretor = D.Codigo_Diretor
 );
+
+--28.
+CREATE OR REPLACE TRIGGER novoUser
+BEFORE INSERT OR UPDATE ON tb_Usuario
+FOR EACH ROW
+BEGIN
+   dbms_output.put_line('Novo usuário cadastrado');
+END novoUser;
+
+--29.
+CREATE OR REPLACE TRIGGER checkAvaliacao
+BEFORE INSERT OR UPDATE OR DELETE ON tb_Serie
+FOR EACH ROW
+BEGIN
+IF :new.Avaliacao < 5 THEN
+RAISE_APPLICATION_ERROR(-20222,'Apenas séries com avaliação acima de 5!');
+END IF;
+END checkAvaliacao;
+
+INSERT INTO tb_Serie VALUES (
+    20,
+    to_date ('07/05/2016', 'dd/mm/yyyy'),
+    'Game Of Thrones',
+    'Para maiores de 16 anos',
+    4,
+    (SELECT REF(G) FROM tb_Genero G WHERE G.Codigo_Genero = 1),
+    (SELECT REF(D) FROM tb_Diretor D WHERE D.Codigo_Diretor = 2),
+    8
+);
+
+--30.
+CREATE OR REPLACE TRIGGER noMoreListas
+BEFORE INSERT OR UPDATE OR DELETE ON tb_Lista
+BEGIN
+RAISE_APPLICATION_ERROR(-20222,'Não é possível adicionar mais listas.');
+END noMoreListas;
