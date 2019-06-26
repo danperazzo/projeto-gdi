@@ -7,6 +7,15 @@ CREATE OR REPLACE TYPE tp_Estudio AS OBJECT (
     ref_Titulo REF tp_Titulo
 ) FINAL;
 
+--2.
+CREATE OR REPLACE TYPE tp_Diretor AS OBJECT (
+    Codigo_Diretor NUMBER,
+	Nome VARCHAR2(50),
+    Nacionalidade VARCHAR (50),
+	Data_Nascimento DATE,
+    Genero tp_Genero
+) FINAL;
+
 CREATE OR REPLACE TYPE tp_Serie under tp_Titulo (
     Qtd_Temporadas NUMBER
 ) FINAL;
@@ -22,8 +31,16 @@ CREATE OR REPLACE TYPE tp_va_email AS VARRAY(3) OF VARCHAR2(40);
 ALTER TYPE tp_Usuario
     MODIFY ATTRIBUTE Email tp_va_email CASCADE;
 
---4.
-CREATE OR REPLACE TYPE tp_nt_titulos AS TABLE OF VARCHAR(30);
+--4. 26.
+CREATE OR REPLACE TYPE tp_nt_titulos AS TABLE OF VARCHAR(30); -- 4
+
+CREATE TABLE nested_table (id NUMBER, col1 tp_nt_titulos) -- pretexto pro código da 26 funcionar
+    NESTED TABLE col1 STORE AS col1_tab;
+
+INSERT INTO nested_table VALUES (1, tp_nt_titulos('A')); -- pretexto pro código da 26 funcionar
+INSERT INTO nested_table VALUES (2, tp_nt_titulos('B', 'C')); -- pretexto pro código da 26 funcionar
+
+SELECT * FROM nested_table; -- 26
 
 --11.
 ALTER TYPE tp_Episodios_Serie
@@ -64,7 +81,22 @@ WHERE DR.Codigo_Diretor IS DANGLING
 ALTER TABLE tb_Usuario
     MODIFY ref_Administrador SCOPE IS tb_Usuario;
 
---18. NÃO ENTENDEMOS
+--18.
+DROP TYPE tp_Diretor force;
+DROP TABLE tb_Diretor;
+
+CREATE OR REPLACE TYPE tp_Diretor AS OBJECT (
+	Codigo_Diretor NUMBER,
+	Nome VARCHAR2(50),
+    Nacionalidade VARCHAR (50),
+	Data_Nascimento DATE
+) FINAL;
+/
+-- T
+CREATE TABLE tb_Diretor OF tp_Diretor (
+	PRIMARY KEY (Codigo_Diretor)
+);
+-- T
 
 --19.
 SELECT AD.Codigo_Titulo.ref_Genero.nome
