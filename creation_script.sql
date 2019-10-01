@@ -38,7 +38,7 @@ CREATE TABLE Filho(
   n_cadastro_pai INT,
   IdFilho INT,
   Nascimento DATE NOT NULL,
-  Badeirinha VARCHAR(1) NOT NULL,
+  Cadeirinha VARCHAR(1) NOT NULL,
   CONSTRAINT FK_Filho FOREIGN KEY (n_cadastro_pai) REFERENCES Cliente (n_cadastro),
   CONSTRAINT PK_Filho  PRIMARY KEY (n_cadastro_pai,IdFilho) 
 );
