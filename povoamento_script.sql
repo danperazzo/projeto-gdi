@@ -1,68 +1,87 @@
 
-INSERT INTO Genero (Nome, Popularidade) VALUES ('Ação', 'Alta');
-INSERT INTO Genero (Nome, Popularidade) VALUES ('Comédia', 'Alta');
-INSERT INTO Genero (Nome, Popularidade) VALUES ('Romance', 'Média');
-INSERT INTO Genero (Nome, Popularidade) VALUES ('Drama', 'Média');
+INSERT INTO Cliente (n_cadastro, CPF,Nascimento) VALUES (1,1111,to_date ('29/08/1968'));
+INSERT INTO Cliente (n_cadastro, CPF,Nascimento) VALUES (2,2222,to_date ('29/08/1969'));
+INSERT INTO Cliente (n_cadastro, CPF,Nascimento) VALUES (3,3333,to_date ('29/08/1970'));
+INSERT INTO Cliente (n_cadastro, CPF,Nascimento) VALUES (4,4444,to_date ('29/08/1971'));
+INSERT INTO Cliente (n_cadastro, CPF,Nascimento) VALUES (5,5555,to_date ('29/08/1972'));
 
-INSERT INTO Diretor (Nome, Nacionalidade, Data_Nascimento) VALUES ('Steven Spielberg', 'Americana', to_date ('29/08/1968', 'dd/mm/yyyy'));
-INSERT INTO Diretor (Nome, Nacionalidade, Data_Nascimento) VALUES ('Alan Taylor', 'Americana', to_date ('29/10/1965', 'dd/mm/yyyy'));
-INSERT INTO Diretor (Nome, Nacionalidade, Data_Nascimento) VALUES ('Tarantino', 'Americana', to_date ('12/09/1972', 'dd/mm/yyyy'));
-INSERT INTO Diretor (Nome, Nacionalidade, Data_Nascimento) VALUES ('Gary Ross', 'Americana', to_date ('03/11/1956', 'dd/mm/yyyy'));
-INSERT INTO Diretor (Nome, Nacionalidade, Data_Nascimento) VALUES ('Lisa Joy', 'Americana', to_date ('18/05/1982', 'dd/mm/yyyy'));
+INSERT INTO Estudante (n_cadastro_Estudo, UNE) VALUES (1111,1);
+INSERT INTO Estudante (n_cadastro_Estudo, UNE) VALUES (2222,2);
 
-INSERT INTO TITULO (Data, Nome, Classificacao, Avaliacao, Codigo_Genero, Codigo_Diretor) VALUES (to_date ('28/11/2000', 'dd/mm/yyyy'), 'E.T.: O Extraterrestre', 'Para maiores de 10 anos', 8, 4, 1);
-INSERT INTO TITULO (Data, Nome, Classificacao, Avaliacao, Codigo_Genero, Codigo_Diretor) VALUES (to_date ('07/05/2016', 'dd/mm/yyyy'), 'Game Of Thrones', 'Para maiores de 16 anos', 10, 1, 2);
-INSERT INTO TITULO (Data, Nome, Classificacao, Avaliacao, Codigo_Genero, Codigo_Diretor) VALUES (to_date ('16/04/1997', 'dd/mm/yyyy'), 'Kill Bill', 'Para maiores de 16 anos', 9, 1, 3);
-INSERT INTO TITULO (Data, Nome, Classificacao, Avaliacao, Codigo_Genero, Codigo_Diretor) VALUES (to_date ('10/11/2014', 'dd/mm/yyyy'), 'Jogos Vorazes', 'Para maiores de 10 anos', 8, 3, 4);
-INSERT INTO TITULO (Data, Nome, Classificacao, Avaliacao, Codigo_Genero, Codigo_Diretor) VALUES (to_date ('10/11/2014', 'dd/mm/yyyy'), 'Westworld', 'Para maiores de 14 anos', 8, 1, 5);
+INSERT INTO Comum (n_cadastro_Comum) VALUES (3333);
+INSERT INTO Comum (n_cadastro_Comum) VALUES (4444);
+INSERT INTO Comum (n_cadastro_Comum) VALUES (5555);
 
-INSERT INTO Estudio (Local, Nome, Data_Lancamento, Codigo_Titulo) VALUES ('5th Avenue, 15', 'Miramax', to_date ('16/04/1997', 'dd/mm/yyyy'), 1);
-INSERT INTO Estudio (Local, Nome, Data_Lancamento, Codigo_Titulo) VALUES ('7th Avenue, 30', 'HBO Sudios', to_date ('05/12/1995', 'dd/mm/yyyy'), 2);
-INSERT INTO Estudio (Local, Nome, Data_Lancamento, Codigo_Titulo) VALUES ('Universal, Orlando', 'Universal Studios', to_date ('20/10/2004', 'dd/mm/yyyy'), 3);
-INSERT INTO Estudio (Local, Nome, Data_Lancamento, Codigo_Titulo) VALUES ('Rodeo Drive, 140', 'Liongate', to_date ('20/10/2004', 'dd/mm/yyyy'), 4);
-INSERT INTO Estudio (Local, Nome, Data_Lancamento, Codigo_Titulo) VALUES ('7th Avenue, 30', 'HBO', to_date ('20/10/2004', 'dd/mm/yyyy'), 5); 
-
-INSERT INTO Lista (Data_Atualizacao, Nome) VALUES (to_date ('20/04/2019', 'dd/mm/yyyy'), 'Ver mais tarde');
-INSERT INTO Lista (Data_Atualizacao, Nome) VALUES (to_date ('19/04/2019', 'dd/mm/yyyy'), 'Ver mais depois');
-INSERT INTO Lista (Data_Atualizacao, Nome) VALUES (to_date ('20/04/2019', 'dd/mm/yyyy'), 'Gostei');
-
-INSERT INTO Cartao_Credito (Numero, Codigo_Seguranca, Bandeira) VALUES (6661, 111, 'MasterCard');
-INSERT INTO Cartao_Credito (Numero, Codigo_Seguranca, Bandeira) VALUES (6662, 112, 'Visa');
-INSERT INTO Cartao_Credito (Numero, Codigo_Seguranca, Bandeira) VALUES (6663, 113, 'Elo');
-
-INSERT INTO Usuario (Email, Data_Nascimento, Nome, Email_Administrador, Numero) VALUES ('user1@gmail.com', to_date ('20/04/1995', 'dd/mm/yyyy'), 'João das Neves', NULL, 6661);
-INSERT INTO Usuario (Email, Data_Nascimento, Nome, Email_Administrador, Numero) VALUES ('user2@gmail.com', to_date ('23/08/1997', 'dd/mm/yyyy'), 'Eduardo Forte', 'user1@gmail.com', 6662);
-INSERT INTO Usuario (Email, Data_Nascimento, Nome, Email_Administrador, Numero) VALUES ('user3@gmail.com', to_date ('15/09/1998', 'dd/mm/yyyy'), 'Samuel L Jackson', NULL, 6663);
-
-INSERT INTO Serie (Codigo_Titulo, Qtd_Temporadas) VALUES (2, 8);
-INSERT INTO Serie (Codigo_Titulo, Qtd_Temporadas) VALUES (5, 2);
-
-INSERT INTO Filme (Codigo_Titulo, Duracao) VALUES (1, 123);
-INSERT INTO Filme (Codigo_Titulo, Duracao) VALUES (3, 123);
-INSERT INTO Filme (Codigo_Titulo, Duracao) VALUES (4, 90);
-
-INSERT INTO Episodios (Codigo_Titulo, Numero_Episodio, Duracao, Nome) VALUES (2, 1, 45, 'Winter Is Coming');
-INSERT INTO Episodios (Codigo_Titulo, Numero_Episodio, Duracao, Nome) VALUES (2, 2, 47, 'The Kings Road');
-INSERT INTO Episodios (Codigo_Titulo, Numero_Episodio, Duracao, Nome) VALUES (2, 3, 50, 'Lord Snow');
-INSERT INTO Episodios (Codigo_Titulo, Numero_Episodio, Duracao, Nome) VALUES (2, 4, 48, 'Cripples, Bastards, and Broken Things');
-INSERT INTO Episodios (Codigo_Titulo, Numero_Episodio, Duracao, Nome) VALUES (5, 1, 55, 'The Original');
-INSERT INTO Episodios (Codigo_Titulo, Numero_Episodio, Duracao, Nome) VALUES (5, 2, 55, 'Chestnut');
-INSERT INTO Episodios (Codigo_Titulo, Numero_Episodio, Duracao, Nome) VALUES (5, 3, 55, 'The Stray');
-INSERT INTO Episodios (Codigo_Titulo, Numero_Episodio, Duracao, Nome) VALUES (5, 4, 55, 'Dissonance Theory');
+INSERT INTO Filho (n_cadastro_pai,IdFilho,Nascimento,Cadeirinha) VALUES (3333,1,to_date('29/08/2000'),'1');
+INSERT INTO Filho (n_cadastro_pai,IdFilho,Nascimento,Cadeirinha) VALUES (4444,2,to_date('29/08/2001'),'0');
+INSERT INTO Filho (n_cadastro_pai,IdFilho,Nascimento,Cadeirinha) VALUES (5555,3,to_date('29/08/2002'),'1');
 
 
-INSERT INTO Adiciona (Email, Codigo_Lista, Codigo_Titulo) VALUES ('user1@gmail.com', 1, 1);
-INSERT INTO Adiciona (Email, Codigo_Lista, Codigo_Titulo) VALUES ('user2@gmail.com', 2, 2);
-INSERT INTO Adiciona (Email, Codigo_Lista, Codigo_Titulo) VALUES ('user3@gmail.com', 3, 1);
+INSERT INTO Assento(Fileira, Numero,Limpeza, Dbox,Adaptavel) VALUES (
+'G','7',to_date('29/08/2005'),'1','0');
+INSERT INTO Assento(Fileira, Numero,Limpeza, Dbox,Adaptavel) VALUES (
+'G','8',to_date('29/08/2004'),'0','1');
+INSERT INTO Assento(Fileira, Numero,Limpeza, Dbox,Adaptavel) VALUES (
+'G','9',to_date('29/08/2003'),'1','1');
+INSERT INTO Assento(Fileira, Numero,Limpeza, Dbox,Adaptavel) VALUES (
+'G','2',to_date('29/08/2002'),'0','0');
+INSERT INTO Assento(Fileira, Numero,Limpeza, Dbox,Adaptavel) VALUES (
+'A','3',to_date('29/08/2006'),'1','1');
+INSERT INTO Assento(Fileira, Numero,Limpeza, Dbox,Adaptavel) VALUES (
+'A','4',to_date('29/08/2001'),'1','0');
+INSERT INTO Assento(Fileira, Numero,Limpeza, Dbox,Adaptavel) VALUES (
+'A','7',to_date('29/08/1999'),'0','0');
 
-INSERT INTO Assiste (Email, Codigo_Titulo, Data) VALUES ('user1@gmail.com', 1, to_date ('20/04/2019', 'dd/mm/yyyy'));
-INSERT INTO Assiste (Email, Codigo_Titulo, Data) VALUES ('user1@gmail.com', 3, to_date ('22/04/2019', 'dd/mm/yyyy'));
-INSERT INTO Assiste (Email, Codigo_Titulo, Data) VALUES ('user2@gmail.com', 2, to_date ('21/04/2019', 'dd/mm/yyyy'));
-INSERT INTO Assiste (Email, Codigo_Titulo, Data) VALUES ('user2@gmail.com', 5, to_date ('06/05/2019', 'dd/mm/yyyy'));
-INSERT INTO Assiste (Email, Codigo_Titulo, Data) VALUES ('user3@gmail.com', 3, to_date ('24/04/2019', 'dd/mm/yyyy'));
-INSERT INTO Assiste (Email, Codigo_Titulo, Data) VALUES ('user3@gmail.com', 4, to_date ('07/05/2019', 'dd/mm/yyyy'));
+INSERT INTO Filme (Nome, Film_ID, EstreiaData, Seq_ID) VALUES ('E.T.: O Extraterrestre', 0, to_date('29/08/1999'), 7);
+INSERT INTO Filme (Nome, Film_ID, EstreiaData, Seq_ID) VALUES ('Kill Bill', 1, to_date('29/08/2019'), 6);
+INSERT INTO Filme (Nome, Film_ID, EstreiaData, Seq_ID) VALUES ('Monstros VS Alienigenas', 2, to_date('29/03/1955'), 5);
+INSERT INTO Filme (Nome, Film_ID, EstreiaData, Seq_ID) VALUES ('Crespusculo', 3, to_date('29/03/2007'), 4);
+INSERT INTO Filme (Nome, Film_ID, EstreiaData, Seq_ID) VALUES ('Crespusculo Advanced', 4, to_date('29/03/2008'), NULL);
+INSERT INTO Filme (Nome, Film_ID, EstreiaData, Seq_ID) VALUES ('Wall-E', 5, to_date('29/03/2000'), NULL);
+INSERT INTO Filme (Nome, Film_ID, EstreiaData, Seq_ID) VALUES ('Bill Kill Bill', 6, to_date('29/03/2025'), NULL);
+INSERT INTO Filme (Nome, Film_ID, EstreiaData, Seq_ID) VALUES ('Dois doidões em Harvard 2', 7, to_date('29/05/2100'), NULL);
 
-INSERT INTO Dirige (Codigo_Titulo, Codigo_Diretor, Nome, Categoria_Premiacao, Ano) VALUES (1, 1, 'Cannes', 'Melhor Filme', to_date ('16/04/2019', 'dd/mm/yyyy'));
-INSERT INTO Dirige (Codigo_Titulo, Codigo_Diretor, Nome, Categoria_Premiacao, Ano) VALUES (3, 3, 'Oscar', 'Melhor Filme', to_date ('21/04/2019', 'dd/mm/yyyy'));
+INSERT INTO Sessao ( Sala, Horario, InicioData, TresD, Evento, Film_ID) VALUES ('tres','11:59',to_date('29/03/2025'),'0','Filme',0);
+INSERT INTO Sessao ( Sala, Horario, InicioData, TresD, Evento, Film_ID) VALUES ('dois','11:47',to_date('29/03/2004'),'1','Peca',1);
+INSERT INTO Sessao ( Sala, Horario, InicioData, TresD, Evento, Film_ID) VALUES ('um','12:59',to_date('29/03/2010'),'0','Filme',2);
+INSERT INTO Sessao ( Sala, Horario, InicioData, TresD, Evento, Film_ID) VALUES ('zero','11:59',to_date('29/03/2025'),'0','Filme',3);
+INSERT INTO Sessao ( Sala, Horario, InicioData, TresD, Evento, Film_ID) VALUES ('dois','11:59',to_date('29/03/2025'),'0','Filme',4);
+INSERT INTO Sessao ( Sala, Horario, InicioData, TresD, Evento, Film_ID) VALUES ('tres','11:58',to_date('29/03/2000'),'0','Filme',5);
+INSERT INTO Sessao ( Sala, Horario, InicioData, TresD, Evento, Film_ID) VALUES ('seis','11:59',to_date('29/03/2025'),'0','Filme',6);
+INSERT INTO Sessao ( Sala, Horario, InicioData, TresD, Evento, Film_ID) VALUES ('tres','11:59',to_date('29/03/2008'),'0','Filme',7);
 
-INSERT INTO Premio (Categoria,  Codigo_Titulo, Codigo_Diretor, Nome, Valor) VALUES ('Melhor Filme', 1, 1, 'Prêmio Luana Amado', 30000);
+INSERT INTO Ingresso (Assento_Fileira, Assento_Numero, Sesssao_Horario, Sessao_Sala, Cliente_id, Preco) VALUES ('G', '7', '11:59','tres',1,5.5);
+INSERT INTO Ingresso (Assento_Fileira, Assento_Numero, Sesssao_Horario, Sessao_Sala, Cliente_id, Preco) VALUES ('G', '8', '11:47','dois',2,5.5);
+INSERT INTO Ingresso (Assento_Fileira, Assento_Numero, Sesssao_Horario, Sessao_Sala, Cliente_id, Preco) VALUES ('G', '9', '12:59','um',3,5.5);
+INSERT INTO Ingresso (Assento_Fileira, Assento_Numero, Sesssao_Horario, Sessao_Sala, Cliente_id, Preco) VALUES ('G', '2', '11:59','zero',4,5.5);
+INSERT INTO Ingresso (Assento_Fileira, Assento_Numero, Sesssao_Horario, Sessao_Sala, Cliente_id, Preco) VALUES ('A', '7', '11:58','tres',5,5.5);
+
+INSERT INTO GeneroFilme (genero,ID_filme) VALUES (5, 'Drama');
+INSERT INTO GeneroFilme (genero, ID_filme VALUES (1, 'Comedia');
+INSERT INTO GeneroFilme (genero, ID_filme VALUES (7, 'Policial');
+
+INSERT INTO Funcionario (ID_func, Aniversario, Sexo, Salario) VALUES
+(1,to_date ('29/08/1968'),'M',3);
+INSERT INTO Funcionario (ID_func, Aniversario, Sexo, Salario) VALUES
+(2,to_date ('29/08/1969'),'F',5);
+INSERT INTO Funcionario (ID_func, Aniversario, Sexo, Salario) VALUES
+(3,to_date ('29/08/2005'),'M',2);
+INSERT INTO Funcionario (ID_func, Aniversario, Sexo, Salario) VALUES
+(4,to_date ('29/08/1900'),'F',10);
+INSERT INTO Funcionario (ID_func, Aniversario, Sexo, Salario) VALUES
+(5,to_date ('29/08/2001'),'F',1);
+
+INSERT INTO CarrinhoDeComida (ID_car,Revisao) VALUES(1,to_date ('29/08/2010'));
+INSERT INTO CarrinhoDeComida (ID_car,Revisao) VALUES(2,to_date ('29/08/2015'));
+
+INSERT INTO Comida_Carrinho(ID_Carrinho, comida) VALUES(1, 'chocolate');
+INSERT INTO Comida_Carrinho(ID_Carrinho, comida) VALUES(2, 'pipoca');
+
+INSERT INTO Bebida_Carrinho(ID_Carrinho, bebida) VALUES (1,'sodas');
+INSERT INTO Bebida_Carrinho(ID_Carrinho, bebida) VALUES(1, 'agua');
+
+INSERT INTO Trabalha(Funcionario_id, Carrinho_come_id, Sessao_hor, Sessao_sala, Funcao) VALUES (1,1,'11:59','tres','Vendas');
+INSERT INTO Trabalha(Funcionario_id, Carrinho_come_id, Sessao_hor, Sessao_sala, Funcao) VALUES (2,1,'11:47','dois','Limpeza');
+INSERT INTO Trabalha(Funcionario_id, Carrinho_come_id, Sessao_hor, Sessao_sala, Funcao) VALUES (3,2,'12:59','um','Vendas');
+INSERT INTO Trabalha(Funcionario_id, Carrinho_come_id, Sessao_hor, Sessao_sala, Funcao) VALUES (4,2,'11:59','zero','Vendas');
+INSERT INTO Trabalha(Funcionario_id, Carrinho_come_id, Sessao_hor, Sessao_sala, Funcao) VALUES (5,2,'11:58','tres','Limpeza');

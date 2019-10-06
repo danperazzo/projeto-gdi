@@ -49,7 +49,7 @@ CREATE TABLE Assento(
   Numero VARCHAR(1),
   Limpeza DATE NOT NULL,
   Dbox VARCHAR(1) NOT NULL,
-  Adaptável VARCHAR(1) NOT NULL,
+  Adaptavel VARCHAR(1) NOT NULL,
   CONSTRAINT PK_Assento PRIMARY KEY (Fileira,Numero)
 
 );
