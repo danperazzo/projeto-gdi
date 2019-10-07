@@ -55,9 +55,14 @@ INSERT INTO Ingresso (Assento_Fileira, Assento_Numero, Sessao_Horario, Sessao_Sa
 INSERT INTO Ingresso (Assento_Fileira, Assento_Numero, Sessao_Horario, Sessao_Sala, Cliente_id, Preco) VALUES ('G', '2', '11:59','zero',4,5.5);
 INSERT INTO Ingresso (Assento_Fileira, Assento_Numero, Sessao_Horario, Sessao_Sala, Cliente_id, Preco) VALUES ('A', '7', '11:58','tres',5,5.5);
 
-INSERT INTO GeneroFilme (genero,ID_filme) VALUES ( 'Drama' , 5);
-INSERT INTO GeneroFilme (genero, ID_filme) VALUES ( 'Comedia' , 1);
-INSERT INTO GeneroFilme (genero, ID_filme) VALUES ( 'Policial' , 7);
+INSERT INTO GeneroFilme (genero,ID_filme) VALUES ( 'Ficcao' , 0);
+INSERT INTO GeneroFilme (genero, ID_filme) VALUES ( 'Acao' , 1);
+INSERT INTO GeneroFilme (genero, ID_filme) VALUES ( 'Animacao' , 2);
+INSERT INTO GeneroFilme (genero, ID_filme) VALUES ( 'Drama' , 3);
+INSERT INTO GeneroFilme (genero, ID_filme) VALUES ( 'Drama' , 4);
+INSERT INTO GeneroFilme (genero, ID_filme) VALUES ( 'Animacao' , 5);
+INSERT INTO GeneroFilme (genero, ID_filme) VALUES ( 'Acao' , 6);
+INSERT INTO GeneroFilme (genero, ID_filme) VALUES ( 'Comedia' , 7);
 
 INSERT INTO Funcionario (ID_func, Aniversario, Sexo, Salario) VALUES
 (1,to_date ('29/08/1968', 'DD/MM/YYYY'),'M',3);
