@@ -4,32 +4,32 @@ INSERT INTO Cliente (n_cadastro, CPF,Nascimento) VALUES (3,3333,to_date ('29/08/
 INSERT INTO Cliente (n_cadastro, CPF,Nascimento) VALUES (4,4444,to_date ('29/08/1971', 'DD/MM/YYYY'));
 INSERT INTO Cliente (n_cadastro, CPF,Nascimento) VALUES (5,5555,to_date ('29/08/1972', 'DD/MM/YYYY'));
 
-INSERT INTO Estudante (n_cadastro_Estudo, UNE) VALUES (1111,1);
-INSERT INTO Estudante (n_cadastro_Estudo, UNE) VALUES (2222,2);
+INSERT INTO Estudante (n_cadastro_Estudo, UNE) VALUES (1,1);
+INSERT INTO Estudante (n_cadastro_Estudo, UNE) VALUES (2,2);
 
-INSERT INTO Comum (n_cadastro_Comum) VALUES (3333);
-INSERT INTO Comum (n_cadastro_Comum) VALUES (4444);
-INSERT INTO Comum (n_cadastro_Comum) VALUES (5555);
+INSERT INTO Comum (n_cadastro_Comum) VALUES (3);
+INSERT INTO Comum (n_cadastro_Comum) VALUES (4);
+INSERT INTO Comum (n_cadastro_Comum) VALUES (5);
 
-INSERT INTO Filho (n_cadastro_pai,IdFilho,Nascimento,Cadeirinha) VALUES (3333,1,to_date('29/08/2000', 'DD/MM/YYYY'),'1');
-INSERT INTO Filho (n_cadastro_pai,IdFilho,Nascimento,Cadeirinha) VALUES (4444,2,to_date('29/08/2001', 'DD/MM/YYYY'),'0');
-INSERT INTO Filho (n_cadastro_pai,IdFilho,Nascimento,Cadeirinha) VALUES (5555,3,to_date('29/08/2002', 'DD/MM/YYYY'),'1');
+INSERT INTO Filho (n_cadastro_pai,IdFilho,Nascimento,Cadeirinha) VALUES (3,1,to_date('29/08/2000', 'DD/MM/YYYY'),'1');
+INSERT INTO Filho (n_cadastro_pai,IdFilho,Nascimento,Cadeirinha) VALUES (4,2,to_date('29/08/2001', 'DD/MM/YYYY'),'0');
+INSERT INTO Filho (n_cadastro_pai,IdFilho,Nascimento,Cadeirinha) VALUES (5,3,to_date('29/08/2002', 'DD/MM/YYYY'),'1');
 
 
 INSERT INTO Assento(Fileira, Numero,Limpeza, Dbox,Adaptavel) VALUES (
-'G','7',to_date('29/08/2005'),'1','0');
+'G','7',to_date('29/08/2005' , 'DD/MM/YYYY'),'1','0');
 INSERT INTO Assento(Fileira, Numero,Limpeza, Dbox,Adaptavel) VALUES (
-'G','8',to_date('29/08/2004'),'0','1');
+'G','8',to_date('29/08/2004' , 'DD/MM/YYYY'),'0','1');
 INSERT INTO Assento(Fileira, Numero,Limpeza, Dbox,Adaptavel) VALUES (
-'G','9',to_date('29/08/2003'),'1','1');
+'G','9',to_date('29/08/2003' , 'DD/MM/YYYY'),'1','1');
 INSERT INTO Assento(Fileira, Numero,Limpeza, Dbox,Adaptavel) VALUES (
-'G','2',to_date('29/08/2002'),'0','0');
+'G','2',to_date('29/08/2002' , 'DD/MM/YYYY'),'0','0');
 INSERT INTO Assento(Fileira, Numero,Limpeza, Dbox,Adaptavel) VALUES (
-'A','3',to_date('29/08/2006'),'1','1');
+'A','3',to_date('29/08/2006' , 'DD/MM/YYYY'),'1','1');
 INSERT INTO Assento(Fileira, Numero,Limpeza, Dbox,Adaptavel) VALUES (
-'A','4',to_date('29/08/2001'),'1','0');
+'A','4',to_date('29/08/2001' , 'DD/MM/YYYY'),'1','0');
 INSERT INTO Assento(Fileira, Numero,Limpeza, Dbox,Adaptavel) VALUES (
-'A','7',to_date('29/08/1999'),'0','0');
+'A','7',to_date('29/08/1999' , 'DD/MM/YYYY'),'0','0');
 
 INSERT INTO Filme (Nome, Film_ID, EstreiaData, Seq_ID) VALUES ('E.T.: O Extraterrestre', 0, to_date('29/08/1999', 'DD/MM/YYYY'), 7);
 INSERT INTO Filme (Nome, Film_ID, EstreiaData, Seq_ID) VALUES ('Kill Bill', 1, to_date('29/08/2019', 'DD/MM/YYYY'), 6);
