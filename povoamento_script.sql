@@ -31,13 +31,13 @@ INSERT INTO Assento(Fileira, Numero,Limpeza, Dbox,Adaptavel) VALUES (
 INSERT INTO Assento(Fileira, Numero,Limpeza, Dbox,Adaptavel) VALUES (
 'A','7',to_date('29/08/1999' , 'DD/MM/YYYY'),'0','0');
 
-INSERT INTO Filme (Nome, Film_ID, EstreiaData, Seq_ID) VALUES ('E.T.: O Extraterrestre', 0, to_date('29/08/1999', 'DD/MM/YYYY'), 7);
-INSERT INTO Filme (Nome, Film_ID, EstreiaData, Seq_ID) VALUES ('Kill Bill', 1, to_date('29/08/2019', 'DD/MM/YYYY'), 6);
-INSERT INTO Filme (Nome, Film_ID, EstreiaData, Seq_ID) VALUES ('Monstros VS Alienigenas', 2, to_date('29/03/1955', 'DD/MM/YYYY'), 5);
-INSERT INTO Filme (Nome, Film_ID, EstreiaData, Seq_ID) VALUES ('Crespusculo', 3, to_date('29/03/2007', 'DD/MM/YYYY'), 4);
-INSERT INTO Filme (Nome, Film_ID, EstreiaData, Seq_ID) VALUES ('Crespusculo Advanced', 4, to_date('29/03/2008', 'DD/MM/YYYY'), NULL);
+INSERT INTO Filme (Nome, Film_ID, EstreiaData, Seq_ID) VALUES ('E.T.: O Extraterrestre', 0, to_date('29/08/1999', 'DD/MM/YYYY'), NULL);
+INSERT INTO Filme (Nome, Film_ID, EstreiaData, Seq_ID) VALUES ('Kill Bill', 1, to_date('29/08/2019', 'DD/MM/YYYY'), NULL);
+INSERT INTO Filme (Nome, Film_ID, EstreiaData, Seq_ID) VALUES ('Monstros VS Alienigenas', 2, to_date('29/03/1955', 'DD/MM/YYYY'), NULL);
+INSERT INTO Filme (Nome, Film_ID, EstreiaData, Seq_ID) VALUES ('Crespusculo', 3, to_date('29/03/2007', 'DD/MM/YYYY'), NULL);
+INSERT INTO Filme (Nome, Film_ID, EstreiaData, Seq_ID) VALUES ('Crespusculo Advanced', 4, to_date('29/03/2008', 'DD/MM/YYYY'), 3);
 INSERT INTO Filme (Nome, Film_ID, EstreiaData, Seq_ID) VALUES ('Wall-E', 5, to_date('29/03/2000', 'DD/MM/YYYY'), NULL);
-INSERT INTO Filme (Nome, Film_ID, EstreiaData, Seq_ID) VALUES ('Bill Kill Bill', 6, to_date('29/03/2025', 'DD/MM/YYYY'), NULL);
+INSERT INTO Filme (Nome, Film_ID, EstreiaData, Seq_ID) VALUES ('Bill Kill Bill', 6, to_date('29/03/2025', 'DD/MM/YYYY'), 1);
 INSERT INTO Filme (Nome, Film_ID, EstreiaData, Seq_ID) VALUES ('Dois doidões em Harvard 2', 7, to_date('29/05/2100', 'DD/MM/YYYY'), NULL);
 
 INSERT INTO Sessao ( Sala, Horario, InicioData, TresD, Evento, Film_ID) VALUES ('tres','11:59',to_date('29/03/2025', 'DD/MM/YYYY'),'0','Filme',0);
@@ -47,7 +47,7 @@ INSERT INTO Sessao ( Sala, Horario, InicioData, TresD, Evento, Film_ID) VALUES (
 INSERT INTO Sessao ( Sala, Horario, InicioData, TresD, Evento, Film_ID) VALUES ('dois','11:59',to_date('29/03/2025', 'DD/MM/YYYY'),'0','Filme',4);
 INSERT INTO Sessao ( Sala, Horario, InicioData, TresD, Evento, Film_ID) VALUES ('tres','11:58',to_date('29/03/2000', 'DD/MM/YYYY'),'0','Filme',5);
 INSERT INTO Sessao ( Sala, Horario, InicioData, TresD, Evento, Film_ID) VALUES ('seis','11:59',to_date('29/03/2025', 'DD/MM/YYYY'),'0','Filme',6);
-INSERT INTO Sessao ( Sala, Horario, InicioData, TresD, Evento, Film_ID) VALUES ('tres','11:59',to_date('29/03/2008', 'DD/MM/YYYY'),'0','Filme',7);
+INSERT INTO Sessao ( Sala, Horario, InicioData, TresD, Evento, Film_ID) VALUES ('tres','11:57',to_date('29/03/2008', 'DD/MM/YYYY'),'0','Filme',7);
 
 INSERT INTO Ingresso (Assento_Fileira, Assento_Numero, Sessao_Horario, Sessao_Sala, Cliente_id, Preco) VALUES ('G', '7', '11:59','tres',1,5.5);
 INSERT INTO Ingresso (Assento_Fileira, Assento_Numero, Sessao_Horario, Sessao_Sala, Cliente_id, Preco) VALUES ('G', '8', '11:47','dois',2,5.5);
@@ -55,9 +55,9 @@ INSERT INTO Ingresso (Assento_Fileira, Assento_Numero, Sessao_Horario, Sessao_Sa
 INSERT INTO Ingresso (Assento_Fileira, Assento_Numero, Sessao_Horario, Sessao_Sala, Cliente_id, Preco) VALUES ('G', '2', '11:59','zero',4,5.5);
 INSERT INTO Ingresso (Assento_Fileira, Assento_Numero, Sessao_Horario, Sessao_Sala, Cliente_id, Preco) VALUES ('A', '7', '11:58','tres',5,5.5);
 
-INSERT INTO GeneroFilme (genero,ID_filme) VALUES (5, 'Drama');
-INSERT INTO GeneroFilme (genero, ID_filme VALUES (1, 'Comedia');
-INSERT INTO GeneroFilme (genero, ID_filme VALUES (7, 'Policial');
+INSERT INTO GeneroFilme (genero,ID_filme) VALUES ( 'Drama' , 5);
+INSERT INTO GeneroFilme (genero, ID_filme) VALUES ( 'Comedia' , 1);
+INSERT INTO GeneroFilme (genero, ID_filme) VALUES ( 'Policial' , 7);
 
 INSERT INTO Funcionario (ID_func, Aniversario, Sexo, Salario) VALUES
 (1,to_date ('29/08/1968', 'DD/MM/YYYY'),'M',3);
