@@ -36,3 +36,8 @@ from funcionario f
 where f.salario  between (select min(salario) from funcionario) 
     and (select avg(salario) from funcionario);
 
+--64 e 65
+CREATE OR REPLACE PROCEDURE idade_Cliente(nascimento IN DATE, idade OUT NUMBER) IS
+    BEGIN
+        idade := EXTRACT(YEAR FROM SYSDATE) - EXTRACT(YEAR FROM nascimento);
+    END; 
