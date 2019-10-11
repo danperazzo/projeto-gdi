@@ -55,10 +55,50 @@ Select AVG(i.preco)
 From ingresso i
 
 
+--20
+select DISTINCT g.genero
+from GeneroFilme g;
+
+
+select f.Nome
+from Filme f
+where f.Film_ID in (select g.ID_filme
+                    from GeneroFilme g
+                    where g.genero = 'Drama');
+--21, 19
+select g.genero, min(f.Nome) as primeiro_em_ordem_alfabetica
+from Filme f, GeneroFilme g
+where f.Film_ID = g.ID_filme
+group by g.genero
+having g.genero != 'Ficcao';
+
+--22, 23
+select g.genero, min(f.Nome) as primeiro_em_ordem_alfabetica
+from Filme f, GeneroFilme g
+where f.Film_ID = g.ID_filme
+group by g.genero
+having min(f.Nome) = (select max(f.Nome) 
+                        from Filme fi, GeneroFilme ge
+                        where ge.genero = g.genero
+                        group by g.genero);
+
+--24
+select f.nome, s.iniciodata
+from sessao s join filme f on (f.film_id = s.film_ID);
+
 --38
 update funcionario
 set salario = ( select max(salario) from funcionario)
     where salario < (select avg(salario) from funcionario);
+
+--39
+delete from comida_carrinho
+where id_carrinho = (select id_car 
+                    from carrinhodecomida 
+                    where revisao < to_date('01/01/2011','DD/MM/YYYY') 
+                    );
+--testando 39
+select * from comida_carrinho;
 
 --44
 select f.id_func
@@ -66,6 +106,11 @@ from funcionario f
 where f.salario  between (select min(salario) from funcionario) 
     and (select avg(salario) from funcionario);
 
+
+--45
+select g.genero, f.nome, s.iniciodata
+from generofilme g inner join filme f on (f.film_id = g.ID_filme)
+inner join sessao s on (f.film_id = s.film_ID);
 
 
 --47
@@ -86,7 +131,7 @@ BEGIN
     dbms_output.put_line('Hello World');
     
 END;
-
+/
 
 --49
 DECLARE
@@ -105,7 +150,7 @@ exception
         dbms_output.put_line('divisão por zero');
         
 end;
-
+/
 
 
 --50
@@ -129,7 +174,7 @@ BEGIN
  
  
 end;
-
+/
 
 --51
 DECLARE
@@ -155,7 +200,7 @@ BEGIN
  
  
 end;
-
+/
 
 
 --52
@@ -184,7 +229,7 @@ BEGIN
  
  
 END;
-
+/
 
 
 
@@ -204,7 +249,7 @@ BEGIN
  
  
 end;
-
+/
 
 
 
@@ -213,3 +258,48 @@ CREATE OR REPLACE PROCEDURE idade_Cliente(nascimento IN DATE, idade OUT NUMBER) 
     BEGIN
         idade := EXTRACT(YEAR FROM SYSDATE) - EXTRACT(YEAR FROM nascimento);
     END; 
+    
+--69
+create or replace function mostra_lan(titulo in varchar) return date is
+    dia date;
+begin
+    select s.iniciodata into dia from sessao s
+    where s.film_id in (select film_id from filme where nome = titulo);
+    return dia;
+end;
+/
+
+--70
+create or replace function mostra_aniv(ide in int, dia out date) return date is
+begin
+    select f.aniversario into dia from funcionario f
+    where f.id_func = ide;
+    return dia;
+end;
+/
+
+--71
+create or replace function salario_ano(ide IN int, sal in out int) return int is
+begin
+    sal := sal*12;
+    return sal;
+end;
+/
+
+--89
+create or replace function DadoFilme(titulo varchar) return Filme%rowtype is
+    lin filme%rowtype;
+begin
+    select * into lin from Filme f where titulo = f.nome;
+    return lin;
+end;
+/
+
+--testando 89
+declare
+    lin filme%rowtype;
+begin
+    lin := DadoFilme('Bill Kill Bill');
+    dbms_output.put_line(lin.nome ||' ' || lin.film_id|| ' ' || lin.estreiadata ||' '|| lin.seq_id);
+end;
+/
