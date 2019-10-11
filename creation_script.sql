@@ -109,7 +109,7 @@ CREATE TABLE GeneroFilme(
 
 );
 
-
+--10
 CREATE TABLE Funcionario(
   ID_func INT,
   Aniversario DATE NOT NULL,
@@ -120,6 +120,8 @@ CREATE TABLE Funcionario(
 
 );
 
+
+--11
 CREATE TABLE CarrinhoDeComida(
 
   ID_car INT,
@@ -128,6 +130,8 @@ CREATE TABLE CarrinhoDeComida(
 
 );
 
+
+--13
 CREATE TABLE Comida_Carrinho(
 
   ID_Carrinho INT,
@@ -137,6 +141,8 @@ CREATE TABLE Comida_Carrinho(
 
 );
 
+
+--14
 CREATE TABLE Bebida_Carrinho(
 
   ID_Carrinho INT,
@@ -146,6 +152,8 @@ CREATE TABLE Bebida_Carrinho(
 
 );
 
+
+--15
 CREATE TABLE Trabalha(
   Funcionario_id INT,
   Carrinho_come_id INT,
