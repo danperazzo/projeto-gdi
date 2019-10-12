@@ -31,6 +31,33 @@ ORDER BY NOME;
 
 --Gabriel : 7-12
 
+-- 7
+CREATE VIEW clienteINFO as
+SELECT n_cadastro,
+CPF, Nascimento
+FROM Cliente
+
+-- 8 
+SELECT *
+FROM clienteINFO
+WHERE Nascimento is not null
+
+-- 9
+DROP VIEW clienteINFO
+
+-- 10
+
+ALTER TABLE Filme
+ADD CONSTRAINT CHK_idFilm CHECK(Film_ID >= 0)
+
+-- 11
+ALTER TABLE Assento
+ADD CONSTRAINT PK_Assento PRIMARY KEY(Fileira, Numero)
+
+-- 12
+ALTER TABLE Ingresso
+ADD CONSTRAINT FK_Ingresso FOREIGN KEY (Assento_Fileira, Assento_Numero) REFERENCES Assento(Fileira, Numero)
+
 --13
 alter table ingresso
 modify preco default 10.0
