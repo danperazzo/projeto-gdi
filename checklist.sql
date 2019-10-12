@@ -90,6 +90,37 @@ select nome
 from filme
 where film_id = any (select film_id from sessao where tresd = 1)
 
+--31
+SELECT Nascimento FROM Cliente 
+WHERE n_cadastro = ALL (SELECT n_cadastro_Estudo FROM Estudante WHERE UNE = 1);
+
+--32
+SELECT DISTINCT (Funcionario_id),Funcao 
+FROM Trabalha 
+WHERE NOT EXISTS (SELECT Funcionario_id FROM Funcionario WHERE salario > 100);
+
+--33
+SELECT Nome AS Titulo 
+FROM Filme 
+WHERE Film_ID  IN (SELECT Film_ID AS TitFilm FROM Sessao WHERE Horario IN 
+		(SELECT Sessao_hor AS Horadoshow FROM Trabalha WHERE Funcao ='Limpeza'));
+
+--34
+SELECT comida FROM Comida_Carrinho 
+UNION
+SELECT bebida FROM Bebida_Carrinho
+ORDER BY comida;
+
+--35
+SELECT n_cadastro FROM Cliente WHERE CPF = '4444'
+INTERSECT
+SELECT n_cadastro_Comum FROM Comum;
+
+--36
+SELECT n_cadastro  FROM Cliente
+MINUS 
+SELECT n_cadastro_Comum  FROM Comum;
+
 --38
 update funcionario
 set salario = ( select max(salario) from funcionario)
@@ -99,6 +130,11 @@ set salario = ( select max(salario) from funcionario)
 grant select
 on filme
 to public
+
+--41 revoke
+revoke select
+on filme
+from public
 
 --44
 select f.id_func
@@ -332,6 +368,83 @@ END deleteIngresso;
 --exemplo
 delete from ingresso where 
 
+--78
+CREATE OR REPLACE TRIGGER SeExisteCadmai0 
+BEFORE INSERT ON Cliente
+FOR EACH ROW
+WHEN(NEW.n_cadastro >0)
+BEGIN 
+    DBMS_OUTPUT.PUT_LINE('O numero de cadastro eh valido.');
+END;
+-- exemplo
+INSERT INTO Cliente (n_cadastro, CPF,Nascimento) VALUES (7,7777,to_date ('29/08/1933', 'DD/MM/YYYY'));
+
+
+
+--79
+CREATE OR REPLACE TRIGGER SeVelCadmai0 
+BEFORE DELETE ON Cliente
+FOR EACH ROW
+WHEN(OLD.n_cadastro >0)
+BEGIN 
+    DBMS_OUTPUT.PUT_LINE('O numero de cadastro era valido.');
+END;
+--exemplo
+DELETE FROM Cliente WHERE CPF = '3333';
+
+--80
+CREATE OR REPLACE TRIGGER SeCPFNovo!Ant
+BEFORE UPDATE ON Cliente
+FOR EACH ROW
+WHEN(NEW.CPF <> OLD.CPF)
+BEGIN 
+    DBMS_OUTPUT.PUT_LINE('CPFS DIFERENTES');
+END;
+--exemplo
+UPDATE Cliente SET CPF = '9999' WHERE n_cadastro = 2;
+
+--81
+CREATE OR REPLACE TRIGGER NPodeInsere
+BEFORE INSERT ON Cliente
+FOR EACH ROW
+BEGIN 
+    RAISE_APPLICATION_ERROR(-20011,'NAO FOI POSSIVEL REALIZAR ESSA OPERACAO');
+END;
+--exemplo 
+INSERT INTO Cliente (n_cadastro, CPF,Nascimento) VALUES (8,8888,to_date ('29/08/1935', 'DD/MM/YYYY'));
+
+--82
+CREATE OR REPLACE TRIGGER NPodeMuda
+BEFORE UPDATE ON Cliente
+FOR EACH ROW
+BEGIN 
+    RAISE_APPLICATION_ERROR(-20012,'NAO FOI POSSIVEL REALIZAR ESSA OPERACAO');
+END;
+--exemplo
+UPDATE Cliente SET CPF = '9999' WHERE n_cadastro = 3;
+
+--83
+CREATE OR REPLACE TRIGGER NPodeDeleta
+BEFORE DELETE ON Cliente
+FOR EACH ROW
+BEGIN 
+    RAISE_APPLICATION_ERROR(-20013,'NAO FOI POSSIVEL REALIZAR ESSA OPERACAO');
+END;
+--exemplo
+DELETE FROM Cliente WHERE CPF = '5555';
+
+--84
+CREATE OR REPLACE TRIGGER INSNoLuga
+BEFORE INSERT ON Cliente
+FOR EACH ROW
+BEGIN 
+    INSERT INTO Comida_Carrinho(ID_Carrinho, comida) VALUES(1, 'piposs');
+    DBMS_OUTPUT.PUT_LINE('VALORES INSERIDOS EM COMIDA_CARRINHO!');
+END;
+--exemplo
+
+
+
 --86.
 -- deleta sessao toda vez que deleta filme
 create or replace trigger deleteSessaoWhenDeleteFilme
@@ -340,3 +453,17 @@ for each row
 begin
     delete from sessao where film_id = :old.film_id;
 end;
+
+--91
+CREATE OR REPLACE TRIGGER t1
+INSTEAD OF INSERT
+ON minhaview
+DECLARE
+BEGIN
+DBMS_OUTPUT.PUT_LINE('FUNCIONA PFV');
+END;
+--exemplo 
+CREATE VIEW minhaview AS
+SELECT CPF FROM Cliente;
+INSERT INTO minhaview VALUES ('4444');
+
