@@ -587,7 +587,4 @@ DECLARE
 BEGIN
 DBMS_OUTPUT.PUT_LINE('FUNCIONA PFV');
 END;
---exemplo 
-CREATE VIEW minhaview AS
-SELECT CPF FROM Cliente;
-INSERT INTO minhaview VALUES ('4444');
+--exemplo
