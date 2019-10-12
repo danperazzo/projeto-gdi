@@ -176,9 +176,9 @@ from public
 SELECT * FROM (SELECT * FROM FILME) ;
 
 --43 = Gabriel
-
-
-
+SELECT SUM(Preco)
+FROM Ingresso
+WHERE Assento_Numero = '7' OR Assento_Numero = '8' OR Assento_Numero = '9' ;
 
 --44
 select f.id_func
