@@ -56,6 +56,12 @@ From ingresso i
 
 
 --25 Junção entre três tabelas + condição de seleção (M:N)
+-- registros de sexos de funcionarios que trabalham em sessoes de filmes
+select funcionario.sexo, trabalha.sessao_sala, sessao.evento
+from funcionario
+inner join trabalha on funcionario.id_func = trabalha.funcionario_id
+inner join sessao on trabalha.sessao_sala = sessao.sala
+where sessao.evento = 'Filme'
 
 --26 uso de inner join
 -- seleciona todos os filmes que tem sessao
@@ -294,7 +300,8 @@ where sala = 'zero'
 --77 trigger de comando
 
 --86.
-create or replace trigger deletesessaowhendeletefilme
+-- deleta sessao toda vez que deleta filme
+create or replace trigger deleteSessaoWhenDeleteFilme
 after delete on filme
 for each row
 begin
