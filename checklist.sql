@@ -276,7 +276,7 @@ end;
 insert into filme (nome, film_id, estreiadata)
 values ('O poderoso chefao', 13, '01-JAN-1972')
 
---74, 75 after trigger
+--74, 75 after trigger e 
 -- trigger toda vez que atualiza o status de disponibilidade 3d em uma sessao
 create or replace trigger update3d
 after update of tresd on sessao
@@ -291,13 +291,20 @@ update sessao
 set tresd = 1
 where sala = 'zero'
 
---75 trigger de linha sem condicao
-
-
---76 trigger de linha com condicao
-
-
 --77 trigger de comando
+CREATE OR REPLACE TRIGGER deleteIngresso
+BEFORE DELETE
+ON Ingresso
+DECLARE
+	dia VARCHAR2(2);
+BEGIN
+	dia := EXTRACT(day FROM sysdate);
+	IF dia = '21' THEN	
+RAISE_APPLICATION_ERROR(-20017, 'O dono nao gosta de deletar ingressos no dia 21 do mes pra nao dar azar!');
+	END IF;
+END deleteIngresso;
+--exemplo
+delete from ingresso where 
 
 --86.
 -- deleta sessao toda vez que deleta filme
