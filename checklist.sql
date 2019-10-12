@@ -319,7 +319,23 @@ CREATE OR REPLACE PROCEDURE idade_Cliente(nascimento IN DATE, idade OUT NUMBER) 
         idade := EXTRACT(YEAR FROM SYSDATE) - EXTRACT(YEAR FROM nascimento);
     END; 
 
---66-67 - Daniel
+--66
+DECLARE 
+   a number;
+   scale number;
+PROCEDURE scaleNumber(x IN OUT number, scale IN number) IS 
+BEGIN 
+  x := x * scale; 
+END;  
+BEGIN 
+   a:= 23;
+   scale:= 7;
+   scaleNumber(a, scale); 
+   dbms_output.put_line(' 23 scaled by ' || scale || ' is: ' || a); 
+END; 
+/
+
+--67 - Daniel
 
 
 --68
