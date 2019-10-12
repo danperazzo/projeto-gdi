@@ -58,23 +58,31 @@ From ingresso i
 --25 Junção entre três tabelas + condição de seleção (M:N)
 
 --26 uso de inner join
+-- seleciona todos os filmes que tem sessao
+select sessao.film_id, filme.nome
+from sessao
+inner join filme on sessao.film_id = filme.film_id
 
 --27 uso de left outer join
+select sessao.film_id, filme.nome
+from sessao
+left outer join filme on sessao.film_id = filme.film_id
 
 --28 uso de right outer join
+select funcionario.sexo, trabalha.sessao_sala
+from funcionario
+right outer join trabalha on funcionario.id_func = trabalha.funcionario_id
 
 --29 uso de full outer join
+select funcionario.sexo, trabalha.sessao_sala
+from funcionario
+full outer join trabalha on funcionario.id_func = trabalha.funcionario_id
 
 --30 Uma subconsulta com uso de ANY ou SOME
 -- seleciona todos os nomes de filmes que possuem sessoes 3d
 select nome
 from filme
 where film_id = any (select film_id from sessao where tresd = 1)
-
---31 sunconsulta com all
-
---32 sunconsulta com exists/not exists
-
 
 --38
 update funcionario
