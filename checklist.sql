@@ -81,6 +81,11 @@ update funcionario
 set salario = ( select max(salario) from funcionario)
     where salario < (select avg(salario) from funcionario);
 
+--40 grant
+grant select
+on filme
+to public
+
 --44
 select f.id_func
 from funcionario f
@@ -243,8 +248,9 @@ CREATE OR REPLACE PROCEDURE idade_Cliente(nascimento IN DATE, idade OUT NUMBER) 
 --72 Criação de pacote (declaração e corpo) com pelo menos dois componentes
 
 
---73 before trigger
-create or replace trigger datatrigger
+--73, 76 before trigger
+-- trigger quando tenta-se inserir um filme mais antigo que o dia 31 de janeiro de 2000
+create or replace trigger dataTrigger
 before insert or update on filme
 for each row
 begin
@@ -252,9 +258,24 @@ begin
         raise_application_error(-20003, 'filme deve ser mais recente que 31-jan-00');
     end if;
 end;
+-- exemplo
+insert into filme (nome, film_id, estreiadata)
+values ('O poderoso chefao', 13, '01-JAN-1972')
 
---74 after trigger
-
+--74, 75 after trigger
+-- trigger toda vez que atualiza o status de disponibilidade 3d em uma sessao
+create or replace trigger update3d
+after update of tresd on sessao
+for each row
+begin
+    if (:new.tresd = 1) then
+        dbms_output.put_line('filme agora tem 3D!');
+    end if;
+end;
+-- query demo:
+update sessao
+set tresd = 1
+where sala = 'zero'
 
 --75 trigger de linha sem condicao
 
@@ -264,3 +285,10 @@ end;
 
 --77 trigger de comando
 
+--86.
+create or replace trigger deletesessaowhendeletefilme
+after delete on filme
+for each row
+begin
+    delete from sessao where film_id = :old.film_id;
+end;
