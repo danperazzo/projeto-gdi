@@ -335,7 +335,29 @@ BEGIN
 END; 
 /
 
---67 - Daniel
+--67
+DECLARE 
+   a number;
+   scale number;
+   
+PROCEDURE scaleNumber(x IN OUT number, scale IN number) IS 
+BEGIN 
+  x := x * scale; 
+END;  
+PROCEDURE scaleAndSumNumber(x IN OUT number, scale IN number) IS 
+BEGIN 
+    
+    
+  scaleNumber(x,scale);
+  x := x + scale; 
+END;  
+BEGIN 
+   a:= 23;
+   scale:= 7;
+   scaleAndSumNumber(a, scale); 
+   dbms_output.put_line(' 23 scaled and summed by ' || scale || ' is: ' || a); 
+END; 
+/
 
 
 --68
