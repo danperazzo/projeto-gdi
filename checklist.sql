@@ -259,8 +259,34 @@ CREATE OR REPLACE PROCEDURE idade_Cliente(nascimento IN DATE, idade OUT NUMBER) 
     END; 
 
 
---72 Criação de pacote (declaração e corpo) com pelo menos dois componentes
+--72, 90 Criação de pacote uso de dois componentes declarados no pacote
+create or replace package my_pkg as
 
+    function GetSalario(id_funcionario number)
+        return number;
+    function GetSexo(id_funcionario char)
+        return varchar;
+
+end my_pkg;
+/
+create or replace package body my_pkg AS
+    create or replace function GetSalario(id_funcionario number)
+    return number is funcionario_salario number
+    begin
+        select salario into funcionario_salario from funcionario where id_func = id_funcionario
+        
+        return salario
+    end;
+    
+    create or replace function GetSexo(id_funcionario)
+    return number is funcionario_sexo varchar
+    begin
+        select sexo into funcionario_sexo from funcionario where id_func = id_funcionario
+        
+        return funcionario_sexo
+    end;
+END my_pkg;
+/
 
 --73, 76 before trigger
 -- trigger quando tenta-se inserir um filme mais antigo que o dia 31 de janeiro de 2000
