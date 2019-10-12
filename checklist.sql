@@ -369,12 +369,12 @@ RETURN number
 IS 
     z number;
 BEGIN 
-   z := 1+x;
+   z := 1;
    RETURN z; 
 END; 
 BEGIN 
    b:= 45;  
-   c := ones(b); 
+   c := ones; 
    dbms_output.put_line(' ones: ' || c); 
 END; 
 / 
@@ -543,7 +543,13 @@ begin
     delete from sessao where film_id = :old.film_id;
 end;
 
---87-89 = Gabriel
+--87
+
+
+
+
+
+--88-89 = Gabriel
 --89 = XImenes
 
 --91
