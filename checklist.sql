@@ -83,7 +83,36 @@ Select AVG(i.preco)
 From ingresso i
 
 -- 19-24
---Parte de victor hugo
+--20
+select DISTINCT g.genero
+from GeneroFilme g;
+
+
+select f.Nome
+from Filme f
+where f.Film_ID in (select g.ID_filme
+                    from GeneroFilme g
+                    where g.genero = 'Drama');
+--21, 19
+select g.genero, min(f.Nome) as primeiro_em_ordem_alfabetica
+from Filme f, GeneroFilme g
+where f.Film_ID = g.ID_filme
+group by g.genero
+having g.genero != 'Ficcao';
+
+--22, 23
+select g.genero, min(f.Nome) as primeiro_em_ordem_alfabetica
+from Filme f, GeneroFilme g
+where f.Film_ID = g.ID_filme
+group by g.genero
+having min(f.Nome) = (select max(f.Nome) 
+                        from Filme fi, GeneroFilme ge
+                        where ge.genero = g.genero
+                        group by g.genero);
+
+--24
+select f.nome, s.iniciodata
+from sessao s join filme f on (f.film_id = s.film_ID);
 
 
 --25 Junção entre três tabelas + condição de seleção (M:N)
@@ -160,7 +189,13 @@ set salario = ( select max(salario) from funcionario)
     where salario < (select avg(salario) from funcionario);
 
 --39
---Victor Hugo
+delete from comida_carrinho
+where id_carrinho = (select id_car 
+                    from carrinhodecomida 
+                    where revisao < to_date('01/01/2011','DD/MM/YYYY') 
+                    );
+--testando 39
+select * from comida_carrinho;
 
 --40 grant
 grant select
@@ -186,7 +221,12 @@ from funcionario f
 where f.salario  between (select min(salario) from funcionario) 
     and (select avg(salario) from funcionario);
 
---45 = Victor Hugo
+
+--45
+select g.genero, f.nome, s.iniciodata
+from generofilme g inner join filme f on (f.film_id = g.ID_filme)
+inner join sessao s on (f.film_id = s.film_ID);
+
 
 
 --46 Order by com mais de dois campos
@@ -406,7 +446,33 @@ BEGIN
 END; 
 / 
 
---69-71 = Victor Hugo
+--69
+create or replace function mostra_lan(titulo in varchar) return date is
+    dia date;
+begin
+    select s.iniciodata into dia from sessao s
+    where s.film_id in (select film_id from filme where nome = titulo);
+    return dia;
+end;
+/
+
+--70
+create or replace function mostra_aniv(ide in int, dia out date) return date is
+begin
+    select f.aniversario into dia from funcionario f
+    where f.id_func = ide;
+    return dia;
+end;
+/
+
+--71
+create or replace function salario_ano(ide IN int, sal in out int) return int is
+begin
+    sal := sal*12;
+    return sal;
+end;
+/
+
 
 
 --72, 90 Criação de pacote uso de dois componentes declarados no pacote
@@ -576,8 +642,16 @@ end;
 
 
 
---88-89 = Gabriel
---89 = XImenes
+--88 = Gabriel
+--testando 89
+declare
+    lin filme%rowtype;
+begin
+    lin := DadoFilme('Bill Kill Bill');
+    dbms_output.put_line(lin.nome ||' ' || lin.film_id|| ' ' || lin.estreiadata ||' '|| lin.seq_id);
+end;
+/
+
 
 --91
 CREATE OR REPLACE TRIGGER t1
