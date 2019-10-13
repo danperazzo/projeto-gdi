@@ -91,6 +91,7 @@ CREATE TABLE Ingresso(
   Sessao_Sala VARCHAR(5),
   Cliente_id INT,
   Preco FLOAT,
+  Desconto INT,
 
   CONSTRAINT FK1_Ingresso FOREIGN KEY (Assento_Fileira,Assento_Numero) REFERENCES Assento(Fileira,Numero),
   CONSTRAINT FK3_Ingresso FOREIGN KEY (Cliente_ID) REFERENCES Cliente(n_cadastro),

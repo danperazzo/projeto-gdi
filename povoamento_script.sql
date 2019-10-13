@@ -49,11 +49,11 @@ INSERT INTO Sessao ( Sala, Horario, InicioData, TresD, Evento, Film_ID) VALUES (
 INSERT INTO Sessao ( Sala, Horario, InicioData, TresD, Evento, Film_ID) VALUES ('seis','11:59',to_date('29/03/2025', 'DD/MM/YYYY'),'0','Filme',6);
 INSERT INTO Sessao ( Sala, Horario, InicioData, TresD, Evento, Film_ID) VALUES ('tres','11:57',to_date('29/03/2008', 'DD/MM/YYYY'),'0','Filme',7);
 
-INSERT INTO Ingresso (Assento_Fileira, Assento_Numero, Sessao_Horario, Sessao_Sala, Cliente_id, Preco) VALUES ('G', '7', '11:59','tres',1,5.5);
-INSERT INTO Ingresso (Assento_Fileira, Assento_Numero, Sessao_Horario, Sessao_Sala, Cliente_id, Preco) VALUES ('G', '8', '11:47','dois',2,5.5);
-INSERT INTO Ingresso (Assento_Fileira, Assento_Numero, Sessao_Horario, Sessao_Sala, Cliente_id, Preco) VALUES ('G', '9', '12:59','um',3,5.5);
-INSERT INTO Ingresso (Assento_Fileira, Assento_Numero, Sessao_Horario, Sessao_Sala, Cliente_id, Preco) VALUES ('G', '2', '11:59','zero',4,5.5);
-INSERT INTO Ingresso (Assento_Fileira, Assento_Numero, Sessao_Horario, Sessao_Sala, Cliente_id, Preco) VALUES ('A', '7', '11:58','tres',5,5.5);
+INSERT INTO Ingresso (Assento_Fileira, Assento_Numero, Sessao_Horario, Sessao_Sala, Cliente_id, Preco,Desconto) VALUES ('G', '7', '11:59','tres',1,5.5, 3);
+INSERT INTO Ingresso (Assento_Fileira, Assento_Numero, Sessao_Horario, Sessao_Sala, Cliente_id, Preco,Desconto) VALUES ('G', '8', '11:47','dois',2,5.5, 2);
+INSERT INTO Ingresso (Assento_Fileira, Assento_Numero, Sessao_Horario, Sessao_Sala, Cliente_id, Preco,Desconto) VALUES ('G', '9', '12:59','um',3,5.5, 1);
+INSERT INTO Ingresso (Assento_Fileira, Assento_Numero, Sessao_Horario, Sessao_Sala, Cliente_id, Preco,Desconto) VALUES ('G', '2', '11:59','zero',4,5.5, 4);
+INSERT INTO Ingresso (Assento_Fileira, Assento_Numero, Sessao_Horario, Sessao_Sala, Cliente_id, Preco,Desconto) VALUES ('A', '7', '11:58','tres',5,5.5, 3);
 
 INSERT INTO GeneroFilme (genero,ID_filme) VALUES  ( 'Ficcao' , 0);
 INSERT INTO GeneroFilme (genero, ID_filme) VALUES ( 'Acao' , 1);
