@@ -333,6 +333,64 @@ end;
 
 --54 - 59 = Gabriel
 
+-- 54
+
+-- 55
+
+-- 56
+DECLARE
+	x number;
+BEGIN
+	SELECT n_cadastro INTO x
+	FROM Cliente
+	WHERE n_cadastro = 1;
+
+	dbms_output.put_line(x);
+
+END;
+
+-- 57
+
+DECLARE
+	TYPE Cliente IS RECORD
+(
+		n_cadastro NUMBER,
+		CPF NUMBER
+);
+c Cliente;
+BEGIN
+	SELECT n_cadastro, CPF  INTO c.n_cadastro, c.CPF
+	FROM Cliente
+	WHERE n_cadastro > 1 AND CPF > 0;
+END;
+
+-- 58
+
+58. --Output de string com variável
+DECLARE
+    nome_var VARCHAR2;
+BEGIN
+SELECT Nome INTO nome_var
+FROM Filme
+WHERE Film_ID = 2;
+
+dbms_output.putline(‘Nome com ID de Filme 2:’|| Nome);
+END;
+
+-- 59 
+DECLARE
+    cursor cliente is SELECT * FROM Cliente;
+    dadosCliente Cliente%rowtype;
+BEGIN
+    open cliente;
+    loop
+        fetch cliente into dadosCliente;
+        exit when cliente%notfound;
+         DBMS_OUTPUT.PUT_LINE(dadosCliente.cpf);
+    end loop;
+    close cliente;
+END;
+
 --60 - 63 = Victor Hugo
 
 
@@ -574,9 +632,22 @@ end;
 
 
 
+--88 Registro como parâmetro de função ou procedimento
 
+CREATE OR REPLACE PROCEDURE anivFuncionario(funcionario_data IN Funcionario%ROWTYPE) IS
+    anivFunc Aniversario.data_aniversario%TYPE;
 
---88-89 = Gabriel
+BEGIN
+    SELECT F.data_aniversario INTO anivFunc
+    FROM Funcionario F
+    WHERE funcionario_data.ID_func = F.ID_func;
+    DBMS_OUTPUT.PUT_LINE('O dia do aniversário do funcionário é '||funcionario_data.Aniversario||'');
+    EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+        DBMS_OUTPUT.PUT_LINE('O aniversário não foi cadastrado'); 
+    
+END;
+
 --89 = XImenes
 
 --91
