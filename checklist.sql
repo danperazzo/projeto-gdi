@@ -180,8 +180,6 @@ SELECT n_cadastro  FROM Cliente
 MINUS 
 SELECT n_cadastro_Comum  FROM Comum;
 
---37 = Gabriel
-
 
 --38
 update funcionario
