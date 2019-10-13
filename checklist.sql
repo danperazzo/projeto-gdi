@@ -431,24 +431,105 @@ BEGIN
     close cliente;
 END;
 
---60 - 63 = Victor Hugo
 
 
---Falta
+--60
+declare 
+CURSOR cur_cadastro is 
+	select n_cadastro , cpf
+	from cliente;
+reg_cadastro cur_cadastro%ROWTYPE;
 
---60 - 63 = Ximenes
--- Falta
+BEGIN 
+	open cur_cadastro;
+	loop
+	   fetch cur_cadastro into reg_cadastro;
+	exit when cur_cadastro%NOTFOUND;
+	end loop;
+	close cur_cadastro;
+	DBMS_OUTPUT.PUT_LINE(reg_cadastro.n_cadastro || ' ' || reg_cadastro.cpf);
+end;
 
+
+--61
+
+declare
+
+
+CURSOR cur_cadastro (cpf_cliente int) is 
+	select n_cadastro , nascimento
+	from cliente c
+	where c.cpf = cpf_cliente;
+reg_cadastro cur_cadastro%ROWTYPE;
+
+BEGIN 
+	open cur_cadastro(1111);
+	loop
+	   fetch cur_cadastro into reg_cadastro;
+	exit when cur_cadastro%NOTFOUND;
+	end loop;
+	close cur_cadastro;
+	DBMS_OUTPUT.PUT_LINE(reg_cadastro.n_cadastro || ' ' || reg_cadastro.nascimento);
+end;
+
+
+--62 cursor em loop sem declare
+declare 
+	cpf_cliente int :=2222;
+
+begin 
+	for reg_cadastro in ( select n_cadastro , nascimento
+		from cliente c
+		 where c.cpf = cpf_cliente)
+	
+loop 
+    DBMS_OUTPUT.PUT_LINE(reg_cadastro.n_cadastro || ' ' || reg_cadastro.nascimento);
+END LOOP;
+END;
+
+--63 create or replace procedure sem parametro
+
+create or replace procedure cadastro_e_nascimento is
+CURSOR cur_cadastro is 
+	select n_cadastro , cpf
+	from cliente;
+reg_cadastro cur_cadastro%ROWTYPE;
+
+BEGIN 
+	open cur_cadastro;
+	loop
+	   fetch cur_cadastro into reg_cadastro;
+	exit when cur_cadastro%NOTFOUND;
+	end loop;
+	close cur_cadastro;
+	DBMS_OUTPUT.PUT_LINE(reg_cadastro.n_cadastro || ' ' || reg_cadastro.cpf);
+end;
+
+-- exemplo
+/
+begin 
+    cadastro_e_nascimento;
+end;
 
 
 --64 e 65
 CREATE OR REPLACE PROCEDURE idade_Cliente(nascimento IN DATE, idade OUT NUMBER) IS
-    BEGIN
-        idade := EXTRACT(YEAR FROM SYSDATE) - EXTRACT(YEAR FROM nascimento);
-    END; 
-
+   BEGIN
+   idade := EXTRACT(YEAR FROM SYSDATE) - EXTRACT(YEAR FROM nascimento);
+   
+   END; 
     
+    --exemplo
+/
+ declare 
+ nasc date;
+idade number;
+   begin
+         nasc := to_date('23/10/1999' , 'DD/MM/YYYY');
+         idade_Cliente(nasc , idade);
+        DBMS_OUTPUT.PUT_LINE(idade);
 
+   end;
 
 
 --66
