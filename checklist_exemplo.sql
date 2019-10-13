@@ -385,3 +385,11 @@ CREATE OR REPLACE PACKAGE BODY my_pkg AS
         SELECT Nome INTO textGroupArray FROM TITULO WHERE ROWNUM <= xPrimeiros ORDER BY Avaliacao DESC;
     END;
 END my_pkg;
+
+--84
+INSERT INTO Cliente (n_cadastro, CPF,Nascimento) VALUES (17,1717,to_date ('29/08/1954', 'DD/MM/YYYY'));
+
+--91
+CREATE VIEW minhaview AS
+SELECT CPF FROM Cliente;
+INSERT INTO minhaview VALUES ('4444');
