@@ -35,40 +35,40 @@ ORDER BY NOME;
 CREATE VIEW clienteINFO as
 SELECT n_cadastro,
 CPF, Nascimento
-FROM Cliente
+FROM Cliente;
 
 -- 8 
 SELECT *
 FROM clienteINFO
-WHERE Nascimento is not null
+WHERE Nascimento is not null;
 
 -- 9
-DROP VIEW clienteINFO
+DROP VIEW clienteINFO;
 
 -- 10
 
 ALTER TABLE Filme
-ADD CONSTRAINT CHK_idFilm CHECK(Film_ID >= 0)
+ADD CONSTRAINT CHK_idFilm CHECK(Film_ID >= 0);
 
 -- 11
 ALTER TABLE Assento
-ADD CONSTRAINT PK_Assento PRIMARY KEY(Fileira, Numero)
+ADD CONSTRAINT PK_Assento PRIMARY KEY(Fileira, Numero);
 
 -- 12
 ALTER TABLE Ingresso
-ADD CONSTRAINT FK_Ingresso FOREIGN KEY (Assento_Fileira, Assento_Numero) REFERENCES Assento(Fileira, Numero)
+ADD CONSTRAINT FK_Ingresso FOREIGN KEY (Assento_Fileira, Assento_Numero) REFERENCES Assento(Fileira, Numero);
 
 --13
 alter table ingresso
-modify preco default 10.0
+modify preco default 10.0;
 
 --14
 alter table generofilme
-modify genero varchar(20)
+modify genero varchar(20);
 
 --15
 alter table generofilme
-add faixa_etaria int
+add faixa_etaria int;
 
 --16
 alter table generofilme
@@ -80,10 +80,38 @@ from ingresso;
 
 --18
 Select AVG(i.preco)
-From ingresso i
+From ingresso i;
 
--- 19-24
---Parte de victor hugo
+--20
+select DISTINCT g.genero
+from GeneroFilme g;
+
+
+select f.Nome
+from Filme f
+where f.Film_ID in (select g.ID_filme
+                    from GeneroFilme g
+                    where g.genero = 'Drama');
+--21, 19
+select g.genero, min(f.Nome) as primeiro_em_ordem_alfabetica
+from Filme f, GeneroFilme g
+where f.Film_ID = g.ID_filme
+group by g.genero
+having g.genero != 'Ficcao';
+
+--22, 23
+select g.genero, min(f.Nome) as primeiro_em_ordem_alfabetica
+from Filme f, GeneroFilme g
+where f.Film_ID = g.ID_filme
+group by g.genero
+having min(f.Nome) = (select max(f.Nome) 
+                        from Filme fi, GeneroFilme ge
+                        where ge.genero = g.genero
+                        group by g.genero);
+
+--24
+select f.nome, s.iniciodata
+from sessao s join filme f on (f.film_id = s.film_ID);
 
 
 --25 Junção entre três tabelas + condição de seleção (M:N)
@@ -92,34 +120,34 @@ select funcionario.sexo, trabalha.sessao_sala, sessao.evento
 from funcionario
 inner join trabalha on funcionario.id_func = trabalha.funcionario_id
 inner join sessao on trabalha.sessao_sala = sessao.sala
-where sessao.evento = 'Filme'
+where sessao.evento = 'Filme';
 
 --26 uso de inner join
 -- seleciona todos os filmes que tem sessao
 select sessao.film_id, filme.nome
 from sessao
-inner join filme on sessao.film_id = filme.film_id
+inner join filme on sessao.film_id = filme.film_id;
 
 --27 uso de left outer join
 select sessao.film_id, filme.nome
 from sessao
-left outer join filme on sessao.film_id = filme.film_id
+left outer join filme on sessao.film_id = filme.film_id;
 
 --28 uso de right outer join
 select funcionario.sexo, trabalha.sessao_sala
 from funcionario
-right outer join trabalha on funcionario.id_func = trabalha.funcionario_id
+right outer join trabalha on funcionario.id_func = trabalha.funcionario_id;
 
 --29 uso de full outer join
 select funcionario.sexo, trabalha.sessao_sala
 from funcionario
-full outer join trabalha on funcionario.id_func = trabalha.funcionario_id
+full outer join trabalha on funcionario.id_func = trabalha.funcionario_id;
 
 --30 Uma subconsulta com uso de ANY ou SOME
 -- seleciona todos os nomes de filmes que possuem sessoes 3d
 select nome
 from filme
-where film_id = any (select film_id from sessao where tresd = 1)
+where film_id = any (select film_id from sessao where tresd = 1);
 
 --31
 SELECT Nascimento FROM Cliente 
@@ -152,7 +180,8 @@ SELECT n_cadastro  FROM Cliente
 MINUS 
 SELECT n_cadastro_Comum  FROM Comum;
 
---37*gabriel
+--37 = Gabriel
+
 
 --38
 update funcionario
@@ -160,25 +189,34 @@ set salario = ( select max(salario) from funcionario)
     where salario < (select avg(salario) from funcionario);
 
 --39
---Victor Hugo
+
+delete from comida_carrinho
+where id_carrinho = (select id_car 
+                    from carrinhodecomida 
+                    where revisao < to_date('01/01/2011','DD/MM/YYYY') 
+                    );
+--testando 39
+select * from comida_carrinho;
+
 
 --40 grant
 grant select
 on filme
-to public
+to public;
 
 --41 revoke
 revoke select
 on filme
-from public
+from public;
 
 --42
 SELECT * FROM (SELECT * FROM FILME) ;
 
---43 = Gabriel
+--43 
 SELECT SUM(Preco)
 FROM Ingresso
 WHERE Assento_Numero = '7' OR Assento_Numero = '8' OR Assento_Numero = '9' ;
+
 
 --44
 select f.id_func
@@ -186,14 +224,24 @@ from funcionario f
 where f.salario  between (select min(salario) from funcionario) 
     and (select avg(salario) from funcionario);
 
---45 = Victor Hugo
+
+--45
+select g.genero, f.nome, s.iniciodata
+from generofilme g inner join filme f on (f.film_id = g.ID_filme)
+inner join sessao s on (f.film_id = s.film_ID);
+
+
+--45
+select g.genero, f.nome, s.iniciodata
+from generofilme g inner join filme f on (f.film_id = g.ID_filme)
+inner join sessao s on (f.film_id = s.film_ID);
 
 
 --46 Order by com mais de dois campos
 -- seleciona todas as colunas e retorna uma tabela ordenada por nome e data de estreia
 select *
 from filme
-order by nome, estreiadata
+order by nome, estreiadata;
 
 --47
 SELECT *
@@ -212,7 +260,7 @@ BEGIN
     dbms_output.put_line('Hello World');
     
 END;
-
+/
 
 --49
 DECLARE
@@ -231,7 +279,7 @@ exception
         dbms_output.put_line('divisão por zero');
         
 end;
-
+/
 
 
 --50
@@ -255,7 +303,7 @@ BEGIN
  
  
 end;
-
+/
 
 --51
 DECLARE
@@ -281,7 +329,7 @@ BEGIN
  
  
 end;
-
+/
 
 
 --52
@@ -310,7 +358,7 @@ BEGIN
  
  
 END;
-
+/
 
 
 
@@ -331,6 +379,7 @@ BEGIN
  
 end;
 
+     
 --54 - 59 = Gabriel
 
 -- 54
@@ -394,7 +443,10 @@ END;
 --60 - 63 = Victor Hugo
 
 
+--Falta
 
+--60 - 63 = Ximenes
+-- Falta
 
 
 
@@ -403,6 +455,10 @@ CREATE OR REPLACE PROCEDURE idade_Cliente(nascimento IN DATE, idade OUT NUMBER) 
     BEGIN
         idade := EXTRACT(YEAR FROM SYSDATE) - EXTRACT(YEAR FROM nascimento);
     END; 
+
+    
+
+
 
 --66
 DECLARE 
@@ -464,7 +520,33 @@ BEGIN
 END; 
 / 
 
---69-71 = Victor Hugo
+--69
+create or replace function mostra_lan(titulo in varchar) return date is
+    dia date;
+begin
+    select s.iniciodata into dia from sessao s
+    where s.film_id in (select film_id from filme where nome = titulo);
+    return dia;
+end;
+/
+
+--70
+create or replace function mostra_aniv(ide in int, dia out date) return date is
+begin
+    select f.aniversario into dia from funcionario f
+    where f.id_func = ide;
+    return dia;
+end;
+/
+
+
+--71
+create or replace function salario_ano(ide IN int, sal in out int) return int is
+begin
+    sal := sal*12;
+    return sal;
+end;
+/
 
 
 --72, 90 Criação de pacote uso de dois componentes declarados no pacote
@@ -506,9 +588,10 @@ begin
         raise_application_error(-20003, 'filme deve ser mais recente que 31-jan-00');
     end if;
 end;
+/
 -- exemplo
 insert into filme (nome, film_id, estreiadata)
-values ('O poderoso chefao', 13, '01-JAN-1972')
+values ('O poderoso chefao', 13, '01-JAN-1972');
 
 --74, 75 after trigger e 
 -- trigger toda vez que atualiza o status de disponibilidade 3d em uma sessao
@@ -520,10 +603,11 @@ begin
         dbms_output.put_line('filme agora tem 3D!');
     end if;
 end;
+/
 -- query demo:
 update sessao
 set tresd = 1
-where sala = 'zero'
+where sala = 'zero';
 
 --77 trigger de comando
 CREATE OR REPLACE TRIGGER deleteIngresso
@@ -537,8 +621,9 @@ BEGIN
 RAISE_APPLICATION_ERROR(-20017, 'O dono nao gosta de deletar ingressos no dia 21 do mes pra nao dar azar!');
 	END IF;
 END deleteIngresso;
+/
 --exemplo
-delete from ingresso where 
+delete from ingresso where; 
 
 --78
 CREATE OR REPLACE TRIGGER SeExisteCadmai0 
@@ -548,6 +633,7 @@ WHEN(NEW.n_cadastro >0)
 BEGIN 
     DBMS_OUTPUT.PUT_LINE('O numero de cadastro eh valido.');
 END;
+/
 -- exemplo
 INSERT INTO Cliente (n_cadastro, CPF,Nascimento) VALUES (7,7777,to_date ('29/08/1933', 'DD/MM/YYYY'));
 
@@ -561,6 +647,7 @@ WHEN(OLD.n_cadastro >0)
 BEGIN 
     DBMS_OUTPUT.PUT_LINE('O numero de cadastro era valido.');
 END;
+/
 --exemplo
 DELETE FROM Cliente WHERE CPF = '3333';
 
@@ -572,6 +659,7 @@ WHEN(NEW.CPF <> OLD.CPF)
 BEGIN 
     DBMS_OUTPUT.PUT_LINE('CPFS DIFERENTES');
 END;
+/
 --exemplo
 UPDATE Cliente SET CPF = '9999' WHERE n_cadastro = 2;
 
@@ -582,6 +670,7 @@ FOR EACH ROW
 BEGIN 
     RAISE_APPLICATION_ERROR(-20011,'NAO FOI POSSIVEL REALIZAR ESSA OPERACAO');
 END;
+/
 --exemplo 
 INSERT INTO Cliente (n_cadastro, CPF,Nascimento) VALUES (8,8888,to_date ('29/08/1935', 'DD/MM/YYYY'));
 
@@ -592,6 +681,7 @@ FOR EACH ROW
 BEGIN 
     RAISE_APPLICATION_ERROR(-20012,'NAO FOI POSSIVEL REALIZAR ESSA OPERACAO');
 END;
+/
 --exemplo
 UPDATE Cliente SET CPF = '9999' WHERE n_cadastro = 3;
 
@@ -613,7 +703,9 @@ BEGIN
     INSERT INTO Comida_Carrinho(ID_Carrinho, comida) VALUES(1, 'piposs');
     DBMS_OUTPUT.PUT_LINE('VALORES INSERIDOS EM COMIDA_CARRINHO!');
 END;
+/
 --exemplo
+INSERT INTO Cliente (n_cadastro, CPF,Nascimento) VALUES (17,1717,to_date ('29/08/1954', 'DD/MM/YYYY'));
 
 --85 - Ximenes
 
@@ -629,8 +721,6 @@ begin
 end;
 
 --87
-
-
 
 --88 Registro como parâmetro de função ou procedimento
 
@@ -648,7 +738,23 @@ BEGIN
     
 END;
 
---89 = XImenes
+--89
+create or replace function DadoFilme(titulo varchar) return Filme%rowtype is
+    lin filme%rowtype;
+begin
+    select * into lin from Filme f where titulo = f.nome;
+    return lin;
+end;
+/
+--testando 89
+declare
+    lin filme%rowtype;
+begin
+    lin := DadoFilme('Bill Kill Bill');
+    dbms_output.put_line(lin.nome ||' ' || lin.film_id|| ' ' || lin.estreiadata ||' '|| lin.seq_id);
+end;
+/
+
 
 --91
 CREATE OR REPLACE TRIGGER t1
@@ -658,7 +764,10 @@ DECLARE
 BEGIN
 DBMS_OUTPUT.PUT_LINE('FUNCIONA PFV');
 END;
+/
 --exemplo 
 CREATE VIEW minhaview AS
 SELECT CPF FROM Cliente;
 INSERT INTO minhaview VALUES ('4444');
+
+
