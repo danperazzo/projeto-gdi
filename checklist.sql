@@ -183,12 +183,44 @@ SELECT n_cadastro_Comum  FROM Comum;
 
 --37*gabriel
 
+--20
+select DISTINCT g.genero
+from GeneroFilme g;
+
+
+select f.Nome
+from Filme f
+where f.Film_ID in (select g.ID_filme
+                    from GeneroFilme g
+                    where g.genero = 'Drama');
+--21, 19
+select g.genero, min(f.Nome) as primeiro_em_ordem_alfabetica
+from Filme f, GeneroFilme g
+where f.Film_ID = g.ID_filme
+group by g.genero
+having g.genero != 'Ficcao';
+
+--22, 23
+select g.genero, min(f.Nome) as primeiro_em_ordem_alfabetica
+from Filme f, GeneroFilme g
+where f.Film_ID = g.ID_filme
+group by g.genero
+having min(f.Nome) = (select max(f.Nome) 
+                        from Filme fi, GeneroFilme ge
+                        where ge.genero = g.genero
+                        group by g.genero);
+
+--24
+select f.nome, s.iniciodata
+from sessao s join filme f on (f.film_id = s.film_ID);
+
 --38
 update funcionario
 set salario = ( select max(salario) from funcionario)
     where salario < (select avg(salario) from funcionario);
 
 --39
+
 delete from comida_carrinho
 where id_carrinho = (select id_car 
                     from carrinhodecomida 
@@ -196,6 +228,7 @@ where id_carrinho = (select id_car
                     );
 --testando 39
 select * from comida_carrinho;
+
 
 --40 grant
 grant select
@@ -215,6 +248,7 @@ SELECT SUM(Preco)
 FROM Ingresso
 WHERE Assento_Numero = '7' OR Assento_Numero = '8' OR Assento_Numero = '9' ;
 
+
 --44
 select f.id_func
 from funcionario f
@@ -227,6 +261,11 @@ select g.genero, f.nome, s.iniciodata
 from generofilme g inner join filme f on (f.film_id = g.ID_filme)
 inner join sessao s on (f.film_id = s.film_ID);
 
+
+--45
+select g.genero, f.nome, s.iniciodata
+from generofilme g inner join filme f on (f.film_id = g.ID_filme)
+inner join sessao s on (f.film_id = s.film_ID);
 
 
 --46 Order by com mais de dois campos
@@ -252,7 +291,7 @@ BEGIN
     dbms_output.put_line('Hello World');
     
 END;
-
+/
 
 --49
 DECLARE
@@ -271,7 +310,7 @@ exception
         dbms_output.put_line('divisão por zero');
         
 end;
-
+/
 
 
 --50
@@ -295,7 +334,7 @@ BEGIN
  
  
 end;
-
+/
 
 --51
 DECLARE
@@ -321,7 +360,7 @@ BEGIN
  
  
 end;
-
+/
 
 
 --52
@@ -350,7 +389,7 @@ BEGIN
  
  
 END;
-
+/
 
 
 
@@ -371,9 +410,11 @@ BEGIN
  
 end;
 
+     
 --54 - 59 = Gabriel
 
 --60 - 63 = Victor Hugo
+
 
 
 
@@ -385,6 +426,10 @@ CREATE OR REPLACE PROCEDURE idade_Cliente(nascimento IN DATE, idade OUT NUMBER) 
     BEGIN
         idade := EXTRACT(YEAR FROM SYSDATE) - EXTRACT(YEAR FROM nascimento);
     END; 
+
+    
+
+
 
 --66
 DECLARE 
@@ -465,6 +510,7 @@ begin
 end;
 /
 
+
 --71
 create or replace function salario_ano(ide IN int, sal in out int) return int is
 begin
@@ -472,7 +518,6 @@ begin
     return sal;
 end;
 /
-
 
 
 --72, 90 Criação de pacote uso de dois componentes declarados no pacote
@@ -642,7 +687,19 @@ end;
 
 
 
---88 = Gabriel
+
+--88-89 = Gabriel
+
+--89
+create or replace function DadoFilme(titulo varchar) return Filme%rowtype is
+    lin filme%rowtype;
+begin
+    select * into lin from Filme f where titulo = f.nome;
+    return lin;
+end;
+/
+
+
 --testando 89
 declare
     lin filme%rowtype;
@@ -661,9 +718,9 @@ DECLARE
 BEGIN
 DBMS_OUTPUT.PUT_LINE('FUNCIONA PFV');
 END;
-
 --exemplo 
 CREATE VIEW minhaview AS
 SELECT CPF FROM Cliente;
 INSERT INTO minhaview VALUES ('4444');
+
 
