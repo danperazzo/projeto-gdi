@@ -362,7 +362,7 @@ END;
 
 
 
---53
+--53, 55
 DECLARE
 
     teste INT := 9;
@@ -370,21 +370,14 @@ DECLARE
 
 BEGIN
     
-    for i in 1..10 loop
+    for i IN 1..10 LOOP
     
         dbms_output.put_line(i);
     
-    end loop;
+    END LOOP;
  
  
-end;
-
-     
---54 - 59 = Gabriel
-
--- 54
-
--- 55
+END;
 
 -- 56
 DECLARE
