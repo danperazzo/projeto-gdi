@@ -959,7 +959,42 @@ INSERT INTO Cliente
 VALUES
     (17, 1717, to_date ('29/08/1954', 'DD/MM/YYYY'));
 
---85 - Ximenes
+--85
+-- iniciando 85 para teste
+drop trigger updateDescontoIngresso;
+
+update ingresso
+set desconto = 2
+where sessao_horario = '11:47' and sessao_sala = 'dois';
+
+update sessao
+set iniciodata = to_date('24/03/2004', 'DD/MM/YYYY')
+where film_ID= 1;
+
+select * from ingresso;
+
+-- 85 de fato
+create or replace trigger updateDescontoIngresso
+before update of InicioData on sessao
+for each row
+
+BEGIN 
+    if :NEW.iniciodata != :OLD.iniciodata then
+    UPDATE ingresso
+    set desconto = 3
+    where (sessao_horario = :OLD.horario and sessao_sala = :OLD.sala);
+    DBMS_OUTPUT.PUT_LINE('VALORES ATUALIZADOS EM INGRESSO');
+    end if;
+    
+END;
+
+/
+-- testando 85
+update sessao
+set iniciodata = to_date('22/03/2004', 'DD/MM/YYYY')
+where film_ID= 1;
+
+select * from ingresso;
 
 
 
