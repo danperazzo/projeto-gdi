@@ -210,6 +210,11 @@ MINUS
 SELECT n_cadastro_Comum
 FROM Comum;
 
+-- 37 
+
+INSERT INTO Filme
+VALUES (SELECT * FROM Filme film WHERE film.Film_ID = 0);
+
 
 --38
 update funcionario
@@ -435,6 +440,28 @@ END LOOP;
 
 END;
 
+-- 54 
+
+DECLARE
+
+CURSOR cur IS (SELECT * FROM Filme);
+
+film Filme%ROWTYPE;
+
+BEGIN
+
+OPEN cur;
+FETCH cur INTO film;
+
+WHILE (cur%FOUND)
+    LOOP
+        dbms_output.put(film.Nome);
+        FETCH cur INTO film;
+    END LOOP;
+CLOSE cur;
+
+END;
+
 -- 56
 DECLARE
 	x number;
@@ -457,29 +484,27 @@ DECLARE
 		n_cadastro NUMBER,
 		CPF NUMBER
 );
-c Cliente;
+cliente Cliente;
 BEGIN
-    SELECT n_cadastro, CPF
-    INTO c.n_cadastro
-    , c.CPF
+    for c in(SELECT *
+    INTO cliente
 	FROM Cliente
-	WHERE n_cadastro > 1 AND CPF > 0;
+	WHERE n_cadastro > 1 AND CPF > 0)
+
+    LOOP
+    cliente := c.Cliente 
+    END LOOP
 END;
 
--- 58
-
-58.
---Output de string com variável
+-- 58 Output de string com variável
 DECLARE
-    nome_var VARCHAR2;
+    nome_var VARCHAR(40);
 BEGIN
     SELECT Nome
     INTO nome_var
     FROM Filme
     WHERE Film_ID = 2;
-
-    dbms_output.putline
-    (‘Nome com ID de Filme 2:’|| Nome);
+    dbms_output.put_line("Nome com ID de Filme 2:"|| nome_var);
 END;
 
 -- 59 
