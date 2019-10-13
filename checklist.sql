@@ -83,7 +83,36 @@ Select AVG(i.preco)
 From ingresso i
 
 -- 19-24
---Parte de victor hugo
+--20
+select DISTINCT g.genero
+from GeneroFilme g;
+
+
+select f.Nome
+from Filme f
+where f.Film_ID in (select g.ID_filme
+                    from GeneroFilme g
+                    where g.genero = 'Drama');
+--21, 19
+select g.genero, min(f.Nome) as primeiro_em_ordem_alfabetica
+from Filme f, GeneroFilme g
+where f.Film_ID = g.ID_filme
+group by g.genero
+having g.genero != 'Ficcao';
+
+--22, 23
+select g.genero, min(f.Nome) as primeiro_em_ordem_alfabetica
+from Filme f, GeneroFilme g
+where f.Film_ID = g.ID_filme
+group by g.genero
+having min(f.Nome) = (select max(f.Nome) 
+                        from Filme fi, GeneroFilme ge
+                        where ge.genero = g.genero
+                        group by g.genero);
+
+--24
+select f.nome, s.iniciodata
+from sessao s join filme f on (f.film_id = s.film_ID);
 
 
 --25 Junção entre três tabelas + condição de seleção (M:N)
@@ -200,7 +229,6 @@ where id_carrinho = (select id_car
 --testando 39
 select * from comida_carrinho;
 
---Victor Hugo
 
 --40 grant
 grant select
@@ -227,7 +255,12 @@ from funcionario f
 where f.salario  between (select min(salario) from funcionario) 
     and (select avg(salario) from funcionario);
 
---45 = Victor Hugo
+
+--45
+select g.genero, f.nome, s.iniciodata
+from generofilme g inner join filme f on (f.film_id = g.ID_filme)
+inner join sessao s on (f.film_id = s.film_ID);
+
 
 --45
 select g.genero, f.nome, s.iniciodata
@@ -467,7 +500,7 @@ begin
     return dia;
 end;
 /
-     
+
 --70
 create or replace function mostra_aniv(ide in int, dia out date) return date is
 begin
@@ -476,7 +509,7 @@ begin
     return dia;
 end;
 /
-     
+
 
 --71
 create or replace function salario_ano(ide IN int, sal in out int) return int is
@@ -654,6 +687,7 @@ end;
 
 
 
+
 --88-89 = Gabriel
 
 --89
@@ -665,6 +699,7 @@ begin
 end;
 /
 
+
 --testando 89
 declare
     lin filme%rowtype;
@@ -674,6 +709,7 @@ begin
 end;
 /
 
+
 --91
 CREATE OR REPLACE TRIGGER t1
 INSTEAD OF INSERT
@@ -682,5 +718,9 @@ DECLARE
 BEGIN
 DBMS_OUTPUT.PUT_LINE('FUNCIONA PFV');
 END;
---exemplo
+--exemplo 
+CREATE VIEW minhaview AS
+SELECT CPF FROM Cliente;
+INSERT INTO minhaview VALUES ('4444');
+
 
