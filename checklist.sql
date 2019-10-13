@@ -27,9 +27,11 @@ WHERE FILM_id =1);
 --5
 SELECT *
 FROM FILME
-WHERE nome IN (SELECT NOME
+WHERE seq_id is null;
+
+SELECT *
 FROM FILME
-WHERE FILM_id =1);
+WHERE seq_id is not null;
 
 --6
 SELECT *
