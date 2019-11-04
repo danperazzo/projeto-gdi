@@ -1,6 +1,6 @@
 Instruções:
 0. Tudo tem que ser feito no Windows 10
-1. Baixe o Microsoft Visual Studio 2019: https://visualstudio.microsoft.com/pt-br/vs/?rr=https%3A%2F%2Fwww.google.com%2F
+1. Baixe o Microsoft Visual Studio 2019(com a extensão para python): https://visualstudio.microsoft.com/pt-br/vs/?rr=https%3A%2F%2Fwww.google.com%2F
 2. Baixe o 11g da oracle: https://www.oracle.com/database/technologies/xe-downloads.html na distribuição para o ubuntu
 3. Na pasta onde você baixou o 11g, vá para a pasta network e, onde tem host, atribua a essa variável o IP 127.0.0.1
 4. Reinicie o computador e espero um pouquinho
