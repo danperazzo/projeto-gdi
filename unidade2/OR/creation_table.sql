@@ -178,7 +178,7 @@ CREATE TABLE tb_Trabalha of tp_Trabalha(
 
   FOREIGN KEY (ref_tp_Funcionario) REFERENCES tb_Funcionario,
   FOREIGN KEY (ref_CarrinhoDeComida) REFERENCES tb_CarrinhoDeComida,
-  FOREIGN KEY (Sessao_hor,Sessao_sala) REFERENCES tb_Sessao,
+  FOREIGN KEY (ref_tp_Sessao) REFERENCES tb_Sessao,
   PRIMARY KEY (Funcionario_id,Carrinho_come_id,Sessao_hor,Sessao_sala,Funcao)
 );
 
