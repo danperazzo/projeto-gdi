@@ -53,6 +53,31 @@ SELECT * FROM ntable; -- 26
 -- 13.
 ALTER TYPE tp_Filho
     DROP ATTRIBUTE Nascimento DATE INVALIDATE;
+
+
+-- 23. criacao de consultas com LIKE, BETWEEN, ORDER BY, GROUP BY, HAVING
+-- like
+select nome from tb_Filme
+where nome like 'C%';
+
+-- between
+select sexo from tb_funcionario
+where salario between 3 and 10;
+
+-- order by
+select nome from tb_Filme
+order by estreiaData, film_id;
+
+-- group by
+select count(id_func), salario from tb_funcionario
+where salario > 2
+group by salario;
+
+-- having
+select fileira from tb_assento
+group by fileira
+having count(adaptavel) > 1;
+
     
 --27
 SELECT *
