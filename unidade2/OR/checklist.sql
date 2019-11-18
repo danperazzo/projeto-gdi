@@ -78,6 +78,20 @@ select fileira from tb_assento
 group by fileira
 having count(adaptavel) > 1;
 
+
+-- 24. criacao de subconsultas com IN , ALL, ANY,
+-- in
+select nome from tb_filme
+where film_id in (select film_id from tb_sessao where tresd = '1');
+
+-- all
+select nome from tb_filme
+where film_id = all(select film_id from tb_sessao where horario > '23:00');
+
+-- any
+select nome from tb_filme
+where film_id = any (select film_id from tb_sessao where evento = 'Filme');
+
     
 --27
 SELECT *
