@@ -48,6 +48,23 @@ CREATE TABLE ntable (id NUMBER, col1 tp_telefones2_check)
 INSERT INTO ntable VALUES (1, tp_telefones2_check('882020')); 
 INSERT INTO ntable VALUES (2, tp_telefones2_check('102030', '203010'));
 
+                                                  
+
+--5
+
+ALTER TYPE tp_GeneroFilme
+    ADD CONSTRUCTOR FUNCTION tp_GeneroFilme(gen VARCHAR2 ) RETURN SELF AS RESULT CASCADE;
+
+
+create or replace type body tp_GeneroFilme as 
+    CONSTRUCTOR FUNCTION tp_GeneroFilme(gen VARCHAR2 ) RETURN SELF AS RESULT AS
+        BEGIN
+            SELF.genero := 'Aventura-'||gen;
+            return;
+        end
+    end
+
+                                                  
 SELECT * FROM ntable; -- 26
 
 --11
