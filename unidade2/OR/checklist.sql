@@ -45,8 +45,8 @@ CREATE OR REPLACE TYPE tp_telefones2_check AS TABLE OF VARCHAR(20);
 CREATE TABLE ntable (id NUMBER, col1 tp_telefones2_check) 
     NESTED TABLE col1 STORE AS col1_tab;
 
-INSERT INTO nested_table VALUES (1, tp_telefones2_check('882020')); 
-INSERT INTO nested_table VALUES (2, tp_telefones2_check('102030', '203010'));
+INSERT INTO ntable VALUES (1, tp_telefones2_check('882020')); 
+INSERT INTO ntable VALUES (2, tp_telefones2_check('102030', '203010'));
 
 SELECT * FROM ntable; -- 26
 
