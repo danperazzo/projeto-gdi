@@ -50,6 +50,25 @@ INSERT INTO ntable VALUES (2, tp_telefones2_check('102030', '203010'));
 
 SELECT * FROM ntable; -- 26
 
+--11
+
+alter type tp_cliente add attribute ( CEP NUMERIC (8 , 0)) CASCADE;                                                  
+       
+/
+
+INSERT INTO tb_Cliente (n_cadastro, CPF,Nascimento , CEP) VALUES (1,1111,to_date ('29/08/1968', 'DD/MM/YYYY') , 50740330);
+
+/
+--verifica
+SELECT E.CEP FROM tb_Cliente E;
+/
+
+
+-- 12 
+--modificar propriedade(tamanho) do atributo nome
+ALTER TYPE tp_filme modify attribute Nome VARCHAR(50) CASCADE;
+                                                   
+                                                   
 -- 13.
 ALTER TYPE tp_Filho
     DROP ATTRIBUTE Nascimento DATE INVALIDATE;
