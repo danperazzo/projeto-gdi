@@ -90,6 +90,9 @@ ALTER TYPE tp_filme modify attribute Nome VARCHAR(50) CASCADE;
 ALTER TYPE tp_Filho
     DROP ATTRIBUTE Nascimento DATE INVALIDATE;
 
+-- 22. criacao de consulta com value
+select e.nome || ' ' || e.preco || ' ' as "comida e preco"
+from carrinhodecomida2 w, table(w.comidas) e;
 
 -- 23. criacao de consultas com LIKE, BETWEEN, ORDER BY, GROUP BY, HAVING
 -- like

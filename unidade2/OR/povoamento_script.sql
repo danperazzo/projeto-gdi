@@ -79,7 +79,10 @@ INSERT INTO tb_CarrinhoDeComida (ID_car,Revisao) VALUES(1,to_date ('29/08/2010',
 INSERT INTO tb_CarrinhoDeComida (ID_car,Revisao) VALUES(2,to_date ('29/08/2015', 'DD/MM/YYYY'));
 
 INSERT INTO tb_Comida_Carrinho(ID_Carrinho, comida) VALUES(1, 'chocolate');
+INSERT INTO tb_Comida_Carrinho(ID_Carrinho, comida) VALUES(1, 'doce');
+INSERT INTO tb_Comida_Carrinho(ID_Carrinho, comida) VALUES(1, 'refrigerante');
 INSERT INTO tb_Comida_Carrinho(ID_Carrinho, comida) VALUES(2, 'pipoca');
+INSERT INTO tb_Comida_Carrinho(ID_Carrinho, comida) VALUES(2, 'agua');
 
 INSERT INTO tb_Bebida_Carrinho(ID_Carrinho, bebida) VALUES (1,'sodas');
 INSERT INTO tb_Bebida_Carrinho(ID_Carrinho, bebida) VALUES(1, 'agua');
@@ -90,3 +93,6 @@ INSERT INTO tb_Trabalha(Funcionario_id, Carrinho_come_id, Sessao_hor, Sessao_sal
 INSERT INTO tb_Trabalha(Funcionario_id, Carrinho_come_id, Sessao_hor, Sessao_sala, Funcao) VALUES (4,2,'11:59','zero','Vendas');
 INSERT INTO tb_Trabalha(Funcionario_id, Carrinho_come_id, Sessao_hor, Sessao_sala, Funcao) VALUES (5,2,'11:58','tres','Limpeza');
 
+
+insert into CarrinhoDeComida2 values (1, Comidas(Comida(7, 'chocolate'), Comida(13, 'pipoca')));
+/

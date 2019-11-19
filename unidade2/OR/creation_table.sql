@@ -182,3 +182,6 @@ CREATE TABLE tb_Trabalha of tp_Trabalha(
   PRIMARY KEY (Funcionario_id,Carrinho_come_id,Sessao_hor,Sessao_sala,Funcao)
 );
 
+
+create table CarrinhoDeComida2(carrinhoID number(5), comidas Comidas);
+/

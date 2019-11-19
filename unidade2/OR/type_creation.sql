@@ -160,30 +160,7 @@ CREATE OR REPLACE TYPE tp_Trabalha AS OBJECT(
     )NOT FINAL;
 /
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+create or replace type Comida as object(preco number(10), nome varchar2(10));
+/
+create or replace type Comidas as varray(3) of Comida;
+/
