@@ -90,7 +90,7 @@ ALTER TYPE tp_filme modify attribute Nome VARCHAR(50) CASCADE;
 ALTER TYPE tp_Filho
     DROP ATTRIBUTE Nascimento DATE INVALIDATE;
 
--- 22. criacao de consulta com value
+-- 22 e 25. criacao de consulta com TABLE que exibe os dados de um VARRAY
 select e.nome || ' ' || e.preco || ' ' as "comida e preco"
 from carrinhodecomida2 w, table(w.comidas) e;
 
