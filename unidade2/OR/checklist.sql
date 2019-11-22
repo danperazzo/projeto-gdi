@@ -5,8 +5,7 @@ CREATE OR REPLACE TYPE tp_Filho_check AS OBJECT(
     n_cadastro_pai NUMBER,
     IdFilho NUMBER,
     Nascimento DATE,
-    Cadeirinha VARCHAR(1),
-    ref_tp_Cliente REF tp_Cliente
+    Cadeirinha VARCHAR(1)
 )NOT FINAL;
 /
 --2
@@ -27,8 +26,8 @@ CREATE OR REPLACE TYPE tp_Bebida_Carrinho_check AS OBJECT(
 CREATE OR REPLACE TYPE tp_CarrinhoDeComida_check AS OBJECT(
     ID_car INT,
     Revisao DATE,
-    comida tp_Comida_Carrinho,
-    bebida  tp_Bebida_Carrinho
+    comida tp_Comida_Carrinho_check,
+    bebida  tp_Bebida_Carrinho_check
     )NOT FINAL;
 /
 
@@ -50,24 +49,36 @@ CREATE TABLE ntable (id NUMBER, col1 tp_telefones2_check)
 INSERT INTO ntable VALUES (1, tp_telefones2_check('882020')); 
 INSERT INTO ntable VALUES (2, tp_telefones2_check('102030', '203010'));
 
-                                                  
+
+
+                                               
 
 --5
 
-ALTER TYPE tp_GeneroFilme
-    ADD CONSTRUCTOR FUNCTION tp_GeneroFilme(gen VARCHAR2 ) RETURN SELF AS RESULT CASCADE;
+CREATE TYPE tp_check_filmes AS OBJECT (
+    name VARCHAR2(30),
+    CONSTRUCTOR FUNCTION tp_check_filmes(SELF IN OUT NOCOPY tp_check_filmes, name VARCHAR2)
+                               RETURN SELF AS RESULT
+) NOT FINAL;
+/
+
+CREATE TYPE BODY tp_check_filmes AS
+    CONSTRUCTOR FUNCTION tp_check_filmes(SELF IN OUT NOCOPY tp_check_filmes, name VARCHAR2) 
+                               RETURN SELF AS RESULT IS
+    BEGIN
+        SELF.name := name;
+        RETURN;
+    END;
+    
+END;
+/
+create table tb_check_filmes of tp_check_filmes;
+insert into tb_check_filmes values (tp_check_filmes('ooi') );
+/
 
 
-create or replace type body tp_GeneroFilme as 
-    CONSTRUCTOR FUNCTION tp_GeneroFilme(gen VARCHAR2 ) RETURN SELF AS RESULT AS
-        BEGIN
-            SELF.genero := 'Aventura-'||gen;
-            return;
-        end
-    end
-
-                                                  
-SELECT * FROM ntable; -- 26
+-- 26
+SELECT * FROM ntable; 
 
 --11
 
