@@ -77,22 +77,11 @@ insert into tb_check_filmes values (tp_check_filmes('ooi') );
 /
 
 
--- 26
-SELECT * FROM ntable; 
-
 --11
 
 alter type tp_cliente add attribute ( CEP NUMERIC (8 , 0)) CASCADE;                                                  
        
 /
-
-INSERT INTO tb_Cliente (n_cadastro, CPF,Nascimento , CEP) VALUES (1,1111,to_date ('29/08/1968', 'DD/MM/YYYY') , 50740330);
-
-/
---verifica
-SELECT E.CEP FROM tb_Cliente E;
-/
-
 
 -- 12 
 --modificar propriedade(tamanho) do atributo nome
@@ -100,8 +89,7 @@ ALTER TYPE tp_filme modify attribute Nome VARCHAR(50) CASCADE;
                                                    
                                                    
 -- 13.
-ALTER TYPE tp_Filho
-    DROP ATTRIBUTE Nascimento DATE INVALIDATE;
+ALTER TYPE tp_Filho DROP ATTRIBUTE Nascimento INVALIDATE;
 
 -- 22 e 25. criacao de consulta com TABLE que exibe os dados de um VARRAY
 select e.nome || ' ' || e.preco || ' ' as "comida e preco"
@@ -144,6 +132,9 @@ where film_id = all(select film_id from tb_sessao where horario > '23:00');
 select nome from tb_filme
 where film_id = any (select film_id from tb_sessao where evento = 'Filme');
 
+
+-- 26
+SELECT * FROM ntable; 
     
 --27
 SELECT *
