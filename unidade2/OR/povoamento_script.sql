@@ -4,12 +4,12 @@ INSERT INTO tb_Cliente (n_cadastro, CPF,Nascimento) VALUES (3,3333,to_date ('29/
 INSERT INTO tb_Cliente (n_cadastro, CPF,Nascimento) VALUES (4,4444,to_date ('29/08/1971', 'DD/MM/YYYY'));
 INSERT INTO tb_Cliente (n_cadastro, CPF,Nascimento) VALUES (5,5555,to_date ('29/08/1972', 'DD/MM/YYYY'));
 
-INSERT INTO tb_Estudante (n_cadastro_Estudo, UNE) VALUES (1,1);
-INSERT INTO tb_Estudante (n_cadastro_Estudo, UNE) VALUES (2,2);
+INSERT INTO tb_Estudante (n_cadastro, UNE) VALUES (1,1);
+INSERT INTO tb_Estudante (n_cadastro, UNE) VALUES (2,2);
 
-INSERT INTO tb_Comum (n_cadastro_Comum) VALUES (3);
-INSERT INTO tb_Comum (n_cadastro_Comum) VALUES (4);
-INSERT INTO tb_Comum (n_cadastro_Comum) VALUES (5);
+INSERT INTO tb_Comum (n_cadastro) VALUES (3);
+INSERT INTO tb_Comum (n_cadastro) VALUES (4);
+INSERT INTO tb_Comum (n_cadastro) VALUES (5);
 
 INSERT INTO tb_Filho (n_cadastro_pai,IdFilho,Nascimento,Cadeirinha) VALUES (3,1,to_date('29/08/2000', 'DD/MM/YYYY'),'1');
 INSERT INTO tb_Filho (n_cadastro_pai,IdFilho,Nascimento,Cadeirinha) VALUES (4,2,to_date('29/08/2001', 'DD/MM/YYYY'),'0');
@@ -80,7 +80,6 @@ INSERT INTO tb_CarrinhoDeComida (ID_car,Revisao) VALUES(2,to_date ('29/08/2015',
 
 INSERT INTO tb_Comida_Carrinho(ID_Carrinho, comida) VALUES(1, 'chocolate');
 INSERT INTO tb_Comida_Carrinho(ID_Carrinho, comida) VALUES(1, 'doce');
-INSERT INTO tb_Comida_Carrinho(ID_Carrinho, comida) VALUES(1, 'refrigerante');
 INSERT INTO tb_Comida_Carrinho(ID_Carrinho, comida) VALUES(2, 'pipoca');
 INSERT INTO tb_Comida_Carrinho(ID_Carrinho, comida) VALUES(2, 'agua');
 

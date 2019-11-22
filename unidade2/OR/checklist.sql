@@ -1,7 +1,7 @@
 --CHECKLIST
 
 --1
-CREATE OR REPLACE TYPE tp_Filho AS OBJECT(
+CREATE OR REPLACE TYPE tp_Filho_check AS OBJECT(
     n_cadastro_pai NUMBER,
     IdFilho NUMBER,
     Nascimento DATE,
@@ -41,6 +41,8 @@ CREATE OR REPLACE TYPE tp_telefones_check AS VARRAY(10) OF VARCHAR2(15);
 --4
 
 CREATE OR REPLACE TYPE tp_telefones2_check AS TABLE OF VARCHAR(20);
+
+/
 
 CREATE TABLE ntable (id NUMBER, col1 tp_telefones2_check) 
     NESTED TABLE col1 STORE AS col1_tab;
