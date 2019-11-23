@@ -12,7 +12,6 @@ INSERT INTO tb_Comum (n_cadastro) VALUES (4);
 INSERT INTO tb_Comum (n_cadastro) VALUES (5);
 
 INSERT INTO tb_Filho (n_cadastro_pai,IdFilho,Nascimento,Cadeirinha) VALUES (3,1,to_date('29/08/2000', 'DD/MM/YYYY'),'1');
-INSERT INTO tb_Filho (n_cadastro_pai,IdFilho,Nascimento,Cadeirinha) VALUES (4,2,to_date('29/08/2001', 'DD/MM/YYYY'),'0');
 INSERT INTO tb_Filho (n_cadastro_pai,IdFilho,Nascimento,Cadeirinha) VALUES (5,3,to_date('29/08/2002', 'DD/MM/YYYY'),'1');
 
 

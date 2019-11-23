@@ -135,16 +135,12 @@ where film_id = any (select film_id from tb_sessao where evento = 'Filme');
 
 -- 26
 SELECT * FROM ntable; 
-    
---27
-SELECT *
-FROM tb_Cliente C
-WHERE EXISTS (
-    SELECT *
-    FROM tb_Filho F
-    WHERE DEREF(F.ref_Cliente).n_cadastro_pai = C.n_cadastro
-);
+-----------------27-----------    
 
+
+
+
+------27-------------
 --28
 CREATE OR REPLACE TRIGGER novoCliente
 BEFORE INSERT OR UPDATE ON tb_Cliente
