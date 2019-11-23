@@ -89,7 +89,7 @@ CREATE TABLE tb_Filho of tp_Filho(
 
 
   PRIMARY KEY (n_cadastro_pai,IdFilho),
-  FOREIGN KEY (ref_tp_Cliente) REFERENCES tb_Cliente
+  ref_tp_Cliente scope is tb_Cliente
 );
 
 --5
