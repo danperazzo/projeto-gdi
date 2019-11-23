@@ -100,17 +100,17 @@ ALTER TYPE tp_Filho DROP ATTRIBUTE Nascimento INVALIDATE;
 
 
 
---16
+--16 (Vitrugo)
 select Fi.ref_tp_Cliente.CPF
 from tb_Filho Fi
 where Fi.ref_tp_Cliente is dangling;
 /
 
---17 Botei Um scope is na criação da tabela filho
+--17 Botei Um scope is na criação da tabela filho (Vitrugo)
 
---18 Script de Criação
+--18 Script de Criação (Vitrugo)
 
---19
+--19 (Vitrugo)
 select Ing.ref_tp_Assento.Adaptavel
 from tb_Ingresso Ing
 where Ing.Cliente_id in (select Cl.n_cadastro
@@ -118,7 +118,7 @@ where Ing.Cliente_id in (select Cl.n_cadastro
 					where Cl.CPF = 1111);
 /
 
---20
+--20 (Vitrugo)
 select DEREF(Fi.ref_tp_Cliente) as pai 
 from tb_Filho Fi;
 /
