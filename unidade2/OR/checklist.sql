@@ -1,6 +1,6 @@
 --CHECKLIST
 
---1
+--1 (Daniel)
 CREATE OR REPLACE TYPE tp_Filho_check AS OBJECT(
     n_cadastro_pai NUMBER,
     IdFilho NUMBER,
@@ -8,7 +8,7 @@ CREATE OR REPLACE TYPE tp_Filho_check AS OBJECT(
     Cadeirinha VARCHAR(1)
 )NOT FINAL;
 /
---2
+--2 (Daniel)
 
 CREATE OR REPLACE TYPE tp_Comida_Carrinho_check AS OBJECT(
     comida VARCHAR(10)
@@ -31,13 +31,13 @@ CREATE OR REPLACE TYPE tp_CarrinhoDeComida_check AS OBJECT(
     )NOT FINAL;
 /
 
---3 
+--3 (Daniel)
 
 CREATE OR REPLACE TYPE tp_telefones_check AS VARRAY(10) OF VARCHAR2(15);
 
 /
 
---4
+--4 (Daniel)
 
 CREATE OR REPLACE TYPE tp_telefones2_check AS TABLE OF VARCHAR(20);
 
@@ -53,7 +53,7 @@ INSERT INTO ntable VALUES (2, tp_telefones2_check('102030', '203010'));
 
                                                
 
---5
+--5 (Daniel)
 
 CREATE TYPE tp_check_filmes AS OBJECT (
     name VARCHAR2(30),
@@ -77,6 +77,8 @@ insert into tb_check_filmes values (tp_check_filmes('ooi') );
 /
 
 
+
+
 --11
 
 alter type tp_cliente add attribute ( CEP NUMERIC (8 , 0)) CASCADE;                                                  
@@ -88,8 +90,15 @@ alter type tp_cliente add attribute ( CEP NUMERIC (8 , 0)) CASCADE;
 ALTER TYPE tp_filme modify attribute Nome VARCHAR(50) CASCADE;
                                                    
                                                    
--- 13.
+-- 13. (Daniel)
 ALTER TYPE tp_Filho DROP ATTRIBUTE Nascimento INVALIDATE;
+
+--14 (Falta)
+--15 (Falta)
+
+
+
+
 
 --16
 select Fi.ref_tp_Cliente.CPF
