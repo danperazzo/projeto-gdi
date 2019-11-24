@@ -79,7 +79,7 @@ insert into tb_check_filmes values (tp_check_filmes('ooi') );
 
 
 
---11
+--11 e 14
 
 alter type tp_cliente add attribute ( CEP NUMERIC (8 , 0)) CASCADE;                                                  
        
@@ -93,11 +93,10 @@ ALTER TYPE tp_filme modify attribute Nome VARCHAR(50) CASCADE;
 -- 13. (Daniel)
 ALTER TYPE tp_Filho DROP ATTRIBUTE Nascimento INVALIDATE;
 
---14 (Falta)
---15 (Falta)
 
-
-
+--15 invalida as instancias nascimento dos subtipos de cliente como estudante e comum
+ALTER TYPE tp_Cliente 
+   drop attribute Nascimento INVALIDATE;
 
 
 --16
