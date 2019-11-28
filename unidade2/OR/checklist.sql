@@ -122,6 +122,13 @@ select DEREF(Fi.ref_tp_Cliente) as pai
 from tb_Filho Fi;
 /
 
+--21.
+
+select (Value(A)).nome as Titulo
+from tb_Filme A
+where film_id = 1;
+/						   
+						   
 -- 22 e 25. criacao de consulta com TABLE que exibe os dados de um VARRAY
 select e.nome || ' ' || e.preco || ' ' as "comida e preco"
 from carrinhodecomida2 w, table(w.comidas) e;
@@ -166,6 +173,7 @@ where film_id = any (select film_id from tb_sessao where evento = 'Filme');
 
 -- 26
 SELECT * FROM ntable; 
+	      
 -----------------27-----------    
 
 INSERT INTO tb_Filho(n_cadastro_pai,IdFilho,Cadeirinha,ref_tp_Cliente) VALUES (2,2,'1',(SELECT REF(T) FROM tb_cliente T WHERE T.n_cadastro = 2));
