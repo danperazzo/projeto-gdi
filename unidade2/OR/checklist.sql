@@ -168,7 +168,15 @@ where film_id = any (select film_id from tb_sessao where evento = 'Filme');
 SELECT * FROM ntable; 
 -----------------27-----------    
 
+INSERT INTO tb_Filho(n_cadastro_pai,IdFilho,Cadeirinha,ref_tp_Cliente) VALUES (2,2,'1',(SELECT REF(T) FROM tb_cliente T WHERE T.n_cadastro = 2));
 
+SELECT *
+FROM tb_Cliente C
+WHERE EXISTS (
+    SELECT *
+    FROM tb_Filho F
+    WHERE DEREF(F.ref_tp_Cliente).n_cadastro = C.n_cadastro
+);
 
 
 ------27-------------
