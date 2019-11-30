@@ -76,6 +76,21 @@ create table tb_check_filmes of tp_check_filmes;
 insert into tb_check_filmes values (tp_check_filmes('ooi') );
 /
 
+--10
+CREATE OR REPLACE TYPE tp_ID_check AS OBJECT(
+    Id1 NUMBER
+)NOT FINAL;
+/
+
+
+CREATE OR REPLACE TYPE tp_id_che2 under tp_id_check(
+    id2 number
+)NOT FINAL;
+    
+/
+ALTER TYPE tp_id_che2
+    ADD ATTRIBUTE iden3 number cascade;
+
 
 
 
