@@ -1,0 +1,252 @@
+
+-------------------------------------------------------INSERINDO VALORES--------------------------------------------
+
+db.cliente.insertMany([
+{_id: 1, n_cadastro: 1, cpf: 1111, Nascimento: new Date("1968-08-29")},
+{_id: 2, n_cadastro: 2, cpf: 2222, Nascimento: new Date("1969-08-29")},
+{_id: 3, n_cadastro: 3, cpf: 3333, Nascimento: new Date("1970-08-29")},
+{_id: 4, n_cadastro: 4, cpf: 4444, Nascimento: new Date("1971-08-29")},
+{_id: 5, n_cadastro: 5, cpf: 5555, Nascimento: new Date("1972-08-29")}
+])
+ 
+db.filho.insertMany([
+{_id: 1, n_cadastro_pai: 1, Nascimento: new Date("2000-08-29"), Cadeirinha: 0},
+{_id: 2, n_cadastro_pai: 2, Nascimento: new Date("2002-08-29"), Cadeirinha: 0},
+{_id: 3, n_cadastro_pai: 3, Nascimento: new Date("2003-08-29"), Cadeirinha: 0},
+{_id: 4, n_cadastro_pai: 4, Nascimento: new Date("2004-08-29"), Cadeirinha: 1},
+{_id: 5, n_cadastro_pai: 5, Nascimento: new Date("2005-08-29"), Cadeirinha: 1}
+])
+ 
+db.filme.insertMany([
+{_id: 1, nome: "E.T.: O Extraterrestre", estreia: new Date("1999-08-29")},
+{_id: 2, nome: "Kill Bill", estreia: new Date("2019-08-29")},
+{_id: 3, nome: "Monstros VS Alienígenas", estreia: new Date("2019-03-29")},
+{_id: 4, nome: "Crepúsculo", estreia: new Date("2007-03-29")},
+{_id: 5, nome: "Wall-E", estreia: new Date("1998-08-29")},
+{_id: 6, nome: "Bill Kill Bill", estreia: new Date("2020-08-29"), sequencia_id: 2},
+{_id: 7, nome: "Dois doidões em Harvard 2", estreia: new Date("2025-08-29")},
+{_id: 8, nome: "Crepúsculo Advanced", estreia: new Date("2008-12-29"), sequencia_id: 4}
+])
+ 
+db.ingresso.insertMany([
+{_id: 1, Fileira: "G", Numero: 7, horario: "11:59", sala: 3, cliente_id: 1, preco: 5.5, desconto: 3},
+{_id: 2, Fileira: "G", Numero: 8, horario: "11:47", sala: 2, cliente_id: 2, preco: 5.5, desconto: 2},
+{_id: 3, Fileira: "G", Numero: 9, horario: "12:59", sala: 1, cliente_id: 3, preco: 5.5, desconto: 1},
+{_id: 4, Fileira: "G", Numero: 2, horario: "11:59", sala: 0, cliente_id: 4, preco: 5.5, desconto: 4},
+{_id: 5, Fileira: "A", Numero: 7, horario: "11:58", sala: 3, cliente_id: 3, preco: 5.5, desconto: 3}
+])
+ 
+db.Sessao.insertMany([
+{_id: 1, sala: 3, horario: "11:59", inicioData: new Date("2025-03-29"), tresD: 0, Evento: "Peca", FilmeID: 1},
+{_id: 2, sala: 2, horario: "11:47", inicioData: new Date("2004-03-29"), tresD: 1, Evento: "Filme", FilmeID: 2},
+{_id: 3, sala: 1, horario: "12:59", inicioData: new Date("2010-03-29"), tresD: 0, Evento: "Filme", FilmeID: 3},
+{_id: 4, sala: "zero", horario: "11:59", inicioData: new Date("2025-03-29"), tresD: 0, Evento: "Filme", FilmeID: 4},
+{_id: 5, sala: 2, horario: "11:59", inicioData: new Date("2025-03-29"), tresD: 0, Evento: "Filme", FilmeID: 5},
+{_id: 6, sala: 3, horario: "11:58", inicioData: new Date("2000-03-29"), tresD: 0, Evento: "Filme", FilmeID: 6},
+{_id: 7, sala: 6, horario: "11:59", inicioData: new Date("2025-03-29"), tresD: 0, Evento: "Filme", FilmeID: 8},
+{_id: 8, sala: 3, horario: "11:57", inicioData: new Date("2008-03-29"), tresD: 0, Evento: "Filme", FilmeID: 7}
+])
+
+
+
+---------------------------------------------------CHECKLIST-CONSULTAS----------------------------------------------
+
+--1. consulta de atualizacao
+db.filho.update(
+	{_id:4},
+	{$set: {
+		Cadeirinha:0
+	}}
+
+)
+
+--2. Consulta de atualizacao com ReplaceOne
+db.filme.replaceOne(
+	{nome: "Wall-E"},
+	{nome: "Stardust Crusaders" , estreia: new Date("2014-04-04")}
+
+)
+
+--3.consulta para renomear ou deletar um campo(fiz os dois)
+
+db.filme.update(
+	{_id: 1} , 
+	{$rename: {'nome': 'Titulo'}
+	}
+	
+)
+
+/
+
+
+db.cliente.update(
+	{_id: 2} , 
+	{$unset: {Nascimento:""}
+	}
+	
+)
+
+
+--4.Consulta com busca em string
+
+db.filme.find(
+	{nome: {$regex: /Crep/ , $options: "s"}}
+
+)
+
+
+--5 e 6. Consulta com operador de comparaçao e com projeçao(fiz os dois)
+
+db.cliente.find(
+	{cpf: {$gt: 3000}} ,
+	{_id:0 , cpf:1}
+
+)
+
+/
+
+db.cliente.find(
+	{Nascimento: {$gt: new Date("1970-01-01")}} ,
+	{_id:0 , cpf:1}
+
+)
+
+
+--7 e 8. Consulta limitando quantidade de documentos e Consulta com ordenação
+
+db.filme.find({}).limit(5).sort(nome:1)
+
+
+
+--9. Consulta com Operadores logicos
+
+db.ingresso.find({$and: [{horario:"11:59"} , {Numero:7}]}).pretty()
+
+
+--10.Consulta com operador $exists
+
+db.filme.find({sequencia_id: {$exists: true}})
+
+
+--11.Consulta com operador $type
+
+db.Sessao.find({sala:{$type:"string"}} , {_id:0})
+
+
+--12. Consulta com MapReduce
+
+db.Sessao.mapReduce(
+    function() { emit(this.horario, this.FilmeID); },
+    function(key,values) {return values.length},
+    {
+         
+        out: "Numero de horarios diferentes"
+    }
+)
+
+
+--13. Consulta por agregaçao
+	
+db.filme.aggregate([
+	{
+		$match: {
+			estreia: {$gt: new Date("2000-01-01")}
+			}
+			
+	},
+	
+	{
+		$sort: {
+			estreia: -1
+			
+		}
+	},
+	
+	{
+		$project: {
+			_id: 0 , 
+			nome:1
+			}
+	}
+	
+])
+
+
+--14. Junçao com UnWind
+
+db.filho.aggregate([
+	{
+		 $lookup: {
+            from: "cliente",
+            localField: "n_cadastro_pai",
+            foreignField: "n_cadastro",
+            as: "Filho_de_fulano"
+        }
+     },
+     
+     {
+        $unwind: {
+            path: "$Filho_de_fulano" , 
+            preserveNullAndEmptyArrays: false
+            
+        }
+     }
+     	
+]).pretty()
+
+
+--15. Tudo dos itens 4 ate o 14 (tirando o 12)
+
+db.Sessao.aggregate([
+    {
+         $lookup: {
+            from: "filme",
+            localField: "FilmeID",
+            foreignField: "_id",
+            as: "Filme_da_Sessao"
+        }
+     },
+     
+     {
+        $unwind: {
+            path: "$Filme_da_Sessao"
+           
+           
+        }
+     },
+     
+     {
+        $match: {
+            $and: [{"Filme_da_Sessao.nome": {$regex: /a/ , $options: "i"} }, {$or: [ {inicioData: {$lt: new Date("2020-01-01")}} , {sala: {$type: "string"}} , {"Filme_da_Sessao.sequencia_id": {$exists: false}}]}]
+            }
+           
+    },
+   
+    {
+        $limit: 3
+    },
+   
+    {
+        $sort: {
+              horario: 1,
+            "Filme_da_Sessao.nome": -1
+           
+        }
+    },
+   
+    {
+        $project: {
+            _id: 0 ,
+            "Filme_da_Sessao.nome":1,
+            horario: 1
+           
+            }
+    }
+   
+     
+]).pretty()
+     		
+     		
+        
+        
+			
