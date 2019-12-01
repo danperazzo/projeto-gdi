@@ -76,6 +76,67 @@ create table tb_check_filmes of tp_check_filmes;
 insert into tb_check_filmes values (tp_check_filmes('ooi') );
 /
 
+--6
+CREATE OR REPLACE TYPE tp_obj AS OBJECT(
+    nume number,
+    MEMBER FUNCTION func RETURN VARCHAR
+)FINAL;
+/
+CREATE OR REPLACE TYPE BODY tp_obj AS
+    MEMBER FUNCTION func RETURN VARCHAR IS
+    BEGIN
+        RETURN SELF.nume;
+    END;
+END;
+/
+
+DECLARE
+    tipo tp_obj; 
+    a number;
+begin
+
+    tipo := new tp_obj(1);
+    a := tipo.func();
+    
+    DBMS_OUTPUT.PUT_LINE('Resultado: '||a); 
+
+end;
+
+/
+
+--8
+
+CREATE OR REPLACE TYPE tp_obj AS OBJECT(
+    nume number,
+    ORDER MEMBER FUNCTION func(OBJ TP_OBJ) RETURN number
+)FINAL;
+/
+CREATE OR REPLACE TYPE BODY tp_obj AS
+    ORDER MEMBER FUNCTION func(OBJ TP_OBJ) RETURN number IS
+    BEGIN
+        RETURN 1;
+    END;
+END;
+/
+
+DECLARE
+    tipo tp_obj; 
+    a number;
+    tipo2 tp_obj;
+begin
+
+    tipo := new tp_obj(1);
+    tipo2 := new tp_obj(2);
+    a := tipo.func(tipo2);
+    
+    DBMS_OUTPUT.PUT_LINE('Resultado: '||a); 
+
+end;
+/
+
+
+
+
 --10
 CREATE OR REPLACE TYPE tp_ID_check AS OBJECT(
     Id1 NUMBER
