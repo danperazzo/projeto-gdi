@@ -5,7 +5,7 @@ CREATE OR REPLACE TYPE tp_Filho_check AS OBJECT(
     n_cadastro_pai NUMBER,
     IdFilho NUMBER,
     Nascimento DATE,
-    Cadeirinha VARCHAR(1)s
+    Cadeirinha VARCHAR(1)
 )NOT FINAL;
 /
 --2 (Daniel)
@@ -104,6 +104,31 @@ end;
 
 /
 
+--7
+ALTER TYPE tp_cliente
+    ADD map MEMBER FUNCTION  numero RETURN NUMBER CASCADE;
+
+CREATE OR REPLACE TYPE BODY tp_cliente AS
+    map MEMBER FUNCTION  numero RETURN NUMBER IS
+    BEGIN
+        return self.n_cadastro;
+    
+    END;
+END;
+/
+select n_cadastro from tb_cliente F order by (F.numero());
+/
+DECLARE
+    cliente tp_cliente;
+    a number;
+BEGIN
+
+    cliente := new tp_cliente(1,2,to_date ('29/07/1982', 'DD/MM/YYYY') );
+    a := cliente.numero();
+END;
+
+/
+
 --8
 
 CREATE OR REPLACE TYPE tp_obj AS OBJECT(
@@ -134,23 +159,6 @@ begin
 end;
 /
 
-
-
-
---10
-CREATE OR REPLACE TYPE tp_ID_check AS OBJECT(
-    Id1 NUMBER
-)NOT FINAL;
-/
-
-
-CREATE OR REPLACE TYPE tp_id_che2 under tp_id_check(
-    id2 number
-)NOT FINAL;
-    
-/
-ALTER TYPE tp_id_che2
-    ADD ATTRIBUTE iden3 number cascade;
 
 
 
