@@ -5,7 +5,7 @@ CREATE OR REPLACE TYPE tp_Filho_check AS OBJECT(
     n_cadastro_pai NUMBER,
     IdFilho NUMBER,
     Nascimento DATE,
-    Cadeirinha VARCHAR(1)
+    Cadeirinha VARCHAR(1)s
 )NOT FINAL;
 /
 --2 (Daniel)
@@ -203,7 +203,7 @@ from tb_Filho Fi;
 select (Value(A)).nome as Titulo
 from tb_Filme A
 where film_id = 1;
-/						   
+						   
 						   
 -- 22 e 25. criacao de consulta com TABLE que exibe os dados de um VARRAY
 select e.nome || ' ' || e.preco || ' ' as "comida e preco"
