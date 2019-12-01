@@ -159,10 +159,41 @@ begin
 end;
 /
 
+--9,10
+CREATE OR REPLACE TYPE tp_shape AS OBJECT(
+    nro1 NUMBER,
+    MEMBER FUNCTION getnro RETURN NUMBER
+)NOT FINAL NOT INSTANTIABLE;
+/
+CREATE OR REPLACE TYPE tp_quadrado UNDER tp_shape(
+    lado NUMBER,
+    OVERRIDING MEMBER FUNCTION getnro RETURN NUMBER
+)NOT FINAL;
+/
+CREATE OR REPLACE TYPE BODY tp_quadrado AS
+    OVERRIDING MEMBER FUNCTION getnro RETURN NUMBER IS
+        BEGIN
+            RETURN SELF.lado;
+        END;
+END;
+/
+
+DECLARE
+    quad tp_quadrado;
+    nro2 NUMBER;
+
+BEGIN
+    
+    quad := new tp_quadrado(1,1);
+    nro2 := quad.getnro();
+    
+    
+    dbms_output.put_line(nro2);
+END;
 
 
 
-
+/
 --11 e 14
 
 alter type tp_cliente add attribute ( CEP NUMERIC (8 , 0)) CASCADE;                                                  
